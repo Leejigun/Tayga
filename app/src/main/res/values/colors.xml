@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="discord_level_3_dark">#1e2124</color>
+    <color name="discord_level_2_dark">#2f3136</color>
+    <color name="discord_level_1_dark">#36393e</color>
+
+</resources>
