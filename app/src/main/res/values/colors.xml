@@ -6,5 +6,6 @@
     <color name="discord_level_3_dark">#1e2124</color>
     <color name="discord_level_2_dark">#2f3136</color>
     <color name="discord_level_1_dark">#36393e</color>
+    <color name="discord_light_gray">#4F545C</color>
 
 </resources>
