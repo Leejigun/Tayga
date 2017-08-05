@@ -6,12 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentTwitchPopularBroadListBinding;
+import com.dopy.dopy.tayga.mainActivity.recyclerView.BroadcastRecyclerViewAdapter;
 
 public class TwitchPopularBroadListFragment extends Fragment {
 
@@ -42,5 +44,12 @@ public class TwitchPopularBroadListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentTwitchPopularBroadListBinding.bind(getView());
+
+    }
+
+//    트위치 방송 리스트 그려주기
+    public void drowRecyclerView(){
+        binding.rvTwitchPopular.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvTwitchPopular.setAdapter(new BroadcastRecyclerViewAdapter());
     }
 }

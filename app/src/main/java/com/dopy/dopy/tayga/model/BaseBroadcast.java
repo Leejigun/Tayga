@@ -10,4 +10,24 @@ public class BaseBroadcast {
     String snepshotURL;
     String linkURL;
     int viewerCount;
+
+    public String getHostName() {
+        return hostName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getSnepshotURL() {
+        return snepshotURL;
+    }
+
+    public String getLinkURL() {
+        return linkURL;
+    }
+
+    public int getViewerCount() {
+        return viewerCount;
+    }
 }
