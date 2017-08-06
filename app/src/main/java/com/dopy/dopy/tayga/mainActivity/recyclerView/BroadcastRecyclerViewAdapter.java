@@ -22,6 +22,10 @@ public class BroadcastRecyclerViewAdapter extends RecyclerView.Adapter<Broadcast
         notifyDataSetChanged();
     }
 
+    public BroadcastRecyclerViewAdapter(List<BaseBroadcast> broadcastList) {
+        this.broadcastList = broadcastList;
+    }
+
     @Override
     public BroadcastViewholder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new BroadcastViewholder(LayoutInflater.from(parent.getContext()).inflate(R.layout.broadcast_cardview,parent,false));

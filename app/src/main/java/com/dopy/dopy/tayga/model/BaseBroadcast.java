@@ -30,4 +30,8 @@ public class BaseBroadcast {
     public int getViewerCount() {
         return viewerCount;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

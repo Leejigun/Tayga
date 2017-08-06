@@ -22,9 +22,9 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return TwitchPopularBroadListFragment.newInstance();
             case 1:
-                return TwitchPopularBroadListFragment.newInstance();
+                return AfricaTVPopularBroadListFragment.newInstance();
             case 2:
-                return TwitchPopularBroadListFragment.newInstance();
+                return YoutubePopularBroadListFragment.newInstance();
             default:
                 Log.d("TabPagerAdapter","getItem position out");
                 return TwitchPopularBroadListFragment.newInstance();
