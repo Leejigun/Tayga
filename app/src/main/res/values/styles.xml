@@ -8,6 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
+    <style name="TaygaAppTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorControlNormal">@color/discord_orange</item>
+0    </style>
 
 
 </resources>

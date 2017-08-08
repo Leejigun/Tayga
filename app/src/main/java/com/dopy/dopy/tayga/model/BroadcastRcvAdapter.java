@@ -1,11 +1,15 @@
 package com.dopy.dopy.tayga.model;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dopy.dopy.tayga.R;
+import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,50 +18,50 @@ import java.util.List;
  * Created by Dopy on 2017-08-08.
  */
 
-public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class BroadcastRcvAdapter extends ParallaxRecyclerAdapter<BroadcastModel> {
 
-    List<BroadcastModel> broadcastModels;
     static final int TYPE_HEADER=101;
     static final int TYPE_BODY=102;
+    Context context;
 
-    public BroadcastRcvAdapter(List<BroadcastModel> broadcastModels) {
-        BroadcastModel header=new BroadcastModel(101);
-        this.broadcastModels = broadcastModels;
-        this.broadcastModels.add(0,header);
+    public BroadcastRcvAdapter(List<BroadcastModel> data, final Context context) {
+        super(data);
+        this.context=context;
+        this.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(context, "You clicked '" + position + "'", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+   @Override
+   public RecyclerView.ViewHolder onCreateViewHolderImpl(ViewGroup viewGroup, ParallaxRecyclerAdapter<BroadcastModel> Adapter, int i) {
+       int viewtype=Adapter.getData().get(i).getViewtype();
+       switch (viewtype){
+           case TYPE_HEADER:
+               return new BroadcastViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.broadcast_cardview,viewGroup,false));
+           case TYPE_BODY:
+               return new BroadcastViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.broadcast_cardview,viewGroup,false));
+       }
+       return null;
+   }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.d("Adapter",Integer.toString(viewType));
-        switch (viewType){
-            case TYPE_HEADER:
-                return new BroadcastViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.broadcast_cardview,parent,false));
-            case TYPE_BODY:
-                return new BroadcastViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.broadcast_cardview,parent,false));
-        }
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        int viewtype = getItemViewType(position);
+    public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<BroadcastModel> Adapter, int i) {
+        int viewtype=Adapter.getData().get(i).getViewtype();
         switch (viewtype){
             case TYPE_HEADER:
-                ((BroadcastViewHolder) holder).bind(broadcastModels.get(position));
+                ((BroadcastViewHolder) viewHolder).bind(Adapter.getData().get(i));
                 break;
             case TYPE_BODY:
-                ((BroadcastViewHolder) holder).bind(broadcastModels.get(position));
+                ((BroadcastViewHolder) viewHolder).bind(Adapter.getData().get(i));
                 break;
         }
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return broadcastModels.get(position).getViewtype();
+    public int getItemCountImpl(ParallaxRecyclerAdapter<BroadcastModel> Adapter) {
+        return Adapter.getData().size();
     }
 
-    @Override
-    public int getItemCount() {
-        return broadcastModels.size();
-    }
 }
