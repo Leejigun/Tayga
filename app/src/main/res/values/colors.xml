@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#1e2124</color>
+    <color name="colorPrimaryDark">#2f3136</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="discord_level_3_dark">#1e2124</color>
-    <color name="discord_level_2_dark">#2f3136</color>
-    <color name="discord_level_1_dark">#36393e</color>
-    <color name="discord_light_gray">#4F545C</color>
 
+    <color name="discord_3Black">#1e2124</color>
+    <color name="discord_2Black">#2f3136</color>
+    <color name="discord_1Black">#36393e</color>
+    <color name="discord_light_gray">#4F545C</color>
+    <color name="discord_orange">#F26522</color>
 </resources>

@@ -3,13 +3,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/discord_level_2_dark"
-        tools:context="com.dopy.dopy.tayga.mainActivity.AfricaTVPopularBroadListFragment">
-
-        <!-- TODO: Update blank fragment layout -->
+        tools:context="com.dopy.dopy.tayga.MainFragment"
+        android:background="@color/discord_2Black">
+        
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvAfricaTVPopular"
+            android:id="@+id/rcvMainFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
     </FrameLayout>
 </layout>

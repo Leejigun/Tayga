@@ -2,57 +2,52 @@
 <layout>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/cardview_margin">
+
 
         <android.support.v7.widget.CardView
-            android:id="@+id/cvBroadcast"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/discord_level_1_dark">
+                android:background="@color/discord_1Black">
 
                 <ImageView
-                    android:id="@+id/cvSnepshot"
-                    android:layout_width="@dimen/sizeOfSnepshot_width"
-                    android:layout_height="@dimen/sizeOfSnepshot_height"
-                    android:src="@drawable/tiwich_logo" />
+                    android:layout_margin="10dp"
+                    android:id="@+id/bcSanpshot"
+                    android:layout_width="@dimen/sieOfsnapshot_width"
+                    android:layout_height="@dimen/sieOfsnapshot_height"
+                    android:src="@drawable/twitch_logo"/>
                 <TextView
+                    android:layout_margin="10dp"
+                    android:id="@+id/bcTitle"
+                    android:textColor="@android:color/white"
+                    android:text="제목"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cvTitle"
-                    android:text="Broadcast Title location"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/title_Size"
-                    android:layout_toEndOf="@id/cvSnepshot"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_toRightOf="@id/cvSnepshot" />
+                    android:layout_alignParentRight="true"/>
                 <TextView
-                    android:id="@+id/cvViewrCount"
-                    android:text="0/500"
-                    android:textSize="@dimen/viewerCount_Size"
+                    android:layout_margin="10dp"
+                    android:id="@+id/bcCountOfViewer"
+                    android:text="0명 시정"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/cvSnepshot"
-                    android:layout_marginLeft="10dp"/>
+                    android:layout_below="@id/bcSanpshot"/>
                 <TextView
-                    android:id="@+id/cvHostName"
+                    android:layout_margin="10dp"
+                    android:id="@+id/bcHostName"
                     android:text="HostName"
-                    android:textSize="@dimen/hostName_size"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@id/cvViewrCount"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentRight="true"
+                    android:layout_alignTop="@id/bcCountOfViewer"/>
 
             </RelativeLayout>
-
         </android.support.v7.widget.CardView>
-
     </RelativeLayout>
 </layout>
