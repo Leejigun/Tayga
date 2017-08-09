@@ -2,6 +2,7 @@ package com.dopy.dopy.tayga;
 
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,6 +23,7 @@ import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
 import com.dopy.dopy.tayga.model.BroadcastModel;
 import com.dopy.dopy.tayga.model.BroadcastPagerAdapter;
 import com.dopy.dopy.tayga.model.BroadcastRcvAdapter;
+import com.imbryk.viewPager.LoopViewPager;
 import com.poliveira.parallaxrecyclerview.HeaderLayoutManagerFixed;
 import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
@@ -33,16 +35,13 @@ import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 import static android.R.id.content;
 import static android.R.id.input;
-
+import static com.dopy.dopy.tayga.R.id.viewpager;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment implements ScreenShotable{
-    public static final String CLOSE = "Close";
-    public static final String BUILDING = "Building";
-    public static final String BOOK = "Book";
 
     FragmentMainBinding binding;
     RecyclerView recyclerView;
@@ -75,7 +74,7 @@ public class MainFragment extends Fragment implements ScreenShotable{
     }
 
     private void setUpHeader(View view){
-        ViewPager viewpager = (ViewPager) view.findViewById(R.id.viewpager);
+        LoopViewPager viewpager = (LoopViewPager) view.findViewById(R.id.viewpager);
         CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
         viewpager.setAdapter(new BroadcastPagerAdapter(models));
         indicator.setViewPager(viewpager);
@@ -101,17 +100,27 @@ public class MainFragment extends Fragment implements ScreenShotable{
         recyclerView.setAdapter(adapter);
     }
     private void inputTestData(){
-        models.add(new BroadcastModel(102));
-        models.add(new BroadcastModel(102));
-        models.add(new BroadcastModel(102));
-        models.add(new BroadcastModel(102));
-        models.add(new BroadcastModel(102));
-        models.add(new BroadcastModel(102));
+        models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
     }
 
     @Override
     public void takeScreenShot() {
+        /*Thread thread = new Thread() {
+            @Override
+            public void run() {
+                Bitmap bitmap = Bitmap.createBitmap(binding.container.getWidth(),
+                        binding.container.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                binding.container.draw(canvas);
+                MainFragment.this.bitmap = bitmap;
+            }
+        };
 
+        thread.start();*/
     }
 
     @Override

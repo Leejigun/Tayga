@@ -1,6 +1,7 @@
 package com.dopy.dopy.tayga.model;
 
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,6 @@ public class BroadcastPagerAdapter extends PagerAdapter {
                 ViewGroup.LayoutParams.MATCH_PARENT);
         return view;
     }
-
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {

@@ -1,16 +1,22 @@
 <layout>
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <io.codetail.widget.RevealFrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.dopy.dopy.tayga.MainFragment"
         android:background="@color/discord_2Black">
 
-        <view
-            android:id="@+id/rcvMainFragment"
+        <FrameLayout
+            android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            class="android.support.v7.widget.RecyclerView"
-            android:layout_gravity="left|top"/>
-    </FrameLayout>
+            android:layout_height="match_parent">
+
+            <view
+                android:id="@+id/rcvMainFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="android.support.v7.widget.RecyclerView"
+                android:layout_gravity="left|top"/>
+
+        </FrameLayout>
+    </io.codetail.widget.RevealFrameLayout>
 </layout>

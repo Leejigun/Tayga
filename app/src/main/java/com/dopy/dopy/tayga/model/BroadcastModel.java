@@ -5,30 +5,18 @@ package com.dopy.dopy.tayga.model;
  */
 
 public class BroadcastModel {
-    int viewtype;
     String title;
     String hostName;
     String countOfViewr;
     String snapshot;
 
-    public BroadcastModel(int viewtype) {
-        this.viewtype = viewtype;
-    }
+    public BroadcastModel() {}
 
-    public BroadcastModel(int viewtype, String title, String hostName, String countOfViewr, String snapshot) {
-        this.viewtype = viewtype;
+    public BroadcastModel( String title, String hostName, String countOfViewr, String snapshot) {
         this.title = title;
         this.hostName = hostName;
         this.countOfViewr = countOfViewr;
         this.snapshot = snapshot;
-    }
-
-    public int getViewtype() {
-        return viewtype;
-    }
-
-    public void setViewtype(int viewtype) {
-        this.viewtype = viewtype;
     }
 
     public String getTitle() {

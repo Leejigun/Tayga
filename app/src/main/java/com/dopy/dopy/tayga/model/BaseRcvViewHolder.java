@@ -14,6 +14,6 @@ public abstract class BaseRcvViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
     }
 
-    public abstract void bind(BroadcastModel data);
+    public abstract void bind(Object data);
 
 }

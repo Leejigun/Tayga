@@ -4,6 +4,7 @@ import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -30,6 +31,10 @@ import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.util.ViewAnimator;
 
 public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener{
+    public static final String CLOSE = "Close";
+    public static final String MAINFRAGMENT = "mainpragment";
+    public static final String FAVORITES = "favorites";
+
     ActivityMainBinding binding;
     MainFragment mainFragment;
     ActionBarDrawerToggle drawerToggle;
@@ -57,11 +62,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     }
 
     private void createMenuList() {
-        SlideMenuItem menuItem0 = new SlideMenuItem(mainFragment.CLOSE, R.drawable.icn_close);
+        SlideMenuItem menuItem0 = new SlideMenuItem(MainActivity.CLOSE, R.drawable.icn_close);
         list.add(menuItem0);
-        SlideMenuItem menuItem = new SlideMenuItem(mainFragment.BUILDING, R.drawable.icn_1);  //first parameter is the id of menu item,the second is the icon resouce
+        SlideMenuItem menuItem = new SlideMenuItem(MainActivity.MAINFRAGMENT, R.drawable.icn_1);  //first parameter is the id of menu item,the second is the icon resouce
         list.add(menuItem);
-        SlideMenuItem menuItem2 = new SlideMenuItem(mainFragment.BOOK, R.drawable.icn_2);
+        SlideMenuItem menuItem2 = new SlideMenuItem(MainActivity.FAVORITES, R.drawable.icn_2);
         list.add(menuItem2);
     }
 
@@ -129,25 +134,36 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     }
 
 //  리스너
-    private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition) {
+    private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition, Fragment fragment) {
+
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.content_frame);
+        Log.d("MainActivity","replaceFragment: f.getClass() ->"+f.getClass()+"fragment.getClass()->"+fragment.getClass());
+        if (f.getClass()==fragment.getClass()) {
+            return screenShotable;
+        }
         View view = binding.contentFrame;
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
         SupportAnimator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
         animator.setInterpolator(new AccelerateInterpolator());
         animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
 
-        binding.contentOverlay.setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
+        findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         animator.start();
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, mainFragment).commit();
-        return mainFragment;
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+        return(ScreenShotable)fragment;
     }
     @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
+        Log.d("MainActivity","replaceFragment:"+Integer.toString(position));
         switch (slideMenuItem.getName()) {
-            case MainFragment.CLOSE:
+            case MainActivity.CLOSE:
                 return screenShotable;
+            case MainActivity.MAINFRAGMENT:
+                return replaceFragment(screenShotable,position,MainFragment.newInstance());
+            case MainActivity.FAVORITES:
+                return replaceFragment(screenShotable,position,FavoritesFragment.newInstance());
             default:
-                return replaceFragment(screenShotable, position);
+                return replaceFragment(screenShotable, position,MainFragment.newInstance());
         }
     }
     @Override

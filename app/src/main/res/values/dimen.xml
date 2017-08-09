@@ -4,4 +4,5 @@
     <dimen name="sieOfsnapshot_width">60dp</dimen>
     <dimen name="sieOfsnapshot_height">60dp</dimen>
     <dimen name="cardview_margin">5dp</dimen>
+    <dimen name="header_height">200dp</dimen>
 </resources>

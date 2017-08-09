@@ -12,7 +12,7 @@ public class BroadcastViewHolder extends BaseRcvViewHolder {
     }
 
     @Override
-    public void bind(BroadcastModel data) {
+    public void bind(Object data) {
 
     }
 }

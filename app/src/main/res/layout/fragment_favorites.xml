@@ -1,0 +1,22 @@
+<layout>
+    <io.codetail.widget.RevealFrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/discord_2Black">
+
+        <FrameLayout
+            android:id="@+id/containerFavorites"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <view
+                android:id="@+id/rcvFavoritesFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                class="android.support.v7.widget.RecyclerView"
+                android:layout_gravity="left|top"/>
+
+        </FrameLayout>
+    </io.codetail.widget.RevealFrameLayout>
+</layout>
