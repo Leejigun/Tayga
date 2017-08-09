@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(MainActivity.CLOSE, R.drawable.icn_close);
         list.add(menuItem0);
-        SlideMenuItem menuItem = new SlideMenuItem(MainActivity.MAINFRAGMENT, R.drawable.icn_1);  //first parameter is the id of menu item,the second is the icon resouce
+        SlideMenuItem menuItem = new SlideMenuItem(MainActivity.MAINFRAGMENT, R.drawable.ic_live_tv_black_24dp); //first parameter is the id of menu item,the second is the icon resouce
         list.add(menuItem);
-        SlideMenuItem menuItem2 = new SlideMenuItem(MainActivity.FAVORITES, R.drawable.icn_2);
+        SlideMenuItem menuItem2 = new SlideMenuItem(MainActivity.FAVORITES, R.drawable.ic_local_play_black_24dp);
         list.add(menuItem2);
     }
 
