@@ -21,6 +21,7 @@ public class BroadcastPagerAdapter extends PagerAdapter {
 
     public BroadcastPagerAdapter(List<BroadcastModel> models) {
         this.models = models;
+        this.models.add(0,new BroadcastModel());
     }
 
     @Override
@@ -37,6 +38,9 @@ public class BroadcastPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_of_broadcast_in_viewpager,container,false);
         ImageView imageView =view.findViewById(R.id.vpImage);
+        if(position != 0){
+            imageView.setImageResource(R.drawable.taygaicon);
+        }
         TextView textView =view.findViewById(R.id.vpTitle);
         container.addView(view, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);

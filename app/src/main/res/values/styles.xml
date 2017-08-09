@@ -9,6 +9,7 @@
 
     </style>
     <style name="TaygaAppTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:tint">@color/discord_orange</item>
         <item name="colorControlNormal">@color/discord_orange</item>
         <item name="colorPrimaryDark">@color/discord_orange</item>
 0    </style>

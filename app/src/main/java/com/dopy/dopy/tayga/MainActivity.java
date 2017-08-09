@@ -58,14 +58,14 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
         setActionBar();
         createMenuList();
-        viewAnimator = new ViewAnimator<>(this, list, mainFragment, binding.drawerLayout, this);
+        viewAnimator = new ViewAnimator<>(this, list,mainFragment, binding.drawerLayout, this);
     }
 
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(MainActivity.CLOSE, R.drawable.icn_close);
         list.add(menuItem0);
-        SlideMenuItem menuItem = new SlideMenuItem(MainActivity.MAINFRAGMENT, R.drawable.ic_live_tv_black_24dp); //first parameter is the id of menu item,the second is the icon resouce
-        list.add(menuItem);
+        SlideMenuItem menuItem1 = new SlideMenuItem(MainActivity.MAINFRAGMENT, R.drawable.ic_live_tv_black_24dp); //first parameter is the id of menu item,the second is the icon resouce
+        list.add(menuItem1);
         SlideMenuItem menuItem2 = new SlideMenuItem(MainActivity.FAVORITES, R.drawable.ic_local_play_black_24dp);
         list.add(menuItem2);
     }
@@ -134,36 +134,36 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     }
 
 //  리스너
-    private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition, Fragment fragment) {
-
-        Fragment f = getSupportFragmentManager().findFragmentById(R.id.content_frame);
-        Log.d("MainActivity","replaceFragment: f.getClass() ->"+f.getClass()+"fragment.getClass()->"+fragment.getClass());
-        if (f.getClass()==fragment.getClass()) {
-            return screenShotable;
-        }
+    private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition) {
         View view = binding.contentFrame;
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
         SupportAnimator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
         animator.setInterpolator(new AccelerateInterpolator());
         animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
-
         findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         animator.start();
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
-        return(ScreenShotable)fragment;
+        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, (Fragment)screenShotable).commit();
+        return screenShotable;
     }
+
     @Override
     public ScreenShotable onSwitch(Resourceble slideMenuItem, ScreenShotable screenShotable, int position) {
-        Log.d("MainActivity","replaceFragment:"+Integer.toString(position));
+        Fragment f = getSupportFragmentManager().findFragmentById(R.id.content_frame);
         switch (slideMenuItem.getName()) {
             case MainActivity.CLOSE:
                 return screenShotable;
+
             case MainActivity.MAINFRAGMENT:
-                return replaceFragment(screenShotable,position,MainFragment.newInstance());
+                if (f instanceof MainFragment) {
+                    return screenShotable;
+                } else {return replaceFragment(MainFragment.newInstance(),position);}
+
             case MainActivity.FAVORITES:
-                return replaceFragment(screenShotable,position,FavoritesFragment.newInstance());
+                if (f instanceof FavoritesFragment) {
+                    return screenShotable;
+                } else {return replaceFragment(FavoritesFragment.newInstance(),position);}
             default:
-                return replaceFragment(screenShotable, position,MainFragment.newInstance());
+                return screenShotable;
         }
     }
     @Override
