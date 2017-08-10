@@ -52,7 +52,8 @@
                 android:background="@android:color/transparent"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="0dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:theme="@style/TaygaAppTheme">
                 <!-- Layout of Drawer -->
 
             </LinearLayout>

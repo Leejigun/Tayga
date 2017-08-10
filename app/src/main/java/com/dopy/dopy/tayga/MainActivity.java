@@ -29,7 +29,10 @@ import yalantis.com.sidemenu.interfaces.Resourceble;
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.util.ViewAnimator;
-
+/*
+* 여기서 구현된 lib은 Side-Menu.Android 라이브러리로 navigation drawer의 레이아웃을 바꿔주는 라이브러리를 구현했다.
+* https://github.com/Yalantis/Side-Menu.Android
+* */
 public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener{
     public static final String CLOSE = "Close";
     public static final String MAINFRAGMENT = "mainpragment";
@@ -39,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     MainFragment mainFragment;
     ActionBarDrawerToggle drawerToggle;
     List<SlideMenuItem> list = new ArrayList<>();
-    ViewAnimator viewAnimator;
+    ViewAnimator viewAnimator; // 프레그 먼트 화면이 전환될 때 물결무늬가 발생하는 에니메이션
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,18 +52,13 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame,mainFragment)
                 .commit();
-        binding.drawerLayout.setScrimColor(Color.TRANSPARENT);
-        binding.leftDrawer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {binding.drawerLayout.closeDrawers();
-            }
-        });
 
-        setActionBar();
         createMenuList();
+        setActionBar();
         viewAnimator = new ViewAnimator<>(this, list,mainFragment, binding.drawerLayout, this);
     }
 
+//    navigation drawer에 아이콘 이미지를 추가한다.
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(MainActivity.CLOSE, R.drawable.icn_close);
         list.add(menuItem0);
@@ -71,6 +69,12 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     }
 
     private void setActionBar() {
+        binding.drawerLayout.setScrimColor(Color.TRANSPARENT);
+        binding.leftDrawer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {binding.drawerLayout.closeDrawers();
+            }
+        });
         Toolbar toolbar =binding.toolbar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
@@ -83,7 +87,6 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 R.string.drawer_open,  /* "open drawer" description */
                 R.string.drawer_close  /* "close drawer" description */
         ) {
-
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
@@ -133,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         }
     }
 
-//  리스너
+//  navigation drawer에 클릭 리스너를 선택
     private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition) {
         View view = binding.contentFrame;
         int finalRadius = Math.max(view.getWidth(), view.getHeight());

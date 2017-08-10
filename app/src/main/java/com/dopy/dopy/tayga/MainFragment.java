@@ -53,8 +53,6 @@ public class MainFragment extends Fragment implements ScreenShotable{
     public static MainFragment newInstance(){
         return new MainFragment();
     }
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -67,29 +65,25 @@ public class MainFragment extends Fragment implements ScreenShotable{
         super.onViewCreated(view, savedInstanceState);
         binding=FragmentMainBinding.bind(view);
         inputTestData();
+        setUpParallaxRecyclerView(view);
 
+    }
+
+    private void setUpParallaxRecyclerView(View view){
         recyclerView=view.findViewById(R.id.rcvMainFragment);
         toolbar=getActivity().findViewById(R.id.toolbar);
         createAdapter(recyclerView);
-    }
-
-    private void setUpHeader(View view){
-        LoopViewPager viewpager = (LoopViewPager) view.findViewById(R.id.viewpager);
-        CircleIndicator indicator = (CircleIndicator) view.findViewById(R.id.indicator);
-        viewpager.setAdapter(new BroadcastPagerAdapter(models));
-        indicator.setViewPager(viewpager);
     }
 //    ParallaxRecyclerView 컨트롤
     private void createAdapter(RecyclerView recyclerView){
         BroadcastRcvAdapter adapter = new BroadcastRcvAdapter(models,getContext());
 //        해더 삽입
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        View header = LayoutInflater.from(getContext()).inflate(R.layout.header, recyclerView, false);
-        setUpHeader(header);
+        View header= cearteCircleIndicator(recyclerView);
         adapter.setParallaxHeader(header, recyclerView);
         adapter.setOnParallaxScroll(new ParallaxRecyclerAdapter.OnParallaxScroll() {
             @Override
-            public void onParallaxScroll(float v, float v1, View view) {
+            public void onParallaxScroll(float v, float v1, View view) { // 해더와 툴바를 연결해서 사라지게 한다.
                 Log.d("MainFragment","onParallaxScroll:"+toolbar.getBackground().toString());
                 Drawable c = toolbar.getBackground();
                 c.setAlpha(Math.round(v * 255));
@@ -98,6 +92,16 @@ public class MainFragment extends Fragment implements ScreenShotable{
         });
         adapter.setData(models);
         recyclerView.setAdapter(adapter);
+    }
+
+    //  리사이클러 뷰 헤더에 추가될 뷰 페이저를 만든다.
+    private View cearteCircleIndicator(RecyclerView recyclerView){
+        View header = LayoutInflater.from(getContext()).inflate(R.layout.header, recyclerView, false);
+        LoopViewPager viewpager = (LoopViewPager) header.findViewById(R.id.viewpager);
+        CircleIndicator indicator = (CircleIndicator) header.findViewById(R.id.indicator);
+        viewpager.setAdapter(new BroadcastPagerAdapter(models));
+        indicator.setViewPager(viewpager);
+        return header;
     }
     private void inputTestData(){
         models.add(new BroadcastModel());

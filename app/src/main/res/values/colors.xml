@@ -9,4 +9,5 @@
     <color name="discord_1Black">#36393e</color>
     <color name="discord_light_gray">#4F545C</color>
     <color name="discord_orange">#F26522</color>
+    <color name="textview_backgroun">#AA000000</color>
 </resources>
