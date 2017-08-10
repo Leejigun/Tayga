@@ -170,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
             case MainActivity.FAVORITES:
                 FavoritesFragment fragment1 = FavoritesFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment1).commit();
                     return replaceFragment(fragment1, position);
             default:
                 return screenShotable;

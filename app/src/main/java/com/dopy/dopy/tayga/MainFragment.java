@@ -1,9 +1,11 @@
 package com.dopy.dopy.tayga;
 
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,11 +15,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
+import com.bumptech.glide.Glide;
 import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
 import com.dopy.dopy.tayga.model.BroadcastModel;
 import com.dopy.dopy.tayga.model.BroadcastPagerAdapter;
 import com.dopy.dopy.tayga.model.BroadcastRcvAdapter;
+import com.github.pedrovgs.DraggableListener;
+import com.github.pedrovgs.DraggablePanel;
+import com.github.pedrovgs.DraggableView;
 import com.imbryk.viewPager.LoopViewPager;
 import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
@@ -33,11 +40,16 @@ import yalantis.com.sidemenu.interfaces.ScreenShotable;
  */
 public class MainFragment extends Fragment implements ScreenShotable{
 
+    private static final int DELAY_MILLIS = 10;
+
     FragmentMainBinding binding;
     View containerView;
     RecyclerView recyclerView;
+    BroadcastRcvAdapter adapter;
     Toolbar toolbar;
     List<BroadcastModel> models =new ArrayList<>();
+    BroadcastModel selectedModel;
+
     public MainFragment() {
         // Required empty public constructor
     }
@@ -59,6 +71,9 @@ public class MainFragment extends Fragment implements ScreenShotable{
         inputTestData();
         setUpParallaxRecyclerView(view);
 
+        initializeDraggableView();
+        addClickListenerAtRecyclerView();
+        hookListeners();
     }
 
     private void setUpParallaxRecyclerView(View view){
@@ -68,7 +83,7 @@ public class MainFragment extends Fragment implements ScreenShotable{
     }
 //    ParallaxRecyclerView 컨트롤
     private void createAdapter(RecyclerView recyclerView){
-        BroadcastRcvAdapter adapter = new BroadcastRcvAdapter(models,getContext());
+       adapter = new BroadcastRcvAdapter(models,getContext());
 //        해더 삽입
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         View header= cearteCircleIndicator(recyclerView);
@@ -109,7 +124,75 @@ public class MainFragment extends Fragment implements ScreenShotable{
         models.add(new BroadcastModel());
 
     }
+    /**
+     * Initialize DraggableView.
+     */
+    private void initializeDraggableView(){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override public void run() {
+                binding.gameDetailViewMainFragment.setVisibility(View.GONE);
+                binding.gameDetailViewMainFragment.closeToRight();
+            }
+        }, DELAY_MILLIS);
+    }
+    /**
+     * Initialize GridView with some injected data and configure OnItemClickListener.
+     */
+    private void addClickListenerAtRecyclerView (){
+        adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
+            @Override
+            public void onClick(View view, int i) {
+                Log.d("MainFragment","on Clicked : "+i+" item");
+                selectedModel=models.get(i);
+                switch (i%3){
+                    case 0:
+                        Glide.with(getActivity()).load(R.drawable.gamesnapshot).into(binding.gameDetailViewHeader);
+                        break;
+                    case 1:
+                        Glide.with(getActivity()).load(R.drawable.gamenapshot2).into(binding.gameDetailViewHeader);
+                        break;
+                    case 2:
+                        Glide.with(getActivity()).load(R.drawable.gamenapshot3).into(binding.gameDetailViewHeader);
+                        break;
+                }
+                renderGameDetailBody(selectedModel);
+                binding.gameDetailViewMainFragment.setVisibility(View.VISIBLE);
+                binding.gameDetailViewMainFragment.maximize();
+            }
+        });
+    }
+    /**
+     * Hook DraggableListener to draggableView to modify action bar title with the tv show
+     * information.
+     */
+    private void hookListeners() {
+        binding.gameDetailViewMainFragment.setDraggableListener(new DraggableListener() {
+            @Override public void onMaximized() {
+                Log.d("MainFragment","call onMaximized");
+            }
 
+            @Override public void onMinimized() {
+                Log.d("MainFragment","call onMinimized");
+            }
+
+            @Override public void onClosedToLeft() {
+                Log.d("MainFragment","call onClosedToLeft");
+            }
+
+            @Override public void onClosedToRight() {
+                Log.d("MainFragment","call onClosedToRight");
+            }
+        });
+    }
+    /**
+     * Configure a view as episodes ListView header with the name of the tv show and the season.
+     */
+    private void renderGameDetailBody(BroadcastModel model){
+//        여기서 아이템에 대해서 클릭 리스너도 달고 조작
+
+
+    }
     @Override
     public void takeScreenShot() {
         /*Thread thread = new Thread() {

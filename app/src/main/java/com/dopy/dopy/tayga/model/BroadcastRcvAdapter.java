@@ -26,12 +26,6 @@ public class BroadcastRcvAdapter extends ParallaxRecyclerAdapter<BroadcastModel>
     public BroadcastRcvAdapter(List<BroadcastModel> data, final Context context) {
         super(data);
         this.context=context;
-        this.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
-            @Override
-            public void onClick(View view, int position) {
-                Toast.makeText(context, "You clicked '" + position + "'", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
    @Override
    public RecyclerView.ViewHolder onCreateViewHolderImpl(ViewGroup viewGroup, ParallaxRecyclerAdapter<BroadcastModel> Adapter, int i) {

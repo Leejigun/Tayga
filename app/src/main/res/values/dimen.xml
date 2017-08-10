@@ -5,4 +5,10 @@
     <dimen name="sieOfsnapshot_height">80dp</dimen>
     <dimen name="cardview_margin">5dp</dimen>
     <dimen name="header_height">200dp</dimen>
+
+    <!-- draggable pannel dimen-->
+    <dimen name="top_fragment_margin">10dip</dimen>
+    <dimen name="gameImage_height">150dip</dimen>
+    <item name="x_scale_factor" format="float" type="dimen">2.3</item>
+    <item name="y_scale_factor" format="float" type="dimen">2.3</item>
 </resources>

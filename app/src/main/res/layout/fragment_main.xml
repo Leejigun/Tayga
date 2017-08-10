@@ -1,4 +1,4 @@
-<layout>
+<layout xmlns:draggable_view="http://schemas.android.com/apk/res-auto">
     <io.codetail.widget.RevealFrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -15,6 +15,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="left|top"/>
+            
+            <!--Draggable Panel add-->
+            <com.github.pedrovgs.DraggableView
+                android:id="@+id/gameDetailViewMainFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                draggable_view:top_view_id="@+id/gameDetailViewHeader"
+                draggable_view:bottom_view_id="@+id/gameDetailViewBody"
+                draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
+                draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
+                draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
+                draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
+                android:background="@color/discord_3Black">
+
+                <RelativeLayout
+                    android:id="@+id/gameDetailViewBody"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/gameDetailViewHeader"/>
+                
+                <ImageView
+                    android:id="@+id/gameDetailViewHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/gameImage_height"
+                    android:layout_alignParentTop="true"
+                    android:scaleType="centerCrop"/>
+
+            </com.github.pedrovgs.DraggableView>
 
         </FrameLayout>
     </io.codetail.widget.RevealFrameLayout>
