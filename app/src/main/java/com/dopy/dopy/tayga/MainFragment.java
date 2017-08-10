@@ -109,6 +109,13 @@ public class MainFragment extends Fragment implements ScreenShotable{
         models.add(new BroadcastModel());
         models.add(new BroadcastModel());
         models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
+        models.add(new BroadcastModel());
+
     }
 
     @Override

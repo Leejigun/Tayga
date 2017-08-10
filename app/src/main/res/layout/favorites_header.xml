@@ -1,21 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
-     android:layout_height="match_parent"
-     android:layout_width="match_parent">
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height">
-        <RelativeLayout
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/header_height"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <ImageView
+            android:id="@+id/fhImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/fhImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/favorites_background"/>
-        </RelativeLayout>
-    </android.support.v7.widget.CardView>
-</RelativeLayout>
+            android:layout_height="@dimen/header_height"
+            android:scaleType="centerCrop"
+            android:src="@drawable/favorites_background"/>
+</android.support.v7.widget.CardView>

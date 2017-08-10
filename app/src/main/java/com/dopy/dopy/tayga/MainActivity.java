@@ -60,12 +60,18 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
 //    navigation drawer에 아이콘 이미지를 추가한다.
     private void createMenuList() {
-        SlideMenuItem menuItem0 = new SlideMenuItem(MainActivity.CLOSE, R.drawable.icn_close);
+        SlideMenuItem menuItem0 = new SlideMenuItem(MainActivity.CLOSE, R.drawable.ic_cancel_black_24dp);
         list.add(menuItem0);
         SlideMenuItem menuItem1 = new SlideMenuItem(MainActivity.MAINFRAGMENT, R.drawable.ic_live_tv_black_24dp); //first parameter is the id of menu item,the second is the icon resouce
         list.add(menuItem1);
         SlideMenuItem menuItem2 = new SlideMenuItem(MainActivity.FAVORITES, R.drawable.ic_local_play_black_24dp);
         list.add(menuItem2);
+        SlideMenuItem menuItem3 = new SlideMenuItem("", R.drawable.ic_chrome_reader_mode_black_24dp);
+        list.add(menuItem3);
+        SlideMenuItem menuItem4 = new SlideMenuItem("", R.drawable.ic_favorite_black_24dp);
+        list.add(menuItem4);
+        SlideMenuItem menuItem5 = new SlideMenuItem("", R.drawable.ic_perm_contact_calendar_black_24dp);
+        list.add(menuItem5);
     }
 
     private void setActionBar() {

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.dopy.dopy.tayga.R;
 import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
@@ -27,13 +28,20 @@ public class FavoritesRcvAdapter extends ParallaxRecyclerAdapter<FavorityItem>{
     @Override
     public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, final ParallaxRecyclerAdapter<FavorityItem> Adapter, final int i) {
         ((FavoritesViewHolder) viewHolder).bind(Adapter.getData().get(i));
-        ((FavoritesViewHolder) viewHolder).deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Adapter.getData().remove(i);
-                Adapter.notifyDataSetChanged();
-            }
-        });
+        switch ((i)%3){
+            case 0:
+                Glide.with(context).load(R.drawable.gamesnapshot).into(((FavoritesViewHolder) viewHolder).imageCategory);
+                ((FavoritesViewHolder) viewHolder).textTitle.setText("하스스톤");
+                break;
+            case 1:
+                Glide.with(context).load(R.drawable.gamenapshot2).into(((FavoritesViewHolder) viewHolder).imageCategory);
+                ((FavoritesViewHolder) viewHolder).textTitle.setText("배틀 그라운드");
+                break;
+            case 2:
+                Glide.with(context).load(R.drawable.gamenapshot3).into(((FavoritesViewHolder) viewHolder).imageCategory);
+                ((FavoritesViewHolder) viewHolder).textTitle.setText("오버워치");
+                break;
+        }
     }
 
     @Override

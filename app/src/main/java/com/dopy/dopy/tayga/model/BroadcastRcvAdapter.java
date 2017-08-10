@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.dopy.dopy.tayga.R;
 import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
@@ -39,6 +40,20 @@ public class BroadcastRcvAdapter extends ParallaxRecyclerAdapter<BroadcastModel>
     @Override
     public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<BroadcastModel> Adapter, int i) {
                 ((BroadcastViewHolder) viewHolder).bind(Adapter.getData().get(i));
+        switch ((i)%3){
+            case 0:
+                Glide.with(context).load(R.drawable.gamesnapshot).into(((BroadcastViewHolder) viewHolder).imageView);
+                ((BroadcastViewHolder) viewHolder).textTitle.setText("하스스톤 얼어붙은 왕좌 신규 확장팩 등장");
+                break;
+            case 1:
+                Glide.with(context).load(R.drawable.gamenapshot2).into(((BroadcastViewHolder) viewHolder).imageView);
+                ((BroadcastViewHolder) viewHolder).textTitle.setText("배틀 그라운드 정식 발매 기념 켠왕 방송");
+                break;
+            case 2:
+                Glide.with(context).load(R.drawable.gamenapshot3).into(((BroadcastViewHolder) viewHolder).imageView);
+                ((BroadcastViewHolder) viewHolder).textTitle.setText("오버워치 첼린저 교육방송");
+                break;
+        }
     }
     @Override
     public int getItemCountImpl(ParallaxRecyclerAdapter<BroadcastModel> Adapter) {

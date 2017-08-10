@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.dopy.dopy.tayga.MainActivity;
@@ -15,13 +16,15 @@ import com.dopy.dopy.tayga.R;
 
 public class BroadcastViewHolder extends BaseRcvViewHolder {
     ImageView imageView;
+    TextView textTitle;
     public BroadcastViewHolder(View itemView) {
         super(itemView);
         imageView=itemView.findViewById(R.id.bcSanpshot);
+        textTitle=itemView.findViewById(R.id.bcTitle);
     }
 
     @Override
     public void bind(Object data) {
-        Glide.with(itemView.getContext()).load(R.drawable.gamesnapshot).into(imageView);
+
     }
 }
