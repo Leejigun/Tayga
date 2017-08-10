@@ -36,6 +36,7 @@ import yalantis.com.sidemenu.interfaces.ScreenShotable;
  */
 public class FavoritesFragment extends Fragment implements ScreenShotable {
     FragmentFavoritesBinding binding;
+    View containerView;
     RecyclerView recyclerView;
     Toolbar toolbar;
     List<FavorityItem> models =new ArrayList<>();
@@ -56,8 +57,8 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentFavoritesBinding.bind(view);
         inputTestData();
-
-        recyclerView=view.findViewById(R.id.rcvFavoritesFragment);
+        this.containerView=binding.containerFavoritesFragment;
+        recyclerView=binding.rcvFavoritesFragment;
         toolbar=getActivity().findViewById(R.id.toolbar);
         createAdapter(recyclerView);
     }
@@ -94,6 +95,18 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
 
     @Override
     public void takeScreenShot() {
+        /*Thread thread = new Thread() {
+            @Override
+            public void run() {
+                Bitmap bitmap = Bitmap.createBitmap(containerView.getWidth(),
+                        containerView.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                containerView.draw(canvas);
+                FavoritesFragment.this.bitmap = bitmap;
+            }
+        };
+
+        thread.start();*/
     }
 
     @Override

@@ -4,19 +4,15 @@ import android.content.res.Configuration;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
-import android.widget.LinearLayout;
 
 import com.dopy.dopy.tayga.databinding.ActivityMainBinding;
 
@@ -29,11 +25,12 @@ import yalantis.com.sidemenu.interfaces.Resourceble;
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 import yalantis.com.sidemenu.model.SlideMenuItem;
 import yalantis.com.sidemenu.util.ViewAnimator;
+
 /*
 * 여기서 구현된 lib은 Side-Menu.Android 라이브러리로 navigation drawer의 레이아웃을 바꿔주는 라이브러리를 구현했다.
 * https://github.com/Yalantis/Side-Menu.Android
 * */
-public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener{
+public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener {
     public static final String CLOSE = "Close";
     public static final String MAINFRAGMENT = "mainpragment";
     public static final String FAVORITES = "favorites";
@@ -47,18 +44,18 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainFragment = MainFragment.newInstance();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame,mainFragment)
+                .replace(R.id.content_frame, mainFragment)
                 .commit();
 
         createMenuList();
         setActionBar();
-        viewAnimator = new ViewAnimator<>(this, list,mainFragment, binding.drawerLayout, this);
+        viewAnimator = new ViewAnimator<>(this, list, mainFragment, binding.drawerLayout, this);
     }
 
-//    navigation drawer에 아이콘 이미지를 추가한다.
+    //    navigation drawer에 아이콘 이미지를 추가한다.
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(MainActivity.CLOSE, R.drawable.ic_cancel_black_24dp);
         list.add(menuItem0);
@@ -78,10 +75,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         binding.drawerLayout.setScrimColor(Color.TRANSPARENT);
         binding.leftDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {binding.drawerLayout.closeDrawers();
+            public void onClick(View v) {
+                binding.drawerLayout.closeDrawers();
             }
         });
-        Toolbar toolbar =binding.toolbar;
+        Toolbar toolbar = binding.toolbar;
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -114,21 +112,25 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         };
         binding.drawerLayout.setDrawerListener(drawerToggle);
     }
+
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
     }
+
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         drawerToggle.onConfigurationChanged(newConfig);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (drawerToggle.onOptionsItemSelected(item)) {
@@ -142,16 +144,15 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         }
     }
 
-//  navigation drawer에 클릭 리스너를 선택
+    //  navigation drawer에 클릭 리스너를 선택
     private ScreenShotable replaceFragment(ScreenShotable screenShotable, int topPosition) {
         View view = binding.contentFrame;
         int finalRadius = Math.max(view.getWidth(), view.getHeight());
         SupportAnimator animator = ViewAnimationUtils.createCircularReveal(view, 0, topPosition, 0, finalRadius);
         animator.setInterpolator(new AccelerateInterpolator());
         animator.setDuration(ViewAnimator.CIRCULAR_REVEAL_ANIMATION_DURATION);
-        findViewById(R.id.content_overlay).setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
+        binding.contentOverlay.setBackgroundDrawable(new BitmapDrawable(getResources(), screenShotable.getBitmap()));
         animator.start();
-        getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, (Fragment)screenShotable).commit();
         return screenShotable;
     }
 
@@ -163,27 +164,29 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 return screenShotable;
 
             case MainActivity.MAINFRAGMENT:
-                if (f instanceof MainFragment) {
-                    return screenShotable;
-                } else {return replaceFragment(MainFragment.newInstance(),position);}
+                MainFragment fragment = MainFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment).commit();
+                    return replaceFragment(fragment, position);
 
             case MainActivity.FAVORITES:
-                if (f instanceof FavoritesFragment) {
-                    return screenShotable;
-                } else {return replaceFragment(FavoritesFragment.newInstance(),position);}
+                FavoritesFragment fragment1 = FavoritesFragment.newInstance();
+                    return replaceFragment(fragment1, position);
             default:
                 return screenShotable;
         }
     }
+
     @Override
     public void disableHomeButton() {
         getSupportActionBar().setHomeButtonEnabled(false);
     }
+
     @Override
     public void enableHomeButton() {
         getSupportActionBar().setHomeButtonEnabled(true);
         binding.drawerLayout.closeDrawers();
     }
+
     public void addViewToContainer(View view) {
         binding.leftDrawer.addView(view);
     }

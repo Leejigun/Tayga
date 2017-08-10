@@ -47,4 +47,5 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
     compile "com.daimajia.swipelayout:library:1.2.0@aar"
     compile 'jp.wasabeef:recyclerview-animators:1.0.3@aar'
+    compile 'com.github.pedrovgs:draggablepanel:1.9'
 }

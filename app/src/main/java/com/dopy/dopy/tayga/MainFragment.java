@@ -2,14 +2,10 @@ package com.dopy.dopy.tayga;
 
 
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -17,14 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
 import com.dopy.dopy.tayga.model.BroadcastModel;
 import com.dopy.dopy.tayga.model.BroadcastPagerAdapter;
 import com.dopy.dopy.tayga.model.BroadcastRcvAdapter;
 import com.imbryk.viewPager.LoopViewPager;
-import com.poliveira.parallaxrecyclerview.HeaderLayoutManagerFixed;
 import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
 import java.util.ArrayList;
@@ -33,10 +27,6 @@ import java.util.List;
 import me.relex.circleindicator.CircleIndicator;
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
-import static android.R.id.content;
-import static android.R.id.input;
-import static com.dopy.dopy.tayga.R.id.viewpager;
-
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,6 +34,7 @@ import static com.dopy.dopy.tayga.R.id.viewpager;
 public class MainFragment extends Fragment implements ScreenShotable{
 
     FragmentMainBinding binding;
+    View containerView;
     RecyclerView recyclerView;
     Toolbar toolbar;
     List<BroadcastModel> models =new ArrayList<>();
@@ -64,13 +55,14 @@ public class MainFragment extends Fragment implements ScreenShotable{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding=FragmentMainBinding.bind(view);
+        this.containerView = binding.containerMainFragment;
         inputTestData();
         setUpParallaxRecyclerView(view);
 
     }
 
     private void setUpParallaxRecyclerView(View view){
-        recyclerView=view.findViewById(R.id.rcvMainFragment);
+        recyclerView=binding.rcvMainFragment;
         toolbar=getActivity().findViewById(R.id.toolbar);
         createAdapter(recyclerView);
     }
@@ -123,10 +115,10 @@ public class MainFragment extends Fragment implements ScreenShotable{
         /*Thread thread = new Thread() {
             @Override
             public void run() {
-                Bitmap bitmap = Bitmap.createBitmap(binding.container.getWidth(),
-                        binding.container.getHeight(), Bitmap.Config.ARGB_8888);
+                Bitmap bitmap = Bitmap.createBitmap(containerView.getWidth(),
+                        containerView.getHeight(), Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(bitmap);
-                binding.container.draw(canvas);
+                containerView.draw(canvas);
                 MainFragment.this.bitmap = bitmap;
             }
         };
