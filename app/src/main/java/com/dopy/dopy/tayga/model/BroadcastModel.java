@@ -9,14 +9,16 @@ public class BroadcastModel {
     String hostName;
     String countOfViewr;
     String snapshot;
+    int isfavorites=0;
 
-    public BroadcastModel() {}
+    public BroadcastModel(String title) {this.title=title;}
 
-    public BroadcastModel( String title, String hostName, String countOfViewr, String snapshot) {
+    public BroadcastModel( String title, String hostName, String countOfViewr, String snapshot,int favorites) {
         this.title = title;
         this.hostName = hostName;
         this.countOfViewr = countOfViewr;
         this.snapshot = snapshot;
+        this.isfavorites=favorites;
     }
 
     public String getTitle() {
@@ -25,5 +27,13 @@ public class BroadcastModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getFavorites() {
+        return isfavorites;
+    }
+
+    public void setFavorites(int favorites) {
+        this.isfavorites = favorites;
     }
 }

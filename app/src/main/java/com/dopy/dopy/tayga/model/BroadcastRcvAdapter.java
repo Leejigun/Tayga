@@ -25,30 +25,39 @@ public class BroadcastRcvAdapter extends ParallaxRecyclerAdapter<BroadcastModel>
 
     public BroadcastRcvAdapter(List<BroadcastModel> data, final Context context) {
         super(data);
-        this.context=context;
+        Log.d("BroadcastRcvAdapter", "crate BroadcastRcvAdapter data.size() :" + data.size());
+        Log.d("BroadcastRcvAdapter", "crate BroadcastRcvAdapter data.get(0).getTitle :" + data.get(0).getTitle());
+        this.context = context;
     }
-   @Override
-   public RecyclerView.ViewHolder onCreateViewHolderImpl(ViewGroup viewGroup, ParallaxRecyclerAdapter<BroadcastModel> Adapter, int i) {
-               return new BroadcastViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.broadcast_cardview,viewGroup,false));
-   }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolderImpl(ViewGroup viewGroup, ParallaxRecyclerAdapter<BroadcastModel> Adapter, int i) {
+        Log.d("BroadcastRcvAdapter","onCreateViewHolderImpl position->"+i);
+        return new BroadcastViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.broadcast_cardview, viewGroup, false));
+    }
+
     @Override
     public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<BroadcastModel> Adapter, int i) {
-                ((BroadcastViewHolder) viewHolder).bind(Adapter.getData().get(i));
-        switch ((i)%3){
+        BroadcastModel data = Adapter.getData().get(i);
+        ((BroadcastViewHolder) viewHolder).bind(data);
+        Log.d("BroadcastRcvAdapter", "onBindViewHolderImpl: title->" + data.getTitle() + " position->" + i);
+
+        switch ((i) % 3) {
             case 0:
                 Glide.with(context).load(R.drawable.gamesnapshot).into(((BroadcastViewHolder) viewHolder).imageView);
-                ((BroadcastViewHolder) viewHolder).textTitle.setText("하스스톤 얼어붙은 왕좌 신규 확장팩 등장");
+                ((BroadcastViewHolder) viewHolder).textTitle.setText(getData().get(i).getTitle());
                 break;
             case 1:
                 Glide.with(context).load(R.drawable.gamenapshot2).into(((BroadcastViewHolder) viewHolder).imageView);
-                ((BroadcastViewHolder) viewHolder).textTitle.setText("배틀 그라운드 정식 발매 기념 켠왕 방송");
+                ((BroadcastViewHolder) viewHolder).textTitle.setText(getData().get(i).getTitle());
                 break;
             case 2:
                 Glide.with(context).load(R.drawable.gamenapshot3).into(((BroadcastViewHolder) viewHolder).imageView);
-                ((BroadcastViewHolder) viewHolder).textTitle.setText("오버워치 첼린저 교육방송");
+                ((BroadcastViewHolder) viewHolder).textTitle.setText(getData().get(i).getTitle());
                 break;
         }
     }
+
     @Override
     public int getItemCountImpl(ParallaxRecyclerAdapter<BroadcastModel> Adapter) {
         return Adapter.getData().size();

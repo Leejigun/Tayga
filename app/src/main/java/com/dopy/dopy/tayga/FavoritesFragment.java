@@ -39,12 +39,16 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
     View containerView;
     RecyclerView recyclerView;
     Toolbar toolbar;
-    List<FavorityItem> models =new ArrayList<>();
+    List<FavorityItem> models = new ArrayList<>();
 
     public FavoritesFragment() {
         // Required empty public constructor
     }
-    public static FavoritesFragment newInstance(){return new FavoritesFragment();}
+
+    public static FavoritesFragment newInstance() {
+        return new FavoritesFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,13 +61,14 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentFavoritesBinding.bind(view);
         inputTestData();
-        this.containerView=binding.containerFavoritesFragment;
-        recyclerView=binding.rcvFavoritesFragment;
-        toolbar=getActivity().findViewById(R.id.toolbar);
+        this.containerView = binding.containerFavoritesFragment;
+        recyclerView = binding.rcvFavoritesFragment;
+        toolbar = getActivity().findViewById(R.id.toolbar);
         createAdapter(recyclerView);
     }
-    private void createAdapter(RecyclerView recyclerView){
-        FavoritesRcvAdapter adapter = new FavoritesRcvAdapter(models,getContext());
+
+    private void createAdapter(RecyclerView recyclerView) {
+        FavoritesRcvAdapter adapter = new FavoritesRcvAdapter(models, getContext());
 //        해더 삽입
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         View header = LayoutInflater.from(getContext()).inflate(R.layout.favorites_header, recyclerView, false);
@@ -71,7 +76,7 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
         adapter.setOnParallaxScroll(new ParallaxRecyclerAdapter.OnParallaxScroll() {
             @Override
             public void onParallaxScroll(float v, float v1, View view) {
-                Log.d("MainFragment","onParallaxScroll:"+toolbar.getBackground().toString());
+                Log.d("MainFragment", "onParallaxScroll:" + toolbar.getBackground().toString());
                 Drawable c = toolbar.getBackground();
                 c.setAlpha(Math.round(v * 255));
                 toolbar.setBackground(c);
@@ -80,7 +85,8 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
         adapter.setData(models);
         recyclerView.setAdapter(adapter);
     }
-    private void inputTestData(){
+
+    private void inputTestData() {
         models.add(new FavorityItem());
         models.add(new FavorityItem());
         models.add(new FavorityItem());

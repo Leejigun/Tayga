@@ -1,6 +1,6 @@
 <layout xmlns:draggable_view="http://schemas.android.com/apk/res-auto">
-    <io.codetail.widget.RevealFrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/discord_2Black">
@@ -14,33 +14,122 @@
                 android:id="@+id/rcvMainFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="left|top"/>
-            
+                android:layout_gravity="left|top" />
+
             <!--Draggable Panel add-->
             <com.github.pedrovgs.DraggableView
                 android:id="@+id/gameDetailViewMainFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                draggable_view:top_view_id="@+id/gameDetailViewHeader"
+                android:background="@android:color/transparent"
                 draggable_view:bottom_view_id="@+id/gameDetailViewBody"
-                draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
-                draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor"
-                draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
+                draggable_view:top_view_id="@+id/gameDetailViewHeader"
                 draggable_view:top_view_margin_bottom="@dimen/top_fragment_margin"
-                android:background="@color/discord_3Black">
+                draggable_view:top_view_margin_right="@dimen/top_fragment_margin"
+                draggable_view:top_view_x_scale_factor="@dimen/x_scale_factor"
+                draggable_view:top_view_y_scale_factor="@dimen/y_scale_factor">
 
-                <RelativeLayout
+                <android.support.v4.widget.NestedScrollView
                     android:id="@+id/gameDetailViewBody"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/gameDetailViewHeader"/>
-                
+                    android:layout_below="@id/gameDetailViewHeader"
+                    android:background="@color/discord_2Black">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/line"
+                            android:layout_width="match_parent"
+                            android:layout_height="3dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="@color/discord_orange" />
+
+                        <RelativeLayout
+                            android:id="@+id/containerGameDetailInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/line"
+                            android:background="@color/discord_2Black">
+                            <TextView
+                                android:id="@+id/gameDetailTitle"
+                                android:layout_width="300dp"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_margin="5dp"
+                                android:text="title of view"
+                                android:textColor="@android:color/white"
+                                android:textSize="30sp" />
+
+                            <TextView
+                                android:id="@+id/gameDetailHostName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/gameDetailTitle"
+                                android:layout_margin="5dp"
+                                android:text="HostName Position"
+                                android:textColor="@android:color/white" />
+
+                            <RelativeLayout
+                                android:id="@+id/containerFavoritesButton"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="5dp">
+
+                                <ImageView
+                                    android:id="@+id/imgFavorites"
+                                    android:layout_width="50dp"
+                                    android:layout_height="50dp"
+                                    android:layout_margin="5dp"
+                                    android:background="@drawable/ic_star_border_black_24dp" />
+                            </RelativeLayout>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/containerGameDetailInfo">
+
+                            <android.support.v7.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                draggable_view:cardBackgroundColor="@color/discord_light_gray"
+                                draggable_view:cardCornerRadius="10dp">
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent">
+                                    <TextView
+                                        android:id="@+id/textOfrelected"
+                                        android:layout_margin="5dp"
+                                        android:text="연관 동영상"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@android:color/white"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"/>
+
+                                    <android.support.v7.widget.RecyclerView
+                                        android:id="@+id/rcvRelactiveBroad"
+                                        android:layout_below="@id/textOfrelected"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"/>
+                                </RelativeLayout>
+                            </android.support.v7.widget.CardView>
+                        </RelativeLayout>
+                    </RelativeLayout>
+                </android.support.v4.widget.NestedScrollView>
+
                 <ImageView
                     android:id="@+id/gameDetailViewHeader"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/gameImage_height"
                     android:layout_alignParentTop="true"
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/taygaicon" />
 
             </com.github.pedrovgs.DraggableView>
 

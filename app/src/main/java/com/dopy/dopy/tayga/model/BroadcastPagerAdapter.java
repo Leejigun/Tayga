@@ -22,9 +22,9 @@ public class BroadcastPagerAdapter extends PagerAdapter {
     List<BroadcastModel> models;
     ImageView imageView;
     TextView title;
+    boolean isHeadAdd=false;
     public BroadcastPagerAdapter(List<BroadcastModel> models) {
         this.models = models;
-        this.models.add(0,new BroadcastModel());
     }
 
     @Override
@@ -42,9 +42,10 @@ public class BroadcastPagerAdapter extends PagerAdapter {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_of_broadcast_in_viewpager,container,false);
         imageView = view.findViewById(R.id.vpImage);
         title = view.findViewById(R.id.vpTitle);
-        if(position == 0){
+        if(!isHeadAdd){
             Glide.with(view.getContext()).load(R.drawable.main_background).into(imageView);
             title.setText("");
+            isHeadAdd=!isHeadAdd;
         }else{
             switch ((position)%3){
                 case 0:
@@ -58,7 +59,6 @@ public class BroadcastPagerAdapter extends PagerAdapter {
                     break;
             }
         }
-        view.setBackgroundResource(R.drawable.main_chart_shadow);
         container.addView(view, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         return view;
