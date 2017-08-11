@@ -238,7 +238,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
             }
         });
 //        youtubeAdapter.setData(youtubeModles);
-        View header = LayoutInflater.from(getContext()).inflate(R.layout.favorites_header, recyclerView, false);
+        View header = LayoutInflater.from(getContext()).inflate(R.layout.video_clip_header, recyclerView, false);
         youtubeAdapter.setParallaxHeader(header,binding.rcvRelactiveBroad);
         binding.rcvRelactiveBroad.setAdapter(youtubeAdapter);
     }
