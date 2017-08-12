@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="modelItme"
+            type="com.dopy.dopy.tayga.model.BroadcastModel"/>
+    </data>
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:cardBackgroundColor="@color/discord_light_gray"
-        app:cardCornerRadius="10dp">
+        android:layout_marginTop="5dp"
+        app:cardBackgroundColor="@color/discord_1Black"
+        app:cardCornerRadius="5dp"
+        android:onClick="@{modelItme::onClickItem}">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -33,7 +39,7 @@
                 android:gravity="right"
                 android:maxLines="1"
                 android:padding="2dp"
-                android:text="title of Game card View"
+                android:text="@{modelItme.getTitle}"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
@@ -44,7 +50,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/bcTitle"
                 android:layout_marginRight="10dp"
-                android:text="HostName"
+                android:text="@{modelItme.getHostName}"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
@@ -57,7 +63,7 @@
                 android:layout_gravity="top|right"
                 android:layout_margin="10dp"
                 android:padding="2dp"
-                android:text="0 Viewer"
+                android:text="@{modelItme.getnumberOfViewrToStringNotNull}"
                 android:textColor="@android:color/holo_red_light" />
         </RelativeLayout>
     </android.support.v7.widget.CardView>

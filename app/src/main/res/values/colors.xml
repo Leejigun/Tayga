@@ -3,7 +3,7 @@
     <color name="colorPrimary">#1e2124</color>
     <color name="colorPrimaryDark">#2f3136</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="discord_4Black">#002</color>
     <color name="discord_3Black">#1e2124</color>
     <color name="discord_2Black">#2f3136</color>
     <color name="discord_1Black">#36393e</color>

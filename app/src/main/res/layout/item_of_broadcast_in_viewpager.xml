@@ -1,29 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v7.widget.CardView
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="broadcastModel"
+            type="com.dopy.dopy.tayga.model.BroadcastModel">
+
+        </variable>
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <FrameLayout
+        android:layout_height="match_parent"
+        android:onClick="@{broadcastModel::onClickItem}">
+
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <ImageView
-                android:id="@+id/vpImage"
+
+            <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/gamesnapshot"
-                android:scaleType="centerCrop"/>
-            <TextView
-                android:id="@+id/vpTitle"
-                android:text="안드로이드 Tyagar 방송 제목 위치"
-                android:textSize="20sp"
-                android:textColor="@android:color/white"
-                android:background="@color/textview_backgroun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center"/>
-        </FrameLayout>
-    </android.support.v7.widget.CardView>
-</RelativeLayout>
+                android:background="@color/discord_3Black">
+
+                <ImageView
+                    android:id="@+id/vpImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/discord_3Black"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/gamesnapshot" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/main_chart_shadow" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:gravity="end"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/vpTitle"
+                        android:text="@{broadcastModel.getTitle}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:textColor="@android:color/white"
+                        android:textSize="25sp" />
+
+                    <TextView
+                        android:id="@+id/vpHostName"
+                        android:text="@{broadcastModel.getHostName}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/vpNumberOfViewr"
+                        android:text="@{broadcastModel.getnumberOfViewrToStringNotNull}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
+                        android:textColor="@color/discord_orange" />
+                </LinearLayout>
+            </FrameLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+</layout>
