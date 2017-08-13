@@ -1,4 +1,4 @@
-package com.dopy.dopy.tayga.model;
+package com.dopy.dopy.tayga.model.broadcast;
 
 import android.content.Intent;
 import android.os.Parcel;
@@ -6,17 +6,17 @@ import android.os.Parcelable;
 import android.view.View;
 
 import com.dopy.dopy.tayga.ui.GameDetailPageActivity;
-import com.dopy.dopy.tayga.ui.YoutubeSampleActivity;
 
 import java.net.URL;
 
 /**
  * Created by Dopy on 2017-08-08.
  */
+
 public class BroadcastModel implements Parcelable {
-    public static final String HEARTHSTONE = "hearthstone";
-    public static final String BATTLE_GROUND = "battleground";
-    public static final String OVERWATCH = "overwatch";
+    public static final String HEARTHSTONE = "하스스톤";
+    public static final String BATTLE_GROUND = "배틀 그라운드";
+    public static final String OVERWATCH = "오버워치";
 
     String title;
     String hostName;
@@ -24,6 +24,7 @@ public class BroadcastModel implements Parcelable {
     URL snapshot;
     String tag;
     int isfavorites = 0;
+
     public BroadcastModel(String title, String hostName, int numberOfViewr, URL snapshot, String tag, int isfavorites) {
         this.title = title;
         this.hostName = hostName;
@@ -106,9 +107,9 @@ public class BroadcastModel implements Parcelable {
         else return Integer.toString(numberOfViewer)+ "명 시청중";
     }
     //    Item Click listener
-    public void onClickItem(View v){
-        Intent intent = new Intent(v.getContext(),GameDetailPageActivity.class);
-        intent.putExtra(this.getClass().toString(),this);
+    public void onClickItem(View v) {
+        Intent intent = new Intent(v.getContext(), GameDetailPageActivity.class);
+        intent.putExtra(this.getClass().toString(), this);
         v.getContext().startActivity(intent);
     }
 

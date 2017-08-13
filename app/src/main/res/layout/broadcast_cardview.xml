@@ -4,7 +4,7 @@
     <data>
         <variable
             name="modelItme"
-            type="com.dopy.dopy.tayga.model.BroadcastModel"/>
+            type="com.dopy.dopy.tayga.model.broadcast.BroadcastModel"/>
     </data>
 
     <android.support.v7.widget.CardView

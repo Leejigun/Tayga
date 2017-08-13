@@ -17,9 +17,11 @@ import android.view.ViewGroup;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
 import com.dopy.dopy.tayga.databinding.HeaderBinding;
-import com.dopy.dopy.tayga.model.BroadcastModel;
-import com.dopy.dopy.tayga.model.BroadcastPagerAdapter;
-import com.dopy.dopy.tayga.model.BroadcastRcvAdapter;
+import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
+import com.dopy.dopy.tayga.model.broadcast.BroadcastPagerAdapter;
+import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
+import com.dopy.dopy.tayga.model.youtube.SearchYoutube;
+import com.dopy.dopy.tayga.model.youtube.YoutubeService;
 import com.imbryk.viewPager.LoopViewPager;
 import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
+import retrofit2.Retrofit;
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 
@@ -59,7 +62,6 @@ public class MainFragment extends Fragment implements ScreenShotable {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentMainBinding.bind(view);
         setUpParallaxRecyclerView();
-
     }
 
     //    새로고침
@@ -100,18 +102,18 @@ public class MainFragment extends Fragment implements ScreenShotable {
 
     private List<BroadcastModel> inputTestData() {
         List<BroadcastModel> models = new ArrayList<>();
-        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null, "hearthstone", 0));
-        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, "battleground", 0));
-        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, "overwatch", 0));
-        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null, "hearthstone", 0));
-        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, "battleground", 0));
-        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, "overwatch", 0));
-        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null, "hearthstone", 0));
-        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, "battleground", 0));
-        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, "overwatch", 0));
-        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null, "hearthstone", 0));
-        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, "battleground", 0));
-        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, "overwatch", 0));
+        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null,BroadcastModel.HEARTHSTONE, 0));
+        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, BroadcastModel.BATTLE_GROUND, 0));
+        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, BroadcastModel.OVERWATCH, 0));
+        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null,BroadcastModel.HEARTHSTONE, 0));
+        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, BroadcastModel.BATTLE_GROUND, 0));
+        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, BroadcastModel.OVERWATCH, 0));
+        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null,BroadcastModel.HEARTHSTONE, 0));
+        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, BroadcastModel.BATTLE_GROUND, 0));
+        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, BroadcastModel.OVERWATCH, 0));
+        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null,BroadcastModel.HEARTHSTONE, 0));
+        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, BroadcastModel.BATTLE_GROUND, 0));
+        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, BroadcastModel.OVERWATCH, 0));
         return models;
     }
 

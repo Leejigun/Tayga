@@ -3,113 +3,16 @@
     xmlns:draggable_panel="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="detailModel"
-            type="com.dopy.dopy.tayga.model.BroadcastModel" />
-    </data>
-
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/discord_2Black"
-                android:orientation="vertical"
-                tools:context="com.dopy.dopy.tayga.ui.GameDetailPageActivity">
-
-                <ImageView
-                    android:id="@+id/imvGameDetail"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/gameImage_height"
-                    android:scaleType="centerCrop" />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="2dp"
-                    android:background="@color/discord_orange" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/discord_light_gray"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/txtGameDetailTitle"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:text="@{detailModel.getTitle}"
-                            android:textColor="@android:color/white"
-                            android:textSize="25dp" />
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true">
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:src="@drawable/ic_star_border_black_24dp" />
-                            </RelativeLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/txtGameDetailHostName"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="end"
-                                    android:layout_margin="5dp"
-                                    android:gravity="end"
-                                    android:text="@{detailModel.getHostName}"
-                                    android:textColor="@android:color/white" />
-
-                                <TextView
-                                    android:id="@+id/txtGameDetailNumberOfViewer"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="end"
-                                    android:layout_margin="5dp"
-                                    android:gravity="end"
-                                    android:text="@{detailModel.getnumberOfViewrToStringNotNull}"
-                                    android:textColor="@color/discord_orange" />
-
-                            </LinearLayout>
-
-                        </RelativeLayout>
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="2dp"
-                        android:background="@color/discord_orange" />
+        android:layout_height="match_parent"
+        android:background="@color/discord_2Black">
 
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rcvGameDetail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
-                </LinearLayout>
-            </LinearLayout>
+
             <!-- Draggable Panel -->
 
         <com.github.pedrovgs.DraggablePanel

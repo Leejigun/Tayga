@@ -5,7 +5,7 @@
 
         <variable
             name="broadcastModel"
-            type="com.dopy.dopy.tayga.model.BroadcastModel">
+            type="com.dopy.dopy.tayga.model.broadcast.BroadcastModel">
 
         </variable>
     </data>

@@ -22,7 +22,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.GameDetailPageActivity"></activity>
-        <activity android:name=".ui.YoutubeSampleActivity"></activity>
     </application>
 
 </manifest>

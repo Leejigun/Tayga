@@ -1,4 +1,4 @@
-package com.dopy.dopy.tayga.model;
+package com.dopy.dopy.tayga.model.broadcast;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;

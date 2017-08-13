@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, mainFragment)
                 .commit();
-
         createMenuList();
         setActionBar();
         viewAnimator = new ViewAnimator<>(this, list, mainFragment, binding.drawerLayout, this);
     }
+
 
     //    navigation drawer에 아이콘 이미지를 추가한다.
     private void createMenuList() {

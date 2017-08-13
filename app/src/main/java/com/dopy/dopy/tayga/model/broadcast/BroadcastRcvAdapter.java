@@ -1,4 +1,4 @@
-package com.dopy.dopy.tayga.model;
+package com.dopy.dopy.tayga.model.broadcast;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -20,8 +20,6 @@ import java.util.List;
 public class BroadcastRcvAdapter extends ParallaxRecyclerAdapter<BroadcastModel> {
 
     Context context;
-    BroadcastCardviewBinding binding;
-
     public BroadcastRcvAdapter(List<BroadcastModel> data, final Context context) {
         super(data);
         Log.d("BroadcastRcvAdapter", "crate BroadcastRcvAdapter data.size() :" + data.size());
