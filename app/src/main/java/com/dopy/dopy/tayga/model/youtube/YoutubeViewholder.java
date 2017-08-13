@@ -22,6 +22,6 @@ public class YoutubeViewholder extends BaseRcvViewHolder {
     public void bind(Object data) {
         SearchData model = (SearchData) data;
         binding.setYoutubeData(model);
-        Glide.with(binding.getRoot()).load(model.snippet.thumbnails._default.url).into(binding.imvYoutubeCard);
+        Glide.with(binding.getRoot()).load(model.snippet.thumbnails.medium.url).into(binding.imvYoutubeCard);
     }
 }

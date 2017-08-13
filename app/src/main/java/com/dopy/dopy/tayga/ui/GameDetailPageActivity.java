@@ -169,4 +169,19 @@ public class GameDetailPageActivity extends AppCompatActivity {
         binding.draggablePanel.setVisibility(View.VISIBLE);
         binding.draggablePanel.maximize();
     }
+
+    @Override
+    public void onBackPressed() {
+        if(binding.draggablePanel.getVisibility()==GONE){
+            finish();
+        }
+        else if(binding.draggablePanel.isMaximized()){
+            binding.draggablePanel.minimize();
+        }else if(binding.draggablePanel.isMinimized()){
+            binding.draggablePanel.closeToRight();
+        }
+        else{
+            finish();
+        }
+    }
 }

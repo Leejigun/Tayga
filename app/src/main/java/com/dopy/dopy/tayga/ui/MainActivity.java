@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.Toast;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityMainBinding;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     public static final String MAINFRAGMENT = "mainpragment";
     public static final String GAME = "game";
     public static final String FAVORITES = "favorites";
+
+    boolean backKeyPressed =false;
 
 
     ActivityMainBinding binding;
@@ -199,5 +203,21 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
     public void addViewToContainer(View view) {
         binding.leftDrawer.addView(view);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(backKeyPressed){
+            finish();
+        }else{
+            Toast.makeText(this,"뒤로가기를 한번 더 누르시면 앱을 종료합니다.",Toast.LENGTH_LONG).show();
+            backKeyPressed=true;
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    backKeyPressed=false;
+                }
+            },3 *1000);
+        }
     }
 }
