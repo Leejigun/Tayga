@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        setTheme(R.style.TaygaAppTheme);
+
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mainFragment = MainFragment.newInstance();

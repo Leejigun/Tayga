@@ -14,9 +14,11 @@
         <item name="colorControlNormal">@color/discord_orange</item>
         <item name="colorPrimaryDark">@color/discord_orange</item>
     </style>
-
-
-
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@drawable/splash</item>
+    </style>
 
 
 </resources>
