@@ -34,7 +34,9 @@ import yalantis.com.sidemenu.util.ViewAnimator;
 public class MainActivity extends AppCompatActivity implements ViewAnimator.ViewAnimatorListener {
     public static final String CLOSE = "Close";
     public static final String MAINFRAGMENT = "mainpragment";
+    public static final String GAME = "game";
     public static final String FAVORITES = "favorites";
+
 
     ActivityMainBinding binding;
     MainFragment mainFragment;
@@ -60,7 +62,9 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
     private void createMenuList() {
         SlideMenuItem menuItem0 = new SlideMenuItem(MainActivity.CLOSE, R.drawable.ic_cancel_black_24dp);
         list.add(menuItem0);
-        SlideMenuItem menuItem1 = new SlideMenuItem(MainActivity.MAINFRAGMENT, R.drawable.ic_live_tv_black_24dp); //first parameter is the id of menu item,the second is the icon resouce
+        SlideMenuItem menuItem = new SlideMenuItem(MainActivity.MAINFRAGMENT, R.drawable.ic_live_tv_black_24dp); //first parameter is the id of menu item,the second is the icon resouce
+        list.add(menuItem);
+        SlideMenuItem menuItem1 = new SlideMenuItem(MainActivity.GAME, R.drawable.ic_videogame_asset_black_24dp);
         list.add(menuItem1);
         SlideMenuItem menuItem2 = new SlideMenuItem(MainActivity.FAVORITES, R.drawable.ic_local_play_black_24dp);
         list.add(menuItem2);
@@ -173,6 +177,10 @@ public class MainActivity extends AppCompatActivity implements ViewAnimator.View
                 FavoritesFragment fragment1 = FavoritesFragment.newInstance();
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment1).commit();
                     return replaceFragment(fragment1, position);
+            case MainActivity.GAME:
+                GameFragment fragment2 = GameFragment.newInstance();
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, fragment2).commit();
+                return replaceFragment(fragment2, position);
             default:
                 return screenShotable;
         }

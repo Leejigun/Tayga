@@ -37,7 +37,6 @@ public class BroadcastRcvAdapter extends ParallaxRecyclerAdapter<BroadcastModel>
     public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<BroadcastModel> Adapter, int i) {
         BroadcastModel data = Adapter.getData().get(i);
         ((BroadcastViewHolder)viewHolder).bind(data);
-        ((BroadcastViewHolder)viewHolder).binding.setVariable(BR.modelItme,data);
     }
 
     @Override

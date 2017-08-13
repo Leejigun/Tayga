@@ -24,6 +24,7 @@ public class BroadcastViewHolder extends BaseRcvViewHolder {
     @Override
     public void bind(Object data) {
         BroadcastModel model = (BroadcastModel) data;
+        binding.setModelItme(model);
         switch (model.getTag()) {
             case BroadcastModel.HEARTHSTONE:
                 Log.d("BroadcastViewHolder", "bind getTag()" + model.getTag());

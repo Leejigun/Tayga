@@ -26,15 +26,12 @@ import java.util.List;
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class FavoritesFragment extends Fragment implements ScreenShotable {
     FragmentFavoritesBinding binding;
-    View containerView;
-    RecyclerView recyclerView;
-    Toolbar toolbar;
-    List<FavorityItem> models = new ArrayList<>();
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -55,19 +52,16 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentFavoritesBinding.bind(view);
-        inputTestData();
-        this.containerView = binding.containerFavoritesFragment;
-        recyclerView = binding.rcvFavoritesFragment;
-        toolbar = getActivity().findViewById(R.id.toolbar);
-        createAdapter(recyclerView);
+        setUpParallaxRecyclerView();
     }
 
-    private void createAdapter(RecyclerView recyclerView) {
+    private void setUpParallaxRecyclerView() {
+        List<FavorityItem> models = inputTestData();
         FavoritesRcvAdapter adapter = new FavoritesRcvAdapter(models, getContext());
-//        해더 삽입
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        View header = LayoutInflater.from(getContext()).inflate(R.layout.favorites_header, recyclerView, false);
-        adapter.setParallaxHeader(header, recyclerView);
+        binding.rcvFavoritesFragment.setLayoutManager(new LinearLayoutManager(getContext()));
+        View header = LayoutInflater.from(getContext()).inflate(R.layout.favorites_header, binding.rcvFavoritesFragment, false);
+        adapter.setParallaxHeader(header, binding.rcvFavoritesFragment);
+        final Toolbar toolbar =getActivity().findViewById(R.id.toolbar);
         adapter.setOnParallaxScroll(new ParallaxRecyclerAdapter.OnParallaxScroll() {
             @Override
             public void onParallaxScroll(float v, float v1, View view) {
@@ -78,10 +72,11 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
             }
         });
         adapter.setData(models);
-        recyclerView.setAdapter(adapter);
+        binding.rcvFavoritesFragment.setAdapter(adapter);
     }
 
-    private void inputTestData() {
+    private List<FavorityItem> inputTestData() {
+        List<FavorityItem> models = new ArrayList<>();
         models.add(new FavorityItem());
         models.add(new FavorityItem());
         models.add(new FavorityItem());
@@ -92,6 +87,7 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
         models.add(new FavorityItem());
         models.add(new FavorityItem());
         models.add(new FavorityItem());
+        return models;
     }
 
     @Override
