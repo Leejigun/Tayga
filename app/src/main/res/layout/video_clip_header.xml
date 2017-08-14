@@ -80,7 +80,7 @@
                         android:layout_gravity="end"
                         android:layout_margin="5dp"
                         android:gravity="end"
-                        android:text="@{twichStraemModel::getCurrentViewr}"
+                        android:text="@{twichStraemModel.ToStringViewrs()}"
                         android:textColor="@color/discord_orange" />
 
                 </LinearLayout>

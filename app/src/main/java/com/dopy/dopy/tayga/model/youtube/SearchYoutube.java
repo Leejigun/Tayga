@@ -21,12 +21,10 @@ public class SearchYoutube{
     final String BASE_URL = "https://www.googleapis.com/youtube/v3/";
     final String SERVICE_KEY = "AIzaSyAzd4t2_efKUvoyzM0X49ckFYGLe9s-IjI"; //콘솔에서 받아온 서버키를 넣어줍니다
 
-    YoutubeRcvAdapter adapter;
-    public SearchYoutube(YoutubeRcvAdapter adapter) {
-        this.adapter=adapter;
+    public SearchYoutube() {
     }
 
-    public void getUtube(String tag, int count) {
+    public void getUtube(String tag, int count, final YoutubeRcvAdapter adapter) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

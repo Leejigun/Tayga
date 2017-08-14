@@ -1,13 +1,9 @@
 package com.dopy.dopy.tayga.model.twich;
+
 import android.util.Log;
 
-import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastPagerAdapter;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
-import com.dopy.dopy.tayga.model.youtube.YoutubeList;
-import com.dopy.dopy.tayga.model.youtube.YoutubeService;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,26 +34,26 @@ public class SearchTwitch {
                 @Override
                 public void onResponse(Call<TwitchStreamList> call, Response<TwitchStreamList> response) {
                     int statusCode = response.code();
-                    Log.d("SearchYoutube", "statusCode :" + Integer.toString(statusCode));
-                    Log.d("SearchYoutube", "response.body() :" + response.body());
+                    Log.d("SearchTwitch", "statusCode :" + Integer.toString(statusCode));
+                    Log.d("SearchTwitch", "response.body() :" + response.body().getList());
                     TwitchStreamList datas = response.body();
-                    Log.d("SearchYoutube", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
-                    Log.d("SearchYoutube", datas.getList().get(0).channel.status);
+                    Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
+                    Log.d("SearchTwitch", datas.getList().get(0).channel.status);
                     adapter.getData().addAll(datas.getList());
                     adapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onFailure(Call<TwitchStreamList> call, Throwable t) {
-                    Log.d("SearchYoutube", "데이터를 불러오는데 실패 했습니다.");
-                    Log.d("SearchYoutube", "call:" + call.request());
-                    Log.d("SearchYoutube", "Throwable:" + t.getMessage());
+                    Log.d("SearchTwitch", "데이터를 불러오는데 실패 했습니다.");
+                    Log.d("SearchTwitch", "call:" + call.request());
+                    Log.d("SearchTwitch", "Throwable:" + t.getMessage());
                 }
             });
         } catch (NullPointerException e) {
-            Log.d("SearchYoutube", e.getMessage());
+            Log.d("SearchTwitch", e.getMessage());
         } catch (Exception e) {
-            Log.d("SearchYoutube", e.getMessage());
+            Log.d("SearchTwitch", e.getMessage());
         }
     }
 
@@ -73,26 +69,26 @@ public class SearchTwitch {
                 @Override
                 public void onResponse(Call<TwitchStreamList> call, Response<TwitchStreamList> response) {
                     int statusCode = response.code();
-                    Log.d("SearchYoutube", "statusCode :" + Integer.toString(statusCode));
-                    Log.d("SearchYoutube", "response.body() :" + response.body());
+                    Log.d("SearchTwitch", "statusCode :" + Integer.toString(statusCode));
+                    Log.d("SearchTwitch", "response.body() :" + response.body());
                     TwitchStreamList datas = response.body();
-                    Log.d("SearchYoutube", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
-                    Log.d("SearchYoutube", datas.getList().get(0).channel.status);
+                    Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
+                    Log.d("SearchTwitch", datas.getList().get(0).channel.status);
                     adapter.getData().addAll(datas.getList());
                     adapter.notifyDataSetChanged();
                 }
 
                 @Override
                 public void onFailure(Call<TwitchStreamList> call, Throwable t) {
-                    Log.d("SearchYoutube", "데이터를 불러오는데 실패 했습니다.");
-                    Log.d("SearchYoutube", "call:" + call.request());
-                    Log.d("SearchYoutube", "Throwable:" + t.getMessage());
+                    Log.d("SearchTwitch", "데이터를 불러오는데 실패 했습니다.");
+                    Log.d("SearchTwitch", "call:" + call.request());
+                    Log.d("SearchTwitch", "Throwable:" + t.getMessage());
                 }
             });
         } catch (NullPointerException e) {
-            Log.d("SearchYoutube", e.getMessage());
+            Log.d("SearchTwitch", e.getMessage());
         } catch (Exception e) {
-            Log.d("SearchYoutube", e.getMessage());
+            Log.d("SearchTwitch", e.getMessage());
         }
     }
 }

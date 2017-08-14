@@ -63,26 +63,30 @@ public class MainFragment extends Fragment implements ScreenShotable {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Log.d(this.getClass().toString(),"ononViewCreated");
         binding = FragmentMainBinding.bind(view);
         setUpParallaxRecyclerView();
     }
 
     //    새로고침
     private void refreshBroadcastModelList(BroadcastRcvAdapter adapter,int pageoffset) {
+        Log.d(this.getClass().toString(),"refreshBroadcastModelList");
         SearchTwitch searchTwitch =new SearchTwitch();
         searchTwitch.getTwitch(pageoffset,adapter);
     }
     private void refreshRecommandedModelList(BroadcastPagerAdapter adapter,int pageoffset) {
+        Log.d(this.getClass().toString(),"refreshRecommandedModelList");
         SearchTwitch searchTwitch =new SearchTwitch();
-        searchTwitch.getRecommandList(pageoffset,adapter);
+        //searchTwitch.getRecommandList(pageoffset,adapter);
     }
 
     private void setUpParallaxRecyclerView() {
+        Log.d(this.getClass().toString(),"setUpParallaxRecyclerView");
         broadcastModelList = new ArrayList<>();
         BroadcastRcvAdapter adapter = new BroadcastRcvAdapter(broadcastModelList, getContext());
         binding.rcvMainFragment.setLayoutManager(new LinearLayoutManager(getContext()));
-        View header = cearteCircleIndicator(binding.rcvMainFragment);
-        adapter.setParallaxHeader(header, binding.rcvMainFragment);
+//        View header = cearteCircleIndicator(binding.rcvMainFragment);
+//        adapter.setParallaxHeader(header, binding.rcvMainFragment);
         final Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         adapter.setOnParallaxScroll(new ParallaxRecyclerAdapter.OnParallaxScroll() {
             @Override
@@ -99,6 +103,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
 
     //  리사이클러 뷰 헤더에 추가될 뷰 페이저를 만든다.
     private View cearteCircleIndicator(RecyclerView recyclerView) {
+        RecommendedBroadcastList= new ArrayList<>();
         View header = LayoutInflater.from(getContext()).inflate(R.layout.header, recyclerView, false);
         viewPagerBinding = HeaderBinding.bind(header);
         LoopViewPager viewpager = viewPagerBinding.viewpager;
@@ -106,7 +111,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
         BroadcastPagerAdapter adapter =new BroadcastPagerAdapter(RecommendedBroadcastList);
         viewpager.setAdapter(adapter);
         indicator.setViewPager(viewpager);
-        refreshRecommandedModelList(adapter,0);
+//        refreshRecommandedModelList(adapter,0);
         return header;
     }
 

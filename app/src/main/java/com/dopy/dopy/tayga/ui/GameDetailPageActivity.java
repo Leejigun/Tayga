@@ -14,6 +14,8 @@ import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityGameDetailPageBinding;
 import com.dopy.dopy.tayga.databinding.VideoClipHeaderBinding;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
+import com.dopy.dopy.tayga.model.twich.TwitchService;
+import com.dopy.dopy.tayga.model.twich.TwitchStream;
 import com.dopy.dopy.tayga.model.youtube.SearchData;
 import com.dopy.dopy.tayga.model.youtube.SearchYoutube;
 import com.dopy.dopy.tayga.model.youtube.YoutubeRcvAdapter;
@@ -22,6 +24,8 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
+
+import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,23 +40,20 @@ public class GameDetailPageActivity extends AppCompatActivity {
 
 
     ActivityGameDetailPageBinding binding;
-    BroadcastModel model;
 
     YouTubePlayer youtubePlayer;
     YouTubePlayerSupportFragment youtubeFragment;
     YoutubeDetailFragment youtubeDetailFragment;
-    List<SearchData> youtubelist;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game_detail_page);
-        Intent intent = getIntent();
-        model = (BroadcastModel) intent.getParcelableExtra(BroadcastModel.class.toString());
+        BroadcastModel model = Parcels.unwrap(getIntent().getParcelableExtra("Stream"));
         setUpParallaxRecyclerView(model);
         initializeYoutubeFragment();
         initializeDraggablePanel();
         hookDraggablePanelListeners();
-
     }
 
     private void initializeYoutubeFragment() {
@@ -67,6 +68,7 @@ public class GameDetailPageActivity extends AppCompatActivity {
                     youtubePlayer.setShowFullscreenButton(true);
                 }
             }
+
             @Override
             public void onInitializationFailure(YouTubePlayer.Provider provider,
                                                 YouTubeInitializationResult error) {
@@ -123,47 +125,42 @@ public class GameDetailPageActivity extends AppCompatActivity {
     }
 
 
-    private void refreshYouTubeModelList(BroadcastModel model,List<SearchData> list,YoutubeRcvAdapter adapter) {
-        SearchYoutube searchYoutube= new SearchYoutube(list,adapter);
-        searchYoutube.getUtube(model.getTag(),10);
-         }
+    private void refreshYouTubeModelList(BroadcastModel model, YoutubeRcvAdapter adapter) {
+        SearchYoutube searchYoutube = new SearchYoutube();
+        switch (model.getClass().toString()) {
+            case "TwitchStream":
+                TwitchStream twitchStream = (TwitchStream)model;
+                searchYoutube.getUtube(twitchStream.channel.game, 10, adapter);
+                break;
+        }
+    }
 
     private void setUpParallaxRecyclerView(BroadcastModel model) {
-        List<SearchData> youtubeList=new ArrayList<>();
+        List<SearchData> youtubeList = new ArrayList<>();
         final YoutubeRcvAdapter adapter = new YoutubeRcvAdapter(youtubeList, this);
         binding.rcvGameDetail.setLayoutManager(new LinearLayoutManager(this));
         View header = LayoutInflater.from(this).inflate(R.layout.video_clip_header, binding.rcvGameDetail, false);
         VideoClipHeaderBinding headerBinding = VideoClipHeaderBinding.bind(header);
+        headerBinding.setTwichStraemModel((TwitchStream) model);
         headerBinding.imvGameDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "방송 보러가기", Toast.LENGTH_LONG).show();
             }
         });
-        headerBinding.setDetailModel(model);
-        switch (model.getTag()) {
-            case BroadcastModel.HEARTHSTONE:
-                Glide.with(binding.getRoot()).load(R.drawable.gamesnapshot).into(headerBinding.imvGameDetail);
-                break;
-            case BroadcastModel.BATTLE_GROUND:
-                Glide.with(binding.getRoot()).load(R.drawable.gamenapshot2).into(headerBinding.imvGameDetail);
-                break;
-            case BroadcastModel.OVERWATCH:
-                Glide.with(binding.getRoot()).load(R.drawable.gamenapshot3).into(headerBinding.imvGameDetail);
-                break;
-        }
         adapter.setParallaxHeader(header, binding.rcvGameDetail);
         binding.rcvGameDetail.setAdapter(adapter);
-        refreshYouTubeModelList(model ,youtubeList,adapter);
+        refreshYouTubeModelList(model, adapter);
         adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
             @Override
             public void onClick(View view, int i) {
-                SearchData data=adapter.getData().get(i);
+                SearchData data = adapter.getData().get(i);
                 LoadYoutube(data);
             }
         });
     }
-    public void LoadYoutube(SearchData data){
+
+    public void LoadYoutube(SearchData data) {
         youtubePlayer.loadVideo(data.id.videoId);
         youtubeDetailFragment.setDetailData(data);
         binding.draggablePanel.setVisibility(View.VISIBLE);
@@ -172,15 +169,13 @@ public class GameDetailPageActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(binding.draggablePanel.getVisibility()==GONE){
+        if (binding.draggablePanel.getVisibility() == GONE) {
             finish();
-        }
-        else if(binding.draggablePanel.isMaximized()){
+        } else if (binding.draggablePanel.isMaximized()) {
             binding.draggablePanel.minimize();
-        }else if(binding.draggablePanel.isMinimized()){
+        } else if (binding.draggablePanel.isMinimized()) {
             binding.draggablePanel.closeToRight();
-        }
-        else{
+        } else {
             finish();
         }
     }

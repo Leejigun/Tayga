@@ -20,6 +20,7 @@ public class BroadcastPagerAdapter extends PagerAdapter {
     List<BroadcastModel> models;
     ItemOfBroadcastInViewpagerBinding recommandedBinding;
     public BroadcastPagerAdapter(List<BroadcastModel> models) {
+        models.add(0,new BroadcastModel());
     }
     public List<BroadcastModel> getData(){
         return models;
@@ -44,6 +45,10 @@ public class BroadcastPagerAdapter extends PagerAdapter {
                 TwitchStream twitchStream = (TwitchStream) models.get(position);
                 recommandedBinding.setTwitchStream(twitchStream);
                 Glide.with(container.getContext()).load(twitchStream.preview.medium).into(recommandedBinding.vpImage);
+                break;
+            case "BroadcastModel":
+                recommandedBinding.setTwitchStream(null);
+                Glide.with(container.getContext()).load(R.drawable.main_background).into(recommandedBinding.vpImage);
                 break;
             default:
                 break;

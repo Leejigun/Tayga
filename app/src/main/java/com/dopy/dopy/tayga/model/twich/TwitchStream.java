@@ -8,14 +8,12 @@ import com.dopy.dopy.tayga.ui.GameDetailPageActivity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 /**
  * Created by Dopy on 2017-08-14.
  */
 
-@Parcel
 public class TwitchStream extends BroadcastModel {
 
     @SerializedName("_id")
@@ -40,14 +38,14 @@ public class TwitchStream extends BroadcastModel {
     @Expose
     public Links_ links;
 
-    public String getCurrentViewr() {
+    public String ToStringViewrs() {
         return (Integer.toString(viewers) + "명 시청중");
     }
 
     public void onStreamingClick(View v){
 
         Intent intent =new Intent(v.getContext(),GameDetailPageActivity.class);
-        intent.putExtra(this.getClass().toString(), Parcels.wrap(this));
+        intent.putExtra("Stream", Parcels.wrap(this));
         v.getContext().startActivity(intent);
     }
 
