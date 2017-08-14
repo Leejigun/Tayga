@@ -28,6 +28,10 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.models=models;
         this.context = context;
     }
+    public void setData(List<BroadcastModel> list){
+        models=list;
+        notifyDataSetChanged();
+    }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -19,7 +19,7 @@ public class SearchTwitch {
     final String BASE_URL = "https://api.twitch.tv/kraken/streams/";
 
 
-    public SearchTwitch () {
+    public SearchTwitch() {
     }
 
     public void getTwitch(int offset, final BroadcastRcvAdapter adapter) {
@@ -39,8 +39,8 @@ public class SearchTwitch {
                     TwitchStreamList datas = response.body();
                     Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
                     Log.d("SearchTwitch", datas.getList().get(0).channel.status);
-                    adapter.getData().addAll(datas.getList());
-//                   adapter.setData(datas.getList());
+                    adapter.setData(datas.getList());
+                    adapter.setData(datas.getList());
                     adapter.notifyDataSetChanged();
                 }
 

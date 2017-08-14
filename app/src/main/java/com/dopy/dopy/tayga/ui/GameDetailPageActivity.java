@@ -15,6 +15,7 @@ import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twich.TwitchStream;
 import com.dopy.dopy.tayga.model.youtube.SearchData;
 import com.dopy.dopy.tayga.model.youtube.SearchYoutube;
+import com.dopy.dopy.tayga.model.youtube.YouTubeClickInterface;
 import com.dopy.dopy.tayga.model.youtube.YoutubeRcvAdapter;
 import com.github.pedrovgs.DraggableListener;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -40,6 +41,7 @@ public class GameDetailPageActivity extends AppCompatActivity {
     YouTubePlayer youtubePlayer;
     YouTubePlayerSupportFragment youtubeFragment;
     YoutubeDetailFragment youtubeDetailFragment;
+    YoutubeRcvAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,20 +135,29 @@ public class GameDetailPageActivity extends AppCompatActivity {
 
     private void setUpParallaxRecyclerView(BroadcastModel model) {
         List<SearchData> youtubeList = new ArrayList<>();
-        final YoutubeRcvAdapter adapter = new YoutubeRcvAdapter(this,youtubeList);
+        adapter = new YoutubeRcvAdapter(youtubeList, new YouTubeClickInterface() {
+            @Override
+            public void itemClick(View v) {
+                Toast.makeText(v.getContext(),"Clicked Item",Toast.LENGTH_LONG).show();
+            }
+        });
         binding.rcvGameDetail.setLayoutManager(new LinearLayoutManager(this));
         View header = LayoutInflater.from(this).inflate(R.layout.video_clip_header, binding.rcvGameDetail, false);
         VideoClipHeaderBinding headerBinding = VideoClipHeaderBinding.bind(header);
         headerBinding.setTwichStraemModel((TwitchStream) model);
         binding.rcvGameDetail.setAdapter(adapter);
         refreshYouTubeModelList(model, adapter);
-        adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
+
+        /*adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
             @Override
             public void onClick(View view, int i) {
                 SearchData data = adapter.getData().get(i);
                 LoadYoutube(data);
             }
-        });
+        });*/
+    }
+    public void onYoutubeItemClicked(View v){
+
     }
 
     public void LoadYoutube(SearchData data) {

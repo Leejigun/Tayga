@@ -17,6 +17,11 @@ public class GameRcvAdapter extends RecyclerView.Adapter<GameViewHolder> {
     Context context;
     List<GameItem> list;
 
+    public GameRcvAdapter(Context context, List<GameItem> list) {
+        this.context = context;
+        this.list = list;
+    }
+
     @Override
     public GameViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new GameViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.gameitem_cardview,parent,false));

@@ -13,9 +13,14 @@ import com.dopy.dopy.tayga.model.BaseRcvViewHolder;
 
 public class YoutubeViewholder extends BaseRcvViewHolder {
     YoutubeCardviewBinding binding;
+    YouTubeClickInterface youTubeClickInterface;
     public YoutubeViewholder(View itemView) {
         super(itemView);
         binding = YoutubeCardviewBinding.bind(itemView);
+    }
+
+    public YoutubeCardviewBinding getBinding() {
+        return binding;
     }
 
     @Override
