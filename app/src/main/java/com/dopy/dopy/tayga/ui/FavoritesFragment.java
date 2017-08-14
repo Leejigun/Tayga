@@ -18,13 +18,13 @@ import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentFavoritesBinding;
 import com.dopy.dopy.tayga.model.FavoritesRcvAdapter;
 import com.dopy.dopy.tayga.model.FavorityItem;
-import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
+import static com.dopy.dopy.tayga.R.id.toolbar;
 
 
 /**
@@ -60,18 +60,6 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
         FavoritesRcvAdapter adapter = new FavoritesRcvAdapter(models, getContext());
         binding.rcvFavoritesFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         View header = LayoutInflater.from(getContext()).inflate(R.layout.favorites_header, binding.rcvFavoritesFragment, false);
-        adapter.setParallaxHeader(header, binding.rcvFavoritesFragment);
-        final Toolbar toolbar =getActivity().findViewById(R.id.toolbar);
-        adapter.setOnParallaxScroll(new ParallaxRecyclerAdapter.OnParallaxScroll() {
-            @Override
-            public void onParallaxScroll(float v, float v1, View view) {
-                Log.d("MainFragment", "onParallaxScroll:" + toolbar.getBackground().toString());
-                Drawable c = toolbar.getBackground();
-                c.setAlpha(Math.round(v * 255));
-                toolbar.setBackground(c);
-            }
-        });
-        adapter.setData(models);
         binding.rcvFavoritesFragment.setAdapter(adapter);
     }
 

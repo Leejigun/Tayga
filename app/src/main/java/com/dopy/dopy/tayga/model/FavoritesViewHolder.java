@@ -7,29 +7,21 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.dopy.dopy.tayga.R;
+import com.dopy.dopy.tayga.databinding.FavoritesCardviewBinding;
 
 /**
  * Created by Dopy on 2017-08-09.
  */
 
 public class FavoritesViewHolder extends BaseRcvViewHolder {
-    ImageView imageCategory;
-    ImageView deleteButton;
-    TextView textTitle;
+   FavoritesCardviewBinding binding;
     public FavoritesViewHolder(View itemView) {
         super(itemView);
-        deleteButton=itemView.findViewById(R.id.fcvDeleteFavorites);
-        imageCategory=itemView.findViewById(R.id.fcvCategory);
-        textTitle = itemView.findViewById(R.id.fcvTitleFavorites);
+        binding=FavoritesCardviewBinding.bind(itemView);
+
     }
 
     @Override
     public void bind(Object data) {
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(itemView.getContext(),"Clicked delete Button",Toast.LENGTH_LONG).show();
-            }
-        });
     }
 }

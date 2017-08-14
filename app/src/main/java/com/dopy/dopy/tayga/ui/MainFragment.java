@@ -2,13 +2,11 @@ package com.dopy.dopy.tayga.ui;
 
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,19 +16,15 @@ import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
 import com.dopy.dopy.tayga.databinding.HeaderBinding;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
-import com.dopy.dopy.tayga.model.broadcast.BroadcastPagerAdapter;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
+import com.dopy.dopy.tayga.model.recommanded.RecommandedPagerAdapter;
 import com.dopy.dopy.tayga.model.twich.SearchTwitch;
-import com.dopy.dopy.tayga.model.youtube.SearchYoutube;
-import com.dopy.dopy.tayga.model.youtube.YoutubeService;
 import com.imbryk.viewPager.LoopViewPager;
-import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
-import retrofit2.Retrofit;
 import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 
@@ -74,7 +68,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
         SearchTwitch searchTwitch =new SearchTwitch();
         searchTwitch.getTwitch(pageoffset,adapter);
     }
-    private void refreshRecommandedModelList(BroadcastPagerAdapter adapter,int pageoffset) {
+    private void refreshRecommandedModelList(RecommandedPagerAdapter adapter, int pageoffset) {
         Log.d(this.getClass().toString(),"refreshRecommandedModelList");
         SearchTwitch searchTwitch =new SearchTwitch();
         searchTwitch.getRecommandList(pageoffset,adapter);
@@ -83,22 +77,10 @@ public class MainFragment extends Fragment implements ScreenShotable {
     private void setUpParallaxRecyclerView() {
         Log.d(this.getClass().toString(),"setUpParallaxRecyclerView");
         broadcastModelList = new ArrayList<>();
-        BroadcastRcvAdapter adapter = new BroadcastRcvAdapter(broadcastModelList, getContext());
+        BroadcastRcvAdapter adapter = new BroadcastRcvAdapter(getContext(),broadcastModelList);
         binding.rcvMainFragment.setLayoutManager(new LinearLayoutManager(getContext()));
-        View header = cearteCircleIndicator(binding.rcvMainFragment);
-        adapter.setParallaxHeader(header, binding.rcvMainFragment);
-        final Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        adapter.setOnParallaxScroll(new ParallaxRecyclerAdapter.OnParallaxScroll() {
-            @Override
-            public void onParallaxScroll(float v, float v1, View view) { // 해더와 툴바를 연결해서 사라지게 한다.
-                Log.d("MainFragment", "onParallaxScroll:" + toolbar.getBackground().toString());
-                Drawable c = toolbar.getBackground();
-                c.setAlpha(Math.round(v * 255));
-                toolbar.setBackground(c);
-            }
-        });
         binding.rcvMainFragment.setAdapter(adapter);
-        //refreshBroadcastModelList(adapter,0);
+        refreshBroadcastModelList(adapter,0);
     }
 
     //  리사이클러 뷰 헤더에 추가될 뷰 페이저를 만든다.
@@ -109,7 +91,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
         viewPagerBinding = HeaderBinding.bind(header);
         LoopViewPager viewpager = viewPagerBinding.viewpager;
         CircleIndicator indicator = viewPagerBinding.indicator;
-        BroadcastPagerAdapter adapter =new BroadcastPagerAdapter(RecommendedBroadcastList);
+        RecommandedPagerAdapter adapter =new RecommandedPagerAdapter(RecommendedBroadcastList);
         viewpager.setAdapter(adapter);
         indicator.setViewPager(viewpager);
         //refreshRecommandedModelList(adapter,0);

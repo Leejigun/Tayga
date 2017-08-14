@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
-import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
 import java.util.List;
 
@@ -14,28 +13,22 @@ import java.util.List;
  * Created by Dopy on 2017-08-13.
  */
 
-public class GameRcvAdapter extends ParallaxRecyclerAdapter<GameItem> {
+public class GameRcvAdapter extends RecyclerView.Adapter<GameViewHolder> {
     Context context;
+    List<GameItem> list;
 
-    public GameRcvAdapter(List<GameItem> data, Context context) {
-        super(data);
-        this.context = context;
+    @Override
+    public GameViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new GameViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.gameitem_cardview,parent,false));
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolderImpl(ViewGroup viewGroup, ParallaxRecyclerAdapter<GameItem> adapter, int i) {
-        return new GameViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.gameitem_cardview,viewGroup,false));
+    public void onBindViewHolder(GameViewHolder holder, int position) {
+        ((GameViewHolder)holder).bind(list.get(position));
     }
 
     @Override
-    public void onBindViewHolderImpl(RecyclerView.ViewHolder viewHolder, ParallaxRecyclerAdapter<GameItem> adapter, int i) {
-        ((GameViewHolder)viewHolder).bind(adapter.getData().get(i));
-
-    }
-
-
-    @Override
-    public int getItemCountImpl(ParallaxRecyclerAdapter<GameItem> adapter) {
-        return adapter.getData().size();
+    public int getItemCount() {
+        return list.size();
     }
 }

@@ -2,7 +2,7 @@ package com.dopy.dopy.tayga.model.twich;
 
 import android.util.Log;
 
-import com.dopy.dopy.tayga.model.broadcast.BroadcastPagerAdapter;
+import com.dopy.dopy.tayga.model.recommanded.RecommandedPagerAdapter;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
 
 import retrofit2.Call;
@@ -40,6 +40,7 @@ public class SearchTwitch {
                     Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
                     Log.d("SearchTwitch", datas.getList().get(0).channel.status);
                     adapter.getData().addAll(datas.getList());
+//                   adapter.setData(datas.getList());
                     adapter.notifyDataSetChanged();
                 }
 
@@ -57,7 +58,7 @@ public class SearchTwitch {
         }
     }
 
-    public void getRecommandList(int offset, final BroadcastPagerAdapter adapter) {
+    public void getRecommandList(int offset, final RecommandedPagerAdapter adapter) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -74,8 +75,7 @@ public class SearchTwitch {
                     TwitchStreamList datas = response.body();
                     Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
                     Log.d("SearchTwitch", datas.getList().get(0).channel.status);
-                    adapter.getData().addAll(datas.getList());
-                    adapter.notifyDataSetChanged();
+                    adapter.setData(datas.getList());
                 }
 
                 @Override

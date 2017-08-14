@@ -1,6 +1,5 @@
 package com.dopy.dopy.tayga.ui;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,12 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityGameDetailPageBinding;
 import com.dopy.dopy.tayga.databinding.VideoClipHeaderBinding;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
-import com.dopy.dopy.tayga.model.twich.TwitchService;
 import com.dopy.dopy.tayga.model.twich.TwitchStream;
 import com.dopy.dopy.tayga.model.youtube.SearchData;
 import com.dopy.dopy.tayga.model.youtube.SearchYoutube;
@@ -23,7 +20,6 @@ import com.github.pedrovgs.DraggableListener;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerSupportFragment;
-import com.poliveira.parallaxrecyclerview.ParallaxRecyclerAdapter;
 
 import org.parceler.Parcels;
 
@@ -137,18 +133,11 @@ public class GameDetailPageActivity extends AppCompatActivity {
 
     private void setUpParallaxRecyclerView(BroadcastModel model) {
         List<SearchData> youtubeList = new ArrayList<>();
-        final YoutubeRcvAdapter adapter = new YoutubeRcvAdapter(youtubeList, this);
+        final YoutubeRcvAdapter adapter = new YoutubeRcvAdapter(this,youtubeList);
         binding.rcvGameDetail.setLayoutManager(new LinearLayoutManager(this));
         View header = LayoutInflater.from(this).inflate(R.layout.video_clip_header, binding.rcvGameDetail, false);
         VideoClipHeaderBinding headerBinding = VideoClipHeaderBinding.bind(header);
         headerBinding.setTwichStraemModel((TwitchStream) model);
-        headerBinding.imvGameDetail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "방송 보러가기", Toast.LENGTH_LONG).show();
-            }
-        });
-        adapter.setParallaxHeader(header, binding.rcvGameDetail);
         binding.rcvGameDetail.setAdapter(adapter);
         refreshYouTubeModelList(model, adapter);
         adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
