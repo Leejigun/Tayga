@@ -20,6 +20,7 @@ import com.dopy.dopy.tayga.databinding.HeaderBinding;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastPagerAdapter;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
+import com.dopy.dopy.tayga.model.twich.SearchTwitch;
 import com.dopy.dopy.tayga.model.youtube.SearchYoutube;
 import com.dopy.dopy.tayga.model.youtube.YoutubeService;
 import com.imbryk.viewPager.LoopViewPager;
@@ -41,6 +42,8 @@ public class MainFragment extends Fragment implements ScreenShotable {
 
     FragmentMainBinding binding;
     HeaderBinding viewPagerBinding;
+    List<BroadcastModel> broadcastModelList;
+    List<BroadcastModel> RecommendedBroadcastList;
 
     public MainFragment() {
         // Required empty public constructor
@@ -65,12 +68,17 @@ public class MainFragment extends Fragment implements ScreenShotable {
     }
 
     //    새로고침
-    private List<BroadcastModel> refreshBroadcastModelList() {
-        return inputTestData();
+    private void refreshBroadcastModelList(BroadcastRcvAdapter adapter,int pageoffset) {
+        SearchTwitch searchTwitch =new SearchTwitch();
+        searchTwitch.getTwitch(pageoffset,adapter);
+    }
+    private void refreshRecommandedModelList(BroadcastPagerAdapter adapter,int pageoffset) {
+        SearchTwitch searchTwitch =new SearchTwitch();
+        searchTwitch.getRecommandList(pageoffset,adapter);
     }
 
     private void setUpParallaxRecyclerView() {
-        List<BroadcastModel> broadcastModelList = refreshBroadcastModelList();
+        broadcastModelList = new ArrayList<>();
         BroadcastRcvAdapter adapter = new BroadcastRcvAdapter(broadcastModelList, getContext());
         binding.rcvMainFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         View header = cearteCircleIndicator(binding.rcvMainFragment);
@@ -86,6 +94,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
             }
         });
         binding.rcvMainFragment.setAdapter(adapter);
+        refreshBroadcastModelList(adapter,0);
     }
 
     //  리사이클러 뷰 헤더에 추가될 뷰 페이저를 만든다.
@@ -94,29 +103,12 @@ public class MainFragment extends Fragment implements ScreenShotable {
         viewPagerBinding = HeaderBinding.bind(header);
         LoopViewPager viewpager = viewPagerBinding.viewpager;
         CircleIndicator indicator = viewPagerBinding.indicator;
-        List<BroadcastModel> RecommendedBroadcastList = inputTestData();
-        viewpager.setAdapter(new BroadcastPagerAdapter(RecommendedBroadcastList));
+        BroadcastPagerAdapter adapter =new BroadcastPagerAdapter(RecommendedBroadcastList);
+        viewpager.setAdapter(adapter);
         indicator.setViewPager(viewpager);
+        refreshRecommandedModelList(adapter,0);
         return header;
     }
-
-    private List<BroadcastModel> inputTestData() {
-        List<BroadcastModel> models = new ArrayList<>();
-        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null,BroadcastModel.HEARTHSTONE, 0));
-        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, BroadcastModel.BATTLE_GROUND, 0));
-        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, BroadcastModel.OVERWATCH, 0));
-        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null,BroadcastModel.HEARTHSTONE, 0));
-        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, BroadcastModel.BATTLE_GROUND, 0));
-        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, BroadcastModel.OVERWATCH, 0));
-        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null,BroadcastModel.HEARTHSTONE, 0));
-        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, BroadcastModel.BATTLE_GROUND, 0));
-        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, BroadcastModel.OVERWATCH, 0));
-        models.add(new BroadcastModel("하스스톤 신규 확장팩 얼어붙은 왕좌의 기사들", "태상", 5600, null,BroadcastModel.HEARTHSTONE, 0));
-        models.add(new BroadcastModel("켠김에 왕까지 배틀그라운드 딩셉션과 함께", "딩셉션", 7852, null, BroadcastModel.BATTLE_GROUND, 0));
-        models.add(new BroadcastModel("오버워치 첼린저 미로의 고급 시계 교육방송", "미로", 4230, null, BroadcastModel.OVERWATCH, 0));
-        return models;
-    }
-
 
     //    원래는 화면을 따서 그려주는 방식인데 부드럽지 못해 이방식보다 그냥 액티비티 배경을 그려주는 방식을 택했다.
     @Override

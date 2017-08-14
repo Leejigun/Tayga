@@ -3,8 +3,8 @@
 
     <data>
         <variable
-            name="detailModel"
-            type="com.dopy.dopy.tayga.model.broadcast.BroadcastModel" />
+            name="twichStraemModel"
+            type="com.dopy.dopy.tayga.model.twich.TwitchStream" />
     </data>
 
     <LinearLayout
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="@{detailModel.getTitle}"
+                android:text="@{twichStraemModel.channel.status}"
                 android:textColor="@android:color/white"
                 android:textSize="25dp" />
 
@@ -70,7 +70,7 @@
                         android:layout_gravity="end"
                         android:layout_margin="5dp"
                         android:gravity="end"
-                        android:text="@{detailModel.getHostName}"
+                        android:text="@{twichStraemModel.channel.displayName}"
                         android:textColor="@android:color/white" />
 
                     <TextView
@@ -80,7 +80,7 @@
                         android:layout_gravity="end"
                         android:layout_margin="5dp"
                         android:gravity="end"
-                        android:text="@{detailModel.getnumberOfViewrToStringNotNull}"
+                        android:text="@{twichStraemModel::getCurrentViewr}"
                         android:textColor="@color/discord_orange" />
 
                 </LinearLayout>

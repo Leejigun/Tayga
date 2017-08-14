@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ItemOfBroadcastInViewpagerBinding;
+import com.dopy.dopy.tayga.model.twich.TwitchStream;
 
 import java.util.List;
 
@@ -19,9 +20,9 @@ public class BroadcastPagerAdapter extends PagerAdapter {
     List<BroadcastModel> models;
     ItemOfBroadcastInViewpagerBinding recommandedBinding;
     public BroadcastPagerAdapter(List<BroadcastModel> models) {
-
-        this.models = models;
-        models.add(0,new BroadcastModel("","",0,null,"",0));
+    }
+    public List<BroadcastModel> getData(){
+        return models;
     }
 
     @Override
@@ -38,22 +39,16 @@ public class BroadcastPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_of_broadcast_in_viewpager,container,false);
         recommandedBinding = ItemOfBroadcastInViewpagerBinding.bind(view);
-        recommandedBinding.setBroadcastModel(models.get(position));
-        if(position==0){
-            Glide.with(view.getContext()).load(R.drawable.main_background).into(recommandedBinding.vpImage);
-        }else{
-            switch ((position)%3){
-                case 0:
-                    Glide.with(view.getContext()).load(R.drawable.gamesnapshot).into(recommandedBinding.vpImage);
-                    break;
-                case 1:
-                    Glide.with(view.getContext()).load(R.drawable.gamenapshot2).into(recommandedBinding.vpImage);
-                    break;
-                case 2:
-                    Glide.with(view.getContext()).load(R.drawable.gamenapshot3).into(recommandedBinding.vpImage);
-                    break;
-            }
+        switch (models.get(position).getClass().toString()){
+            case "TwitchStream":
+                TwitchStream twitchStream = (TwitchStream) models.get(position);
+                recommandedBinding.setTwitchStream(twitchStream);
+                Glide.with(container.getContext()).load(twitchStream.preview.medium).into(recommandedBinding.vpImage);
+                break;
+            default:
+                break;
         }
+
         container.addView(view, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);
         return view;
