@@ -1,6 +1,7 @@
 package com.dopy.dopy.tayga.model.broadcast;
 
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,8 @@ public class BroadcastPagerAdapter extends PagerAdapter {
     List<BroadcastModel> models;
     ItemOfBroadcastInViewpagerBinding recommandedBinding;
     public BroadcastPagerAdapter(List<BroadcastModel> models) {
-        models.add(0,new BroadcastModel());
+        this.models=models;
+        this.models.add(0,new BroadcastModel());
     }
     public List<BroadcastModel> getData(){
         return models;
@@ -40,19 +42,19 @@ public class BroadcastPagerAdapter extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_of_broadcast_in_viewpager,container,false);
         recommandedBinding = ItemOfBroadcastInViewpagerBinding.bind(view);
-        switch (models.get(position).getClass().toString()){
-            case "TwitchStream":
+        Log.d(this.getClass().toString(),"instantiateItem position:"+ position+ "class : "+models.get(position).getClass());
+        Log.d(this.getClass().toString(),"TwitchSream.class : "+BroadcastModel.class.toString());
+        String type = models.get(position).getClass().toString();
+            if(TwitchStream.class.toString()==type){
                 TwitchStream twitchStream = (TwitchStream) models.get(position);
                 recommandedBinding.setTwitchStream(twitchStream);
                 Glide.with(container.getContext()).load(twitchStream.preview.medium).into(recommandedBinding.vpImage);
-                break;
-            case "BroadcastModel":
+            }else if(BroadcastModel.class.toString() == type) {
                 recommandedBinding.setTwitchStream(null);
                 Glide.with(container.getContext()).load(R.drawable.main_background).into(recommandedBinding.vpImage);
-                break;
-            default:
-                break;
-        }
+            }else{
+                Log.e(this.getClass().toString(),"not match type");
+            }
 
         container.addView(view, ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT);

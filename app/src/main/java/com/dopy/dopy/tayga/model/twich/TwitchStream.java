@@ -18,7 +18,7 @@ public class TwitchStream extends BroadcastModel {
 
     @SerializedName("_id")
     @Expose
-    public Integer id;
+    public double id;
     @SerializedName("game")
     @Expose
     public String game;

@@ -10,8 +10,8 @@ import retrofit2.http.Query;
  */
 
 public interface TwitchService {
-    @Headers({"Client-ID: 2ern1d9404oilcymc4z8xioyaxf14w"})
-    @GET("streams/?")
+    @Headers("Client-ID:2ern1d9404oilcymc4z8xioyaxf14w")
+    @GET("?")
     Call<TwitchStreamList> searchStreamList(@Query("language") String langeuage,
                                             @Query("limit") int limit,
                                             @Query("offset") int offset);

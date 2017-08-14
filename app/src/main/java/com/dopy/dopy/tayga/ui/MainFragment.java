@@ -77,7 +77,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
     private void refreshRecommandedModelList(BroadcastPagerAdapter adapter,int pageoffset) {
         Log.d(this.getClass().toString(),"refreshRecommandedModelList");
         SearchTwitch searchTwitch =new SearchTwitch();
-        //searchTwitch.getRecommandList(pageoffset,adapter);
+        searchTwitch.getRecommandList(pageoffset,adapter);
     }
 
     private void setUpParallaxRecyclerView() {
@@ -85,8 +85,8 @@ public class MainFragment extends Fragment implements ScreenShotable {
         broadcastModelList = new ArrayList<>();
         BroadcastRcvAdapter adapter = new BroadcastRcvAdapter(broadcastModelList, getContext());
         binding.rcvMainFragment.setLayoutManager(new LinearLayoutManager(getContext()));
-//        View header = cearteCircleIndicator(binding.rcvMainFragment);
-//        adapter.setParallaxHeader(header, binding.rcvMainFragment);
+        View header = cearteCircleIndicator(binding.rcvMainFragment);
+        adapter.setParallaxHeader(header, binding.rcvMainFragment);
         final Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         adapter.setOnParallaxScroll(new ParallaxRecyclerAdapter.OnParallaxScroll() {
             @Override
@@ -98,11 +98,12 @@ public class MainFragment extends Fragment implements ScreenShotable {
             }
         });
         binding.rcvMainFragment.setAdapter(adapter);
-        refreshBroadcastModelList(adapter,0);
+        //refreshBroadcastModelList(adapter,0);
     }
 
     //  리사이클러 뷰 헤더에 추가될 뷰 페이저를 만든다.
     private View cearteCircleIndicator(RecyclerView recyclerView) {
+        Log.d(this.getClass().toString(),"cearteCircleIndicator");
         RecommendedBroadcastList= new ArrayList<>();
         View header = LayoutInflater.from(getContext()).inflate(R.layout.header, recyclerView, false);
         viewPagerBinding = HeaderBinding.bind(header);
@@ -111,7 +112,7 @@ public class MainFragment extends Fragment implements ScreenShotable {
         BroadcastPagerAdapter adapter =new BroadcastPagerAdapter(RecommendedBroadcastList);
         viewpager.setAdapter(adapter);
         indicator.setViewPager(viewpager);
-//        refreshRecommandedModelList(adapter,0);
+        //refreshRecommandedModelList(adapter,0);
         return header;
     }
 
