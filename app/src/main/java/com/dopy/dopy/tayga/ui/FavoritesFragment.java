@@ -1,15 +1,10 @@
 package com.dopy.dopy.tayga.ui;
 
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,15 +17,11 @@ import com.dopy.dopy.tayga.model.FavorityItem;
 import java.util.ArrayList;
 import java.util.List;
 
-import yalantis.com.sidemenu.interfaces.ScreenShotable;
-
-import static com.dopy.dopy.tayga.R.id.toolbar;
-
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FavoritesFragment extends Fragment implements ScreenShotable {
+public class FavoritesFragment extends Fragment{
     FragmentFavoritesBinding binding;
 
     public FavoritesFragment() {
@@ -76,26 +67,5 @@ public class FavoritesFragment extends Fragment implements ScreenShotable {
         models.add(new FavorityItem());
         models.add(new FavorityItem());
         return models;
-    }
-
-    @Override
-    public void takeScreenShot() {
-        /*Thread thread = new Thread() {
-            @Override
-            public void run() {
-                Bitmap bitmap = Bitmap.createBitmap(containerView.getWidth(),
-                        containerView.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                containerView.draw(canvas);
-                FavoritesFragment.this.bitmap = bitmap;
-            }
-        };
-
-        thread.start();*/
-    }
-
-    @Override
-    public Bitmap getBitmap() {
-        return null;
     }
 }

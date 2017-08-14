@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1e2124</color>
-    <color name="colorPrimaryDark">#2f3136</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#616161</color>
+    <color name="colorAccent">#FAFAFA</color>
+
     <color name="discord_4Black">#002</color>
     <color name="discord_3Black">#1e2124</color>
     <color name="discord_2Black">#2f3136</color>
     <color name="discord_1Black">#36393e</color>
     <color name="discord_light_gray">#4F545C</color>
     <color name="discord_orange">#F26522</color>
-    <color name="textview_backgroun">#AA000000</color>
+    <color name="textview_backgroun">#AA000000</color>=
+
+    <color name="light_gray">#c2c7cc</color>
+    <color name="dark_gray">#3d454c</color>
+    <color name="dark_gray_pressed">#373e44</color>
+    <color name="darker_gray">#1f2226</color>
+
+
 </resources>

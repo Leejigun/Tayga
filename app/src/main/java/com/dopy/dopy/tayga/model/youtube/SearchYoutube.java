@@ -41,8 +41,8 @@ public class SearchYoutube{
                     YoutubeList datas = response.body();
                     Log.d("SearchYoutube", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
                     Log.d("SearchYoutube", datas.getList().get(0).snippet.title);
-                    adapter.getData().addAll(datas.getList());
-                    adapter.notifyDataSetChanged();
+                    /*adapter.getData().addAll(datas.getList());
+                    adapter.notifyDataSetChanged();*/
                 }
 
                 @Override

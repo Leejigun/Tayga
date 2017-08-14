@@ -1,21 +1,15 @@
 package com.dopy.dopy.tayga.ui;
 
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
 import com.dopy.dopy.tayga.R;
-import com.dopy.dopy.tayga.databinding.FavoritesHeaderBinding;
 import com.dopy.dopy.tayga.databinding.FragmentGameBinding;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.game.GameRcvAdapter;
@@ -23,14 +17,10 @@ import com.dopy.dopy.tayga.model.game.GameRcvAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import yalantis.com.sidemenu.interfaces.ScreenShotable;
-
-import static com.dopy.dopy.tayga.R.id.toolbar;
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class GameFragment extends Fragment implements ScreenShotable {
+public class GameFragment extends Fragment{
     FragmentGameBinding binding;
 
     public GameFragment() {
@@ -73,15 +63,5 @@ public class GameFragment extends Fragment implements ScreenShotable {
         gameItems.add(new GameItem(GameItem.MINECRAFT));
         gameItems.add(new GameItem(GameItem.WOW));
         return gameItems;
-    }
-
-    @Override
-    public void takeScreenShot() {
-
-    }
-
-    @Override
-    public Bitmap getBitmap() {
-        return null;
     }
 }

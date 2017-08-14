@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_main"
+            android:icon="@drawable/ic_ondemand_video_black_24dp"
+            android:title="@string/menu_main" />
+        <item
+            android:id="@+id/menu_game"
+            android:icon="@drawable/ic_videogame_asset_black_24dp"
+            android:title="@string/menu_game" />
+        <item
+            android:id="@+id/menu_favorites"
+            android:icon="@drawable/ic_favorite_black_24dp"
+            android:title="@string/menu_favorites" />
+    </group>
+
+    <item android:title="@string/menu_profile">
+        <menu>
+            <item
+                android:id="@+id/menu_remove_favorites"
+                android:icon="@drawable/ic_delete_forever_black_24dp"
+                android:title="@string/menu_remove_favorites" />
+            <item
+                android:id="@+id/menu_profile_detail"
+                android:icon="@drawable/ic_assignment_ind_black_24dp"
+                android:title="@string/menu_profile_detail" />
+        </menu>
+    </item>
+
+</menu>

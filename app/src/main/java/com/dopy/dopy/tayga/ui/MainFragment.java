@@ -1,7 +1,6 @@
 package com.dopy.dopy.tayga.ui;
 
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,13 +24,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import me.relex.circleindicator.CircleIndicator;
-import yalantis.com.sidemenu.interfaces.ScreenShotable;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MainFragment extends Fragment implements ScreenShotable {
+public class MainFragment extends Fragment {
 
 
     FragmentMainBinding binding;
@@ -59,7 +57,12 @@ public class MainFragment extends Fragment implements ScreenShotable {
         super.onViewCreated(view, savedInstanceState);
         Log.d(this.getClass().toString(),"ononViewCreated");
         binding = FragmentMainBinding.bind(view);
-        setUpParallaxRecyclerView();
+        setUpRecyclerView();
+    }
+
+    public void setUpRecyclerView(){
+        BroadcastRcvAdapter
+
     }
 
     //    새로고침
@@ -98,26 +101,6 @@ public class MainFragment extends Fragment implements ScreenShotable {
         return header;
     }
 
-    //    원래는 화면을 따서 그려주는 방식인데 부드럽지 못해 이방식보다 그냥 액티비티 배경을 그려주는 방식을 택했다.
-    @Override
-    public void takeScreenShot() {
-        /*Thread thread = new Thread() {
-            @Override
-            public void run() {
-                Bitmap bitmap = Bitmap.createBitmap(containerView.getWidth(),
-                        containerView.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                containerView.draw(canvas);
-                MainFragment.this.bitmap = bitmap;
-            }
-        };
 
-        thread.start();*/
-    }
-
-    @Override
-    public Bitmap getBitmap() {
-        return null;
-    }
 
 }

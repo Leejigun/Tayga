@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">Tayga</string>
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
-    <string name="login">Login</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="number_of_viewr" formatted="false">%s 명 시청중</string>
-    <dimen name="top_fragment_height">200dip</dimen>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- navigation drawer menu item-->
+    <string name="menu_main">인기 Streams</string>
+    <string name="menu_game">게임별</string>
+    <string name="menu_favorites">즐겨찾기</string>
+    <string name="menu_profile">계정</string>
+    <string name="menu_remove_favorites">계정 정보 보기</string>
+    <string name="menu_profile_detail">계정 정보 보기</string>
+
 </resources>
