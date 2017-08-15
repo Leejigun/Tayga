@@ -15,6 +15,7 @@ import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.youtube.SearchData;
 import com.dopy.dopy.tayga.model.youtube.SearchYoutube;
+import com.dopy.dopy.tayga.model.youtube.SetOnclickYoutubePlay;
 import com.dopy.dopy.tayga.model.youtube.YouTubeClickInterface;
 import com.dopy.dopy.tayga.model.youtube.YoutubeRcvAdapter;
 import com.github.pedrovgs.DraggableListener;
@@ -30,7 +31,7 @@ import java.util.List;
 import static android.view.View.GONE;
 
 
-public class GameDetailPageActivity extends AppCompatActivity {
+public class GameDetailPageActivity extends AppCompatActivity{
 
     final String SERVICE_KEY = "AIzaSyAzd4t2_efKUvoyzM0X49ckFYGLe9s-IjI";
 
@@ -57,17 +58,16 @@ public class GameDetailPageActivity extends AppCompatActivity {
         List<BroadcastModel> youtubeList = new ArrayList<>();
         youtubeList.add(model);
         adapter = new YoutubeRcvAdapter(youtubeList);
+        adapter.addSetOnClickListener(new SetOnclickYoutubePlay() {
+            @Override
+            public void onClickYoutube(View v, SearchData data) {
+                Log.d("GameDetailPageActivity","call onClickYoutube");
+                LoadYoutube(data);
+            }
+        });
         refreshYouTubeModelList(model, adapter);
         binding.rcvGameDetail.setLayoutManager(new LinearLayoutManager(this));
         binding.rcvGameDetail.setAdapter(adapter);
-
-        /*adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
-            @Override
-            public void onClick(View view, int i) {
-                SearchData data = adapter.getData().get(i);
-                LoadYoutube(data);
-            }
-        });*/
     }
 
     private void initializeYoutubeFragment() {

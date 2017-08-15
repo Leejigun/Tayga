@@ -3,6 +3,7 @@ package com.dopy.dopy.tayga.model.youtube;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
@@ -18,14 +19,18 @@ import java.util.List;
  * Created by Dopy on 2017-08-13.
  */
 
-public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder> {
+public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder>{
     final int STREAMINFO =101;
     final int YOUTUBE =102;
-
+    SetOnclickYoutubePlay onclickYoutubePlay;
     List<BroadcastModel> list;
 
     public YoutubeRcvAdapter(List<BroadcastModel> list) {
         this.list = list;
+    }
+
+    public void addSetOnClickListener(SetOnclickYoutubePlay listener){
+        this.onclickYoutubePlay=listener;
     }
 
     @Override
@@ -41,13 +46,20 @@ public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(BaseRcvViewHolder holder, int position) {
+    public void onBindViewHolder(BaseRcvViewHolder holder, final int position) {
         switch (getItemViewType(position)){
             case STREAMINFO:
                 ((GameDetailHeaderViewHolder)holder).bind(list.get(position));
                 break;
             case YOUTUBE:
                 ((YoutubeViewholder)holder).bind(list.get(position));
+                ((YoutubeViewholder)holder).binding.containeryoutubeCardView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Log.d("YoutubeRcvAdapter", "call onClick");
+                        onclickYoutubePlay.onClickYoutube(view, (SearchData) list.get(position));
+                    }
+                });
                 break;
             default:
                 break;

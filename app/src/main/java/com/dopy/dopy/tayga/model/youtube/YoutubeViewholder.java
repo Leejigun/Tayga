@@ -7,13 +7,14 @@ import com.bumptech.glide.Glide;
 import com.dopy.dopy.tayga.databinding.YoutubeCardviewBinding;
 import com.dopy.dopy.tayga.model.BaseRcvViewHolder;
 
+
 /**
  * Created by Dopy on 2017-08-13.
  */
 
-public class YoutubeViewholder extends BaseRcvViewHolder {
+public class YoutubeViewholder extends BaseRcvViewHolder{
     YoutubeCardviewBinding binding;
-    YouTubeClickInterface youTubeClickInterface;
+    SetOnclickYoutubePlay youTubeClickInterface;
     public YoutubeViewholder(View itemView) {
         super(itemView);
         binding = YoutubeCardviewBinding.bind(itemView);
@@ -24,7 +25,7 @@ public class YoutubeViewholder extends BaseRcvViewHolder {
     }
 
     @Override
-    public void bind(Object data) {
+    public void bind(final Object data) {
         SearchData model = (SearchData) data;
         binding.setYoutubeData(model);
         Glide.with(binding.getRoot()).load(model.snippet.thumbnails.medium.url).into(binding.imvYoutubeCard);

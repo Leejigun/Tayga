@@ -18,62 +18,73 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/discord_orange" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/discord_light_gray"
+                android:background="@color/cardview_background"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txtYoutubeDetailTitle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:hint="assssssssssssssssssssssssssssssssssdsasadsasaaaaaaaaaaaaaaaaaaaaaaa"
+                    android:padding="5dp"
                     android:text="@{youTubeData.snippet.title}"
-                    android:textColor="@android:color/white"
-                    android:textSize="20sp" />
+                    android:textSize="18sp"
+                    android:theme="@style/BroadCardTextView" />
 
-                <TextView
-                    android:id="@+id/txtYoutubeDetailHostName"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_margin="5dp"
-                    android:text="@{youTubeData.snippet.channelTitle}"
-                    android:textColor="@android:color/white" />
+                    android:padding="5dp">
+
+                    <TextView
+                        android:id="@+id/txtYoutubePublicshAt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:hint="05.08.2017"
+                        android:text="@{youTubeData.snippet.getPublishedAt}"/>
+
+                    <TextView
+                        android:id="@+id/txtYoutubeDetailHostName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="right"
+                        android:hint="hostname"
+                        android:text="@{youTubeData.snippet.channelTitle}"
+                        android:theme="@style/BroadCardTextView" />
+                </RelativeLayout>
+
+
             </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="@color/discord_orange" />
+                android:background="@color/cardview_outline" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/discord_1Black"
-                android:orientation="vertical">
+                android:background="@color/cardview_background"
+                android:orientation="vertical"
+                android:padding="5dp">
 
                 <TextView
-                    android:id="@+id/txtYoutubePublicshAt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:text="@{youTubeData.snippet.getPublishedAt}"
-                    android:textColor="@android:color/white" />
+                    android:text="영상 설명" />
 
                 <TextView
                     android:id="@+id/txtYoutubeDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textSize="20dp"
                     android:text="@{youTubeData.snippet.description}"
-                    android:textColor="@android:color/white" />
+                    android:textSize="20dp"
+                    android:linksClickable="true"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
