@@ -6,9 +6,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
+import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
+import com.dopy.dopy.tayga.model.game.GameItem;
+import com.dopy.dopy.tayga.model.game.GameViewHolder;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.TwitchViewHolder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +22,7 @@ import java.util.List;
 public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     final int RECOMMANDED_HEADER = 101;
     final int TWITCH = 102;
+    final int GAME_HEADER = 103;
 
     Context context;
     List<BroadcastModel> models;
@@ -28,7 +33,14 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public void setData(List<BroadcastModel> list) {
-        models = list;
+        if(this.models.size()>0){
+            List<BroadcastModel> newlist=new ArrayList<>();
+            newlist.add(models.get(0));
+            newlist.addAll(list);
+            this.models=newlist;
+        }else {
+            models = list;
+        }
         notifyDataSetChanged();
     }
 
@@ -39,6 +51,8 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 return null;
             case TWITCH:
                 return new TwitchViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.twitch_stream_cardview, parent, false));
+            case GAME_HEADER:
+                return new GameHeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.game_logo_header,parent,false));
         }
         return null;
     }
@@ -52,6 +66,9 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case TWITCH:
                 ((TwitchViewHolder) holder).bind(models.get(position));
                 break;
+            case GAME_HEADER:
+                ((GameHeaderViewHolder)holder).bind(models.get(position));
+                break;
         }
     }
 
@@ -61,7 +78,11 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         String type = model.getClass().toString();
         if (TwitchStream.class.toString().equals(type)) {
             return TWITCH;
-        } else return TWITCH;
+        } else if(GameItem.class.toString().equals(type)){
+            return GAME_HEADER;
+        }else{
+            return 0;
+        }
     }
 
     @Override

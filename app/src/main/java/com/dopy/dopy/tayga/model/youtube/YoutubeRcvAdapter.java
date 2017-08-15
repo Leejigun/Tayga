@@ -10,7 +10,7 @@ import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.model.BaseRcvViewHolder;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
-import com.dopy.dopy.tayga.ui.GameDetailHeaderViewHolder;
+import com.dopy.dopy.tayga.model.twitch.GameDetailHeaderViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;

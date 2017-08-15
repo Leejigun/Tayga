@@ -1,14 +1,19 @@
 package com.dopy.dopy.tayga.model.game;
 
 
+import android.view.View;
+
+import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+
+import org.parceler.Parcel;
 
 /**
  * Created by Dopy on 2017-08-13.
  */
-
-public class GameItem {
+@Parcel
+public class GameItem extends BroadcastModel {
 
     @SerializedName("game")
     @Expose
@@ -20,6 +25,10 @@ public class GameItem {
     @Expose
     public Integer channels;
 
+    public String showChannels(){
+        return (Integer.toString(channels)+"개의 방송이 있습니다.");
+    }
+
     public String showGameName(){
         return (game.name);
     }
@@ -28,7 +37,28 @@ public class GameItem {
         return (game.popularity + "명 시청중");
     }
 
-    public class Game {
+    @Override
+    public String showTitle() {
+        return game.name;
+    }
+
+    @Override
+    public String showHostName() {
+        return game.name;
+    }
+
+    @Override
+    public String showViewrToString() {
+        return showTotalViewr();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Parcel
+    public static class Game {
 
         @SerializedName("name")
         @Expose
@@ -54,8 +84,24 @@ public class GameItem {
         @SerializedName("locale")
         @Expose
         public String locale;
+        @Parcel
+        public static class Box {
 
-        public class Box {
+            @SerializedName("large")
+            @Expose
+            public String large;
+            @SerializedName("medium")
+            @Expose
+            public String medium;
+            @SerializedName("small")
+            @Expose
+            public String small;
+            @SerializedName("template")
+            @Expose
+            public String template;
+        }
+        @Parcel
+        public static class Logo {
 
             @SerializedName("large")
             @Expose
@@ -71,24 +117,5 @@ public class GameItem {
             public String template;
 
         }
-        public class Logo {
-
-            @SerializedName("large")
-            @Expose
-            public String large;
-            @SerializedName("medium")
-            @Expose
-            public String medium;
-            @SerializedName("small")
-            @Expose
-            public String small;
-            @SerializedName("template")
-            @Expose
-            public String template;
-
-        }
-
     }
-
-
 }

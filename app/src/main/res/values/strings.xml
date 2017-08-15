@@ -9,7 +9,7 @@
     <string name="menu_game">게임별</string>
     <string name="menu_favorites">즐겨찾기</string>
     <string name="menu_profile">계정</string>
-    <string name="menu_remove_favorites">계정 정보 보기</string>
+    <string name="menu_remove_favorites">즐겨찾기 제거</string>
     <string name="menu_profile_detail">계정 정보 보기</string>
 
 </resources>

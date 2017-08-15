@@ -65,6 +65,42 @@ public class SearchTwitch {
         }
     }
 
+    public void getListOfGame(final int offset, final String gameName, final BroadcastRcvAdapter adapter){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        TwitchService service = retrofit.create(TwitchService.class);
+        try {
+            Call<TwitchStreamList> videoList = (Call<TwitchStreamList>) service.searchStreamListOfGame(gameName,"ko", 50, offset);
+            videoList.enqueue(new Callback<TwitchStreamList>() {
+                @Override
+                public void onResponse(Call<TwitchStreamList> call, Response<TwitchStreamList> response) {
+                    int statusCode = response.code();
+                    Log.d("SearchTwitch", "statusCode :" + Integer.toString(statusCode));
+                    TwitchStreamList datas = response.body();
+                    Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
+                    Log.d("SearchTwitch", datas.getList().get(0).channel.status);
+                    Log.d("SearchTwitch", datas.getList().get(0).preview.medium.toString());
+                    List<BroadcastModel> list = new ArrayList<>();
+                    list.addAll(datas.getList());
+                    adapter.setData(list);
+                }
+
+                @Override
+                public void onFailure(Call<TwitchStreamList> call, Throwable t) {
+                    Log.d("SearchTwitch", "데이터를 불러오는데 실패 했습니다.");
+                    Log.d("SearchTwitch", "call:" + call.request());
+                    Log.d("SearchTwitch", "Throwable:" + t.getMessage());
+                }
+            });
+        } catch (NullPointerException e) {
+            Log.d("SearchTwitch", e.getMessage());
+        } catch (Exception e) {
+            Log.d("SearchTwitch", e.getMessage());
+        }
+    }
+
     public void getGameList(final GameRcvAdapter adapter) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)

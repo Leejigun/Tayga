@@ -5,8 +5,10 @@
     <color name="colorAccent">#FAFAFA</color>
 
     <color name="cardview_background">#EEEEEE</color>
+    <color name="playbutton_background">#55EEEEEE</color>
     <color name="cardview_outline">#BDBDBD</color>
     <color name="grey">#9E9E9E</color>
+    <color name="gameLogo_background">#E0E0E0</color>
 
     <color name="discord_4Black">#002</color>
     <color name="discord_3Black">#1e2124</color>

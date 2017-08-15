@@ -53,7 +53,12 @@ public class TwitchStream extends BroadcastModel{
 
     @Parcel
     public static class Channel {
-
+        @SerializedName("_id")
+        @Expose
+        public double id;
+        @SerializedName("name")
+        @Expose
+        public String name;
         @SerializedName("status")
         @Expose
         public String status;
@@ -98,8 +103,6 @@ public class TwitchStream extends BroadcastModel{
     }
     @Parcel
     public static class Links {
-
-
         @SerializedName("self")
         @Expose
         public String self;

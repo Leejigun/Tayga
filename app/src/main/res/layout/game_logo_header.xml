@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="GameItem"
+            type="com.dopy.dopy.tayga.model.game.GameItem" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/gameLogo_background">
+            <ImageView
+                android:id="@+id/imvGameLogo"
+                android:layout_width="match_parent"
+                android:layout_height="150dp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@color/cardview_outline"/>
+
+        <TextView
+            android:gravity="center"
+            android:hint="aaaaaaa"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{GameItem.showTitle()}"/>
+        <TextView
+            android:gravity="end"
+            android:hint="2015812"
+            android:text="@{GameItem.showChannels()}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@color/cardview_outline"/>
+    </LinearLayout>
+</layout>

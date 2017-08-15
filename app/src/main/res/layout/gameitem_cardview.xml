@@ -13,6 +13,7 @@
         android:layout_margin="5dp"
         app:cardCornerRadius="10dp">
         <LinearLayout
+            android:id="@+id/containerGameItem"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cardview_background"

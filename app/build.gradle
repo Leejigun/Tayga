@@ -46,7 +46,7 @@ dependencies {
     compile 'com.github.pedrovgs:draggablepanel:1.9'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'org.parceler:parceler:1.1.9'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
-    compile 'org.parceler:parceler:1.1.9'
 }
