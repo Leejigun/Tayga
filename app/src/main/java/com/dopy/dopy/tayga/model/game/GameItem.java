@@ -1,31 +1,94 @@
 package com.dopy.dopy.tayga.model.game;
 
+
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by Dopy on 2017-08-13.
  */
 
 public class GameItem {
-    public static final String HEARTHSTONE = "하스스톤";
-    public static final String BATTLE_GROUND = "배틀 그라운드";
-    public static final String OVERWATCH = "오버워치";
-    public static final String LOL = "리그 오브 레전드";
-    public static final String HOS = "히어로즈 오브 더 스톰";
-    public static final String DOTA2 = "도타2";
-    public static final String MINECRAFT = "마인 크래프트";
-    public static final String WOW = "월드 오브 워크레프트";
 
+    @SerializedName("game")
+    @Expose
+    public Game game;
+    @SerializedName("viewers")
+    @Expose
+    public Integer viewers;
+    @SerializedName("channels")
+    @Expose
+    public Integer channels;
 
-
-
-
-
-    String tag;
-
-    public GameItem(String tag) {
-        this.tag = tag;
+    public String showGameName(){
+        return (game.name);
     }
 
-    public String getTag() {
-        return tag;
+    public String showTotalViewr(){
+        return (game.popularity + "명 시청중");
     }
+
+    public class Game {
+
+        @SerializedName("name")
+        @Expose
+        public String name;
+        @SerializedName("popularity")
+        @Expose
+        public Integer popularity;
+        @SerializedName("_id")
+        @Expose
+        public Integer id;
+        @SerializedName("giantbomb_id")
+        @Expose
+        public Integer giantbombId;
+        @SerializedName("box")
+        @Expose
+        public Box box;
+        @SerializedName("logo")
+        @Expose
+        public Logo logo;
+        @SerializedName("localized_name")
+        @Expose
+        public String localizedName;
+        @SerializedName("locale")
+        @Expose
+        public String locale;
+
+        public class Box {
+
+            @SerializedName("large")
+            @Expose
+            public String large;
+            @SerializedName("medium")
+            @Expose
+            public String medium;
+            @SerializedName("small")
+            @Expose
+            public String small;
+            @SerializedName("template")
+            @Expose
+            public String template;
+
+        }
+        public class Logo {
+
+            @SerializedName("large")
+            @Expose
+            public String large;
+            @SerializedName("medium")
+            @Expose
+            public String medium;
+            @SerializedName("small")
+            @Expose
+            public String small;
+            @SerializedName("template")
+            @Expose
+            public String template;
+
+        }
+
+    }
+
+
 }

@@ -13,6 +13,7 @@ import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentGameBinding;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.game.GameRcvAdapter;
+import com.dopy.dopy.tayga.model.twitch.SearchTwitch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 public class GameFragment extends Fragment{
     FragmentGameBinding binding;
+    GameRcvAdapter adapter;
 
     public GameFragment() {
         // Required empty public constructor
@@ -42,26 +44,18 @@ public class GameFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentGameBinding.bind(view);
-        setUpParallaxRecyclerView();
+        setUpRecyclerView();
     }
-
-    private void setUpParallaxRecyclerView() {
-        List<GameItem> gameItemList = inputGameCategory();
-        GameRcvAdapter adapter = new GameRcvAdapter(getContext(),gameItemList);
+    public void setUpRecyclerView(){
+        List<GameItem> gameItemList =new ArrayList<>();
+        adapter = new GameRcvAdapter(getContext(),gameItemList);
+        refreshGameItemList();
         binding.rcvGameFragment.setLayoutManager(new GridLayoutManager(getContext(),2));
-        View header = LayoutInflater.from(getContext()).inflate(R.layout.favorites_header,binding.rcvGameFragment,false);
         binding.rcvGameFragment.setAdapter(adapter);
     }
-    public List<GameItem> inputGameCategory(){
-        List<GameItem> gameItems = new ArrayList<>();
-        gameItems.add(new GameItem(GameItem.HEARTHSTONE));
-        gameItems.add(new GameItem(GameItem.OVERWATCH));
-        gameItems.add(new GameItem(GameItem.BATTLE_GROUND));
-        gameItems.add(new GameItem(GameItem.LOL));
-        gameItems.add(new GameItem(GameItem.HOS));
-        gameItems.add(new GameItem(GameItem.DOTA2));
-        gameItems.add(new GameItem(GameItem.MINECRAFT));
-        gameItems.add(new GameItem(GameItem.WOW));
-        return gameItems;
+
+    public void refreshGameItemList(){
+        SearchTwitch searchTwitch =new  SearchTwitch();
+        searchTwitch.getGameList(adapter);
     }
 }

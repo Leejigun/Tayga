@@ -4,15 +4,15 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityGameDetailPageBinding;
-import com.dopy.dopy.tayga.databinding.VideoClipHeaderBinding;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
-import com.dopy.dopy.tayga.model.twich.TwitchStream;
+import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.youtube.SearchData;
 import com.dopy.dopy.tayga.model.youtube.SearchYoutube;
 import com.dopy.dopy.tayga.model.youtube.YouTubeClickInterface;
@@ -31,7 +31,6 @@ import static android.view.View.GONE;
 
 
 public class GameDetailPageActivity extends AppCompatActivity {
-    final String BASE_URL = "https://www.googleapis.com/youtube/v3/";
 
     final String SERVICE_KEY = "AIzaSyAzd4t2_efKUvoyzM0X49ckFYGLe9s-IjI";
 
@@ -46,12 +45,29 @@ public class GameDetailPageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_game_detail_page);
-        BroadcastModel model = Parcels.unwrap(getIntent().getParcelableExtra("Stream"));
-        setUpParallaxRecyclerView(model);
+        binding =DataBindingUtil.setContentView(this, R.layout.activity_game_detail_page);
+        BroadcastModel model = Parcels.unwrap(getIntent().getParcelableExtra("GameDetailPageActivity"));
+        setUpRecyclerView(model);
         initializeYoutubeFragment();
         initializeDraggablePanel();
         hookDraggablePanelListeners();
+    }
+
+    private void setUpRecyclerView(BroadcastModel model) {
+        List<BroadcastModel> youtubeList = new ArrayList<>();
+        youtubeList.add(model);
+        adapter = new YoutubeRcvAdapter(youtubeList);
+        refreshYouTubeModelList(model, adapter);
+        binding.rcvGameDetail.setLayoutManager(new LinearLayoutManager(this));
+        binding.rcvGameDetail.setAdapter(adapter);
+
+        /*adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
+            @Override
+            public void onClick(View view, int i) {
+                SearchData data = adapter.getData().get(i);
+                LoadYoutube(data);
+            }
+        });*/
     }
 
     private void initializeYoutubeFragment() {
@@ -125,40 +141,14 @@ public class GameDetailPageActivity extends AppCompatActivity {
 
     private void refreshYouTubeModelList(BroadcastModel model, YoutubeRcvAdapter adapter) {
         SearchYoutube searchYoutube = new SearchYoutube();
-        switch (model.getClass().toString()) {
-            case "TwitchStream":
-                TwitchStream twitchStream = (TwitchStream)model;
-                searchYoutube.getUtube(twitchStream.channel.game, 10, adapter);
-                break;
+        String type = model.getClass().toString();
+        if(TwitchStream.class.toString().equals(type)){
+            Log.d("GameDetailPageActivity","call refreshYouTubeModelList");
+            TwitchStream twitchStream = (TwitchStream)model;
+            searchYoutube.getUtube(twitchStream.channel.displayName, 10, adapter);
         }
     }
 
-    private void setUpParallaxRecyclerView(BroadcastModel model) {
-        List<SearchData> youtubeList = new ArrayList<>();
-        adapter = new YoutubeRcvAdapter(youtubeList, new YouTubeClickInterface() {
-            @Override
-            public void itemClick(View v) {
-                Toast.makeText(v.getContext(),"Clicked Item",Toast.LENGTH_LONG).show();
-            }
-        });
-        binding.rcvGameDetail.setLayoutManager(new LinearLayoutManager(this));
-        View header = LayoutInflater.from(this).inflate(R.layout.video_clip_header, binding.rcvGameDetail, false);
-        VideoClipHeaderBinding headerBinding = VideoClipHeaderBinding.bind(header);
-        headerBinding.setTwichStraemModel((TwitchStream) model);
-        binding.rcvGameDetail.setAdapter(adapter);
-        refreshYouTubeModelList(model, adapter);
-
-        /*adapter.setOnClickEvent(new ParallaxRecyclerAdapter.OnClickEvent() {
-            @Override
-            public void onClick(View view, int i) {
-                SearchData data = adapter.getData().get(i);
-                LoadYoutube(data);
-            }
-        });*/
-    }
-    public void onYoutubeItemClicked(View v){
-
-    }
 
     public void LoadYoutube(SearchData data) {
         youtubePlayer.loadVideo(data.id.videoId);

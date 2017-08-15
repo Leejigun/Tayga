@@ -13,8 +13,15 @@ import java.net.URL;
  * Created by Dopy on 2017-08-08.
  */
 
-public class BroadcastModel {
+public abstract class BroadcastModel{
     public BroadcastModel() {
     }
 
+    public abstract String showTitle();
+
+    public abstract String showHostName();
+
+    public abstract String showViewrToString();
+
+    public abstract void onClick(View v);
 }

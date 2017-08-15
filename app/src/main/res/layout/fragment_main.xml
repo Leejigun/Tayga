@@ -1,6 +1,6 @@
 <layout>
 
-    <io.codetail.widget.RevealFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,5 +16,5 @@
                 android:layout_gravity="left|top" />
 
         </FrameLayout>
-    </io.codetail.widget.RevealFrameLayout>
+    </FrameLayout>
 </layout>

@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.menu_main) {
             getSupportFragmentManager().beginTransaction().replace(contentBinding.mainFrame.getId(),MainFragment.newInstance()).commit();
         } else if (id == R.id.menu_game) {
-            getSupportFragmentManager().beginTransaction().replace(contentBinding.mainFrame.getId(),MainFragment.newInstance()).commit();
+            getSupportFragmentManager().beginTransaction().replace(contentBinding.mainFrame.getId(),GameFragment.newInstance()).commit();
         } else if (id == R.id.menu_favorites) {
             getSupportFragmentManager().beginTransaction().replace(contentBinding.mainFrame.getId(),MainFragment.newInstance()).commit();
         } else if (id == R.id.menu_remove_favorites) {

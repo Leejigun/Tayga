@@ -1,4 +1,4 @@
-package com.dopy.dopy.tayga.model.twich;
+package com.dopy.dopy.tayga.model.twitch;
 
 import com.google.gson.annotations.SerializedName;
 

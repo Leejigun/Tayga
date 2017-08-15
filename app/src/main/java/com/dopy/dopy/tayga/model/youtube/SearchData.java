@@ -1,9 +1,11 @@
 package com.dopy.dopy.tayga.model.youtube;
 
 import android.content.Intent;
+import android.os.Parcel;
 import android.provider.MediaStore;
 import android.view.View;
 
+import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.ui.GameDetailPageActivity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -16,7 +18,7 @@ import java.util.Date;
  * Created by Dopy on 2017-08-12.
  */
 
-public class SearchData {
+public class SearchData extends BroadcastModel {
     @SerializedName("id")
     @Expose
     public Id id;
@@ -24,95 +26,25 @@ public class SearchData {
     @Expose
     public Snippet snippet;
 
-    public class Id {
 
-        @SerializedName("videoId")
-        @Expose
-        public String videoId;
+    @Override
+    public String showTitle() {
+        return snippet.title;
     }
 
-    public class Snippet {
+    @Override
+    public String showHostName() {
+        return snippet.channelTitle;
+    }
 
-        @SerializedName("publishedAt")
-        @Expose
-        public String publishedAt;
-        @SerializedName("channelId")
-        @Expose
-        public String channelId;
-        @SerializedName("title")
-        @Expose
-        public String title;
-        @SerializedName("description")
-        @Expose
-        public String description;
-        @SerializedName("thumbnails")
-        @Expose
-        public Thumbnails thumbnails;
-        @SerializedName("channelTitle")
-        @Expose
-        public String channelTitle;
+    @Override
+    public String showViewrToString() {
+        return null;
+    }
 
-        public String getPublishedAt(){
-            try {
-                Date date = new java.text.SimpleDateFormat("yyyy-mm-dd").parse(publishedAt);
-                return ("게시일: " +new SimpleDateFormat("yyyy년 mm월 dd일").format(date));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return publishedAt;
-        }
+    @Override
+    public void onClick(View v) {
 
-        public class Thumbnails {
-
-            @SerializedName("default")
-            @Expose
-            public Default _default;
-            @SerializedName("medium")
-            @Expose
-            public Medium medium;
-            @SerializedName("high")
-            @Expose
-            public High high;
-            public class Default {
-
-                @SerializedName("url")
-                @Expose
-                public String url;
-                @SerializedName("width")
-                @Expose
-                public Integer width;
-                @SerializedName("height")
-                @Expose
-                public Integer height;
-
-            }
-            public class Medium {
-
-                @SerializedName("url")
-                @Expose
-                public String url;
-                @SerializedName("width")
-                @Expose
-                public Integer width;
-                @SerializedName("height")
-                @Expose
-                public Integer height;
-
-            }
-
-            public class High {
-
-                @SerializedName("url")
-                @Expose
-                public String url;
-                @SerializedName("width")
-                @Expose
-                public Integer width;
-                @SerializedName("height")
-                @Expose
-                public Integer height;
-            }
-        }
 
     }
 }

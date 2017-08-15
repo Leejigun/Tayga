@@ -36,4 +36,9 @@ public class GameRcvAdapter extends RecyclerView.Adapter<GameViewHolder> {
     public int getItemCount() {
         return list.size();
     }
+
+    public void setData(List<GameItem> list){
+        this.list=list;
+        notifyDataSetChanged();
+    }
 }

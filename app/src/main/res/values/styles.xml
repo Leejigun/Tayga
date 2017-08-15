@@ -17,4 +17,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="BroadCardViewStyle">
+        <item name="android:background">@color/cardview_background</item>
+    </style>
+
+    <style name="BroadCardTextView">
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
 </resources>
