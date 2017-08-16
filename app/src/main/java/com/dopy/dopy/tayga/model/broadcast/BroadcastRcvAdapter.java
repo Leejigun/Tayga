@@ -42,6 +42,11 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
         notifyDataSetChanged();
     }
+    public void restoreData(List<BroadcastModel> list){
+        this.models=list;
+        notifyDataSetChanged();
+    }
+
 
     public List<BroadcastModel>getData(){
         return models;

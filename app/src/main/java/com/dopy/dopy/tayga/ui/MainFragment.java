@@ -57,7 +57,7 @@ public class MainFragment extends Fragment {
 
         if(savedInstanceState!=null){
             Log.d("MainFragment","savedInstanceState!=null");
-            adapter.setData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastModelList")));
+            adapter.restoreData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastModelList")));
         }else {
             refreshBroadcastList(0);
         }

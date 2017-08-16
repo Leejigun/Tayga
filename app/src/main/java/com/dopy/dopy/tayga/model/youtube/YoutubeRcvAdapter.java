@@ -84,10 +84,16 @@ public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder>{
         }
     }
     public void setData(List<BroadcastModel> model){
+        Log.d("YoutubeRcvAdapter","position 0 =>"+model.get(0).showTitle());
         BroadcastModel header = list.get(0);
         list = new ArrayList<>();
         list.add(header);
         list.addAll(model);
+        notifyDataSetChanged();
+    }
+
+    public void restoreData(List<BroadcastModel> model){
+        this.list=model;
         notifyDataSetChanged();
     }
 

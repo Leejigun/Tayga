@@ -40,6 +40,7 @@ public class GameDetailPageActivity extends AppCompatActivity{
     YoutubeDetailFragment youtubeDetailFragment;
     YoutubeRcvAdapter adapter;
     SearchData currentUtube;
+    List<BroadcastModel> youtubeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,28 +53,36 @@ public class GameDetailPageActivity extends AppCompatActivity{
         initializeDraggablePanel();
         hookDraggablePanelListeners();
 
-        if(savedInstanceState!=null){
-            adapter.setData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastBodelList")));
+        /*if(savedInstanceState!=null){
+            adapter.restoreData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastBodelList")));
 
             String state = savedInstanceState.getString("State");
-            if(state.equals("GONE")){
-
-            }else if(state.equals("MAX")){
-                binding.draggablePanel.setVisibility(View.VISIBLE);
-                binding.draggablePanel.maximize();
-                currentUtube=savedInstanceState.getParcelable()
-            }else{
-                binding.draggablePanel.setVisibility(View.VISIBLE);
-                binding.draggablePanel.minimize();
+            binding.draggablePanel.setVisibility(View.VISIBLE);
+            if(!state.equals("GONE")) {
+                if (state.equals("MAX")) {
+                    binding.draggablePanel.maximize();
+                } else {
+                    binding.draggablePanel.minimize();
+                }
+                Boolean isPlaying = savedInstanceState.getBoolean("isPlaying");
+                if(isPlaying){
+                    LoadYoutube(currentUtube);
+                }else{
+                    LoadYoutube(currentUtube);
+                    youtubePlayer.pause();
+                }
             }
 
         }else{
+            //not exist saveData
+            youtubeList = new ArrayList<>();
             refreshYouTubeModelList(model);
-        }
+        }*/
+        refreshYouTubeModelList(model);
     }
 
     private void setUpRecyclerView(BroadcastModel model) {
-        List<BroadcastModel> youtubeList = new ArrayList<>();
+        youtubeList = new ArrayList<>();
         youtubeList.add(model);
         adapter = new YoutubeRcvAdapter(youtubeList);
         adapter.addSetOnClickListener(new SetOnclickYoutubePlay() {
@@ -181,9 +190,9 @@ public class GameDetailPageActivity extends AppCompatActivity{
                 outState.putString("State","MIN");
             }
             if(youtubePlayer.isPlaying()){
-                outState.putString("isPlaying","Playing");
+                outState.putBoolean("isPlaying",true);
             }else{
-                outState.putString("isPlaying","Stopped");
+                outState.putBoolean("isPlaying",false);
             }
         }
     }

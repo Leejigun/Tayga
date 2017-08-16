@@ -49,7 +49,7 @@ public class GameFragment extends Fragment{
         setUpRecyclerView();
 
         if(savedInstanceState!=null){
-            adapter.setData((List<GameItem>) Parcels.unwrap(savedInstanceState.getParcelable("GameItemList")));
+            adapter.restroeData((List<GameItem>) Parcels.unwrap(savedInstanceState.getParcelable("GameItemList")));
         }else{
             refreshGameItemList();
         }
