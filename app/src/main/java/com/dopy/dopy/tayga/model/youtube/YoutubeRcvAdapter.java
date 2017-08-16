@@ -90,5 +90,9 @@ public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder>{
         list.addAll(model);
         notifyDataSetChanged();
     }
+
+    public List<BroadcastModel> getData(){
+        return list;
+    }
 }
 

@@ -5,9 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityGameDetailPageBinding;
@@ -16,7 +14,6 @@ import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.youtube.SearchData;
 import com.dopy.dopy.tayga.model.youtube.SearchYoutube;
 import com.dopy.dopy.tayga.model.youtube.SetOnclickYoutubePlay;
-import com.dopy.dopy.tayga.model.youtube.YouTubeClickInterface;
 import com.dopy.dopy.tayga.model.youtube.YoutubeRcvAdapter;
 import com.github.pedrovgs.DraggableListener;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -42,16 +39,37 @@ public class GameDetailPageActivity extends AppCompatActivity{
     YouTubePlayerSupportFragment youtubeFragment;
     YoutubeDetailFragment youtubeDetailFragment;
     YoutubeRcvAdapter adapter;
+    SearchData currentUtube;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding =DataBindingUtil.setContentView(this, R.layout.activity_game_detail_page);
         BroadcastModel model = Parcels.unwrap(getIntent().getParcelableExtra("GameDetailPageActivity"));
+        getSupportActionBar().setTitle(model.showTitle());
         setUpRecyclerView(model);
         initializeYoutubeFragment();
         initializeDraggablePanel();
         hookDraggablePanelListeners();
+
+        if(savedInstanceState!=null){
+            adapter.setData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastBodelList")));
+
+            String state = savedInstanceState.getString("State");
+            if(state.equals("GONE")){
+
+            }else if(state.equals("MAX")){
+                binding.draggablePanel.setVisibility(View.VISIBLE);
+                binding.draggablePanel.maximize();
+                currentUtube=savedInstanceState.getParcelable()
+            }else{
+                binding.draggablePanel.setVisibility(View.VISIBLE);
+                binding.draggablePanel.minimize();
+            }
+
+        }else{
+            refreshYouTubeModelList(model);
+        }
     }
 
     private void setUpRecyclerView(BroadcastModel model) {
@@ -62,10 +80,10 @@ public class GameDetailPageActivity extends AppCompatActivity{
             @Override
             public void onClickYoutube(View v, SearchData data) {
                 Log.d("GameDetailPageActivity","call onClickYoutube");
-                LoadYoutube(data);
+                currentUtube=data;
+                LoadYoutube(currentUtube);
             }
         });
-        refreshYouTubeModelList(model, adapter);
         binding.rcvGameDetail.setLayoutManager(new LinearLayoutManager(this));
         binding.rcvGameDetail.setAdapter(adapter);
     }
@@ -139,7 +157,7 @@ public class GameDetailPageActivity extends AppCompatActivity{
     }
 
 
-    private void refreshYouTubeModelList(BroadcastModel model, YoutubeRcvAdapter adapter) {
+    private void refreshYouTubeModelList(BroadcastModel model) {
         SearchYoutube searchYoutube = new SearchYoutube();
         String type = model.getClass().toString();
         if(TwitchStream.class.toString().equals(type)){
@@ -149,6 +167,26 @@ public class GameDetailPageActivity extends AppCompatActivity{
         }
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("BroadcastBodelList",Parcels.wrap(adapter.getData()));
+        outState.putParcelable("CurrentVideo",Parcels.wrap(currentUtube));
+        if(binding.draggablePanel.getVisibility()==View.GONE){
+            outState.putString("State","GONE");
+        }else{
+            if(binding.draggablePanel.isMaximized()){
+                outState.putString("State","MAX");
+            }else{
+                outState.putString("State","MIN");
+            }
+            if(youtubePlayer.isPlaying()){
+                outState.putString("isPlaying","Playing");
+            }else{
+                outState.putString("isPlaying","Stopped");
+            }
+        }
+    }
 
     public void LoadYoutube(SearchData data) {
         youtubePlayer.loadVideo(data.id.videoId);

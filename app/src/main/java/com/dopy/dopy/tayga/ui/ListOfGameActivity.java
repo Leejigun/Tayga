@@ -30,7 +30,7 @@ public class ListOfGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_list_of_game);
         gameItem = Parcels.unwrap(getIntent().getParcelableExtra("ListOfGameActivity"));
-        getSupportActionBar().hide
+        getSupportActionBar().setTitle(gameItem.showTitle());
         setUpRecyclerView();
 
         if(savedInstanceState!=null){
