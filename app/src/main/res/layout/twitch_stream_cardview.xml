@@ -35,7 +35,7 @@
                 <ImageView
                     android:id="@+id/tscvPreView"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
+                    android:layout_height="160dp"
                     android:layout_gravity="center_horizontal"
                     android:scaleType="centerCrop" />
             </FrameLayout>
@@ -47,43 +47,45 @@
                 android:layout_toRightOf="@id/tscvPreView"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tscvStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:ellipsize="marquee"
-                    android:gravity="right"
-                    android:hint="LookSam harthston aaaaaaaaaaass ssssssss s ssssssssssss"
-                    android:maxLines="1"
-                    android:text="@{twitchModel.showTitle()}"
-                    android:textSize="20sp"
-                    android:theme="@style/BroadCardTextView" />
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <RelativeLayout
+                        android:id="@+id/containerTscvLogo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
                         android:layout_alignParentLeft="true">
                         <ImageView
                             android:id="@+id/tscvLogo"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp" />
+                            android:layout_width="50dp"
+                            android:layout_height="50dp" />
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_alignParentEnd="true"
+                        android:layout_toRightOf="@id/containerTscvLogo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
-                            android:id="@+id/tscvDispalyName"
+                            android:id="@+id/tscvStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
+                            android:ellipsize="marquee"
+                            android:gravity="left"
+                            android:hint="LookSam harthston aaaaaaaaaaass ssssssss s ssssssssssss"
+                            android:maxLines="1"
+                            android:text="@{twitchModel.showTitle()}"
+                            android:textSize="18sp"
+                            android:theme="@style/BroadCardTextView" />
+                        <TextView
+                            android:id="@+id/tscvDispalyName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left"
                             android:hint="Lokksam"
                             android:text="@{twitchModel.showHostName()}"
                             android:textSize="15sp"
@@ -93,7 +95,7 @@
                             android:id="@+id/tscvCountOfViewer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="top|right"
+                            android:gravity="left"
                             android:hint="2222 viewing"
                             android:text="@{twitchModel.showViewrToString()}"
                             android:textColor="@color/grey" />

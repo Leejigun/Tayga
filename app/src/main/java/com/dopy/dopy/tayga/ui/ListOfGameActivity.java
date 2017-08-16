@@ -30,14 +30,20 @@ public class ListOfGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_list_of_game);
         gameItem = Parcels.unwrap(getIntent().getParcelableExtra("ListOfGameActivity"));
+        getSupportActionBar().hide
         setUpRecyclerView();
+
+        if(savedInstanceState!=null){
+            adapter.setData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastModelList")));
+        }else{
+            refreshBroadcastListOfGame(0);
+        }
     }
 
     private void setUpRecyclerView() {
         List<BroadcastModel> list = new ArrayList<>();
         list.add(gameItem);
         adapter = new BroadcastRcvAdapter(list, this);
-        refreshBroadcastListOfGame(0);
         binding.rcvBroadListOfGame.setLayoutManager(new LinearLayoutManager(this));
         binding.rcvBroadListOfGame.setAdapter(adapter);
     }
@@ -45,5 +51,11 @@ public class ListOfGameActivity extends AppCompatActivity {
     public void refreshBroadcastListOfGame(int offset) {
         SearchTwitch searchTwitch =new SearchTwitch();
         searchTwitch.getListOfGame(offset,gameItem.game.name,adapter);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("BroadcastModelList",Parcels.wrap(adapter.getData()));
     }
 }

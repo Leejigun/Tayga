@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
 import com.dopy.dopy.tayga.model.game.GameItem;
-import com.dopy.dopy.tayga.model.game.GameViewHolder;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.TwitchViewHolder;
 
@@ -42,6 +41,10 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             models = list;
         }
         notifyDataSetChanged();
+    }
+
+    public List<BroadcastModel>getData(){
+        return models;
     }
 
     @Override

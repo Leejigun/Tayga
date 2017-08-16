@@ -41,4 +41,7 @@ public class GameRcvAdapter extends RecyclerView.Adapter<GameViewHolder> {
         this.list=list;
         notifyDataSetChanged();
     }
+    public List<GameItem> getData(){
+        return list;
+    }
 }

@@ -72,7 +72,7 @@ public class SearchTwitch {
                 .build();
         TwitchService service = retrofit.create(TwitchService.class);
         try {
-            Call<TwitchStreamList> videoList = (Call<TwitchStreamList>) service.searchStreamListOfGame(gameName,"ko", 50, offset);
+            Call<TwitchStreamList> videoList = (Call<TwitchStreamList>) service.searchStreamListOfGame(gameName, 50, offset);
             videoList.enqueue(new Callback<TwitchStreamList>() {
                 @Override
                 public void onResponse(Call<TwitchStreamList> call, Response<TwitchStreamList> response) {

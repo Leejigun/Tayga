@@ -3,17 +3,12 @@ package com.dopy.dopy.tayga.ui;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import com.dopy.dopy.tayga.R;
@@ -22,8 +17,6 @@ import com.dopy.dopy.tayga.databinding.AppBarMainBinding;
 import com.dopy.dopy.tayga.databinding.ContentMainBinding;
 
 /*
-* 여기서 구현된 lib은 Side-Menu.Android 라이브러리로 navigation drawer의 레이아웃을 바꿔주는 라이브러리를 구현했다.
-* https://github.com/Yalantis/Side-Menu.Android
 * */
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 

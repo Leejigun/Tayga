@@ -16,6 +16,9 @@ import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
 import com.dopy.dopy.tayga.model.twitch.SearchTwitch;
 
+import org.parceler.Parcel;
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,12 +54,18 @@ public class MainFragment extends Fragment {
         Log.d(this.getClass().toString(),"ononViewCreated");
         binding = FragmentMainBinding.bind(view);
         setUpRecyclerView();
+
+        if(savedInstanceState!=null){
+            Log.d("MainFragment","savedInstanceState!=null");
+            adapter.setData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastModelList")));
+        }else {
+            refreshBroadcastList(0);
+        }
     }
 
     public void setUpRecyclerView(){
         broadcastList=new ArrayList<>();
         adapter= new BroadcastRcvAdapter(broadcastList,getContext());
-        refreshBroadcastList(0);
         binding.rcvMainFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rcvMainFragment.setAdapter(adapter);
     }
@@ -67,6 +76,9 @@ public class MainFragment extends Fragment {
         searchTwitch.getTwitch(pageOffSet,adapter);
     }
 
-
-
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("BroadcastModelList",Parcels.wrap(adapter.getData()));
+    }
 }

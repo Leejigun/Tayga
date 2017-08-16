@@ -24,7 +24,7 @@
     <style name="BroadCardTextView">
         <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginTop">5dp</item>
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/discord_3Black</item>
     </style>
 
 </resources>

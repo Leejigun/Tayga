@@ -21,7 +21,6 @@ public interface TwitchService {
     @Headers("Client-ID:2ern1d9404oilcymc4z8xioyaxf14w")
     @GET("streams/?")
     Call<TwitchStreamList> searchStreamListOfGame(@Query("game") String game,
-                                                  @Query("language") String langeuage,
                                                   @Query("limit") int limit,
                                                   @Query("offset") int offset);
 

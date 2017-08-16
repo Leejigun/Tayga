@@ -12,7 +12,6 @@ import java.net.URL;
 /**
  * Created by Dopy on 2017-08-08.
  */
-
 public abstract class BroadcastModel{
     public BroadcastModel() {
     }

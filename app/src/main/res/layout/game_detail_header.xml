@@ -13,6 +13,7 @@
         android:orientation="vertical"
         android:background="@color/cardview_background">
         <FrameLayout
+            android:id="@+id/btnPrayButton"
             android:layout_width="match_parent"
             android:layout_height="200dp">
             <ImageView
@@ -23,7 +24,6 @@
 
             <FrameLayout
                 android:background="@color/playbutton_background"
-                android:id="@+id/btnPrayButton"
                 android:layout_gravity="center_vertical|center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">

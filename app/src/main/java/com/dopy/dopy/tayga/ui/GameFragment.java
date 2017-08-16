@@ -15,6 +15,8 @@ import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.game.GameRcvAdapter;
 import com.dopy.dopy.tayga.model.twitch.SearchTwitch;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +47,16 @@ public class GameFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentGameBinding.bind(view);
         setUpRecyclerView();
+
+        if(savedInstanceState!=null){
+            adapter.setData((List<GameItem>) Parcels.unwrap(savedInstanceState.getParcelable("GameItemList")));
+        }else{
+            refreshGameItemList();
+        }
     }
     public void setUpRecyclerView(){
         List<GameItem> gameItemList =new ArrayList<>();
         adapter = new GameRcvAdapter(getContext(),gameItemList);
-        refreshGameItemList();
         binding.rcvGameFragment.setLayoutManager(new GridLayoutManager(getContext(),2));
         binding.rcvGameFragment.setAdapter(adapter);
     }
@@ -57,5 +64,11 @@ public class GameFragment extends Fragment{
     public void refreshGameItemList(){
         SearchTwitch searchTwitch =new  SearchTwitch();
         searchTwitch.getGameList(adapter);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("GameItemList",Parcels.wrap(adapter.getData()));
     }
 }
