@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/LoopingViewPage/LoopingViewPage.iml" filepath="$PROJECT_DIR$/LoopingViewPage/LoopingViewPage.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/tayga.iml" filepath="$PROJECT_DIR$/tayga.iml" />
       <module fileurl="file://$PROJECT_DIR$/tayga.iml" filepath="$PROJECT_DIR$/tayga.iml" />
     </modules>
   </component>

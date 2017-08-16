@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.GameitemCardviewBinding;
 import com.dopy.dopy.tayga.model.BaseRcvViewHolder;
 import com.dopy.dopy.tayga.ui.GameDetailPageActivity;
@@ -32,6 +34,12 @@ public class GameViewHolder extends BaseRcvViewHolder {
                 view.getRootView().getContext().startActivity(new Intent(itemView.getContext(),ListOfGameActivity.class).putExtra("ListOfGameActivity", Parcels.wrap(gameItem)));
             }
         });
-        Glide.with(binding.getRoot()).load(gameItem.game.box.medium).into(binding.imvGameItem);
+        Glide.with(itemView.getContext())
+                .load(gameItem.game.box.medium)
+                .placeholder(R.drawable.placeholder_broadcast)
+                .error(R.drawable.ic_error_outline_black_24dp)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .crossFade()
+                .into(binding.imvGameItem);
     }
 }

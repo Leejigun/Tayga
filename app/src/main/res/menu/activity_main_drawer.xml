@@ -19,10 +19,6 @@
     <item android:title="@string/menu_profile">
         <menu>
             <item
-                android:id="@+id/menu_remove_favorites"
-                android:icon="@drawable/ic_delete_forever_black_24dp"
-                android:title="@string/menu_remove_favorites" />
-            <item
                 android:id="@+id/menu_profile_detail"
                 android:icon="@drawable/ic_assignment_ind_black_24dp"
                 android:title="@string/menu_profile_detail" />

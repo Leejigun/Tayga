@@ -80,8 +80,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(contentBinding.mainFrame.getId(),MainFragment.newInstance())
                     .addToBackStack(null)
                     .commit();
-        } else if (id == R.id.menu_remove_favorites) {
-
         } else if (id == R.id.menu_profile_detail) {
 
         }

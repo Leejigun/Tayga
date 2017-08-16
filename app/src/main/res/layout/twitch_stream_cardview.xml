@@ -38,6 +38,12 @@
                     android:layout_height="160dp"
                     android:layout_gravity="center_horizontal"
                     android:scaleType="centerCrop" />
+                <ImageView
+                    android:layout_gravity="end"
+                    android:layout_alignParentTop="true"
+                    android:src="@drawable/twitch_logo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
             </FrameLayout>
 
             <LinearLayout

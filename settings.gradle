@@ -1,1 +1,1 @@
-include ':app', ':LoopingViewPage'
+include ':app'

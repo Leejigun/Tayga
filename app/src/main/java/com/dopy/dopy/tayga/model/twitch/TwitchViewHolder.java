@@ -5,6 +5,8 @@ import android.databinding.DataBindingUtil;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.TwitchStreamCardviewBinding;
 import com.dopy.dopy.tayga.model.BaseRcvViewHolder;
 import com.dopy.dopy.tayga.ui.GameDetailPageActivity;
@@ -27,9 +29,20 @@ public class TwitchViewHolder extends BaseRcvViewHolder {
     public void bind(Object data) {
         final TwitchStream twitchStream =(TwitchStream)data;
         binding.setTwitchModel(twitchStream);
-        Glide.with(itemView.getContext()).load(twitchStream.channel.logo).into(binding.tscvLogo);
-        Glide.with(itemView.getContext()).load(twitchStream.preview.medium).into(binding.tscvPreView);
-
+        Glide.with(itemView.getContext())
+                .load(twitchStream.channel.logo)
+                .placeholder(R.drawable.placeholder_broadcast)
+                .error(R.drawable.ic_error_outline_black_24dp)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .crossFade()
+                .into(binding.tscvLogo);
+        Glide.with(itemView.getContext())
+                .load(twitchStream.preview.medium)
+                .placeholder(R.drawable.placeholder_broadcast)
+                .error(R.drawable.ic_error_outline_black_24dp)
+                .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                .crossFade()
+                .into(binding.tscvPreView);
         binding.containerTwitchCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
