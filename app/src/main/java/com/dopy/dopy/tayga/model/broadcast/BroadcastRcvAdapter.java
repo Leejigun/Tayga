@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
 import com.dopy.dopy.tayga.model.game.GameItem;
@@ -25,10 +26,11 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     Context context;
     List<BroadcastModel> models;
-
-    public BroadcastRcvAdapter(List<BroadcastModel> models, Context context) {
+    PullRefreshLayout pullRefreshLayout;
+    public BroadcastRcvAdapter(List<BroadcastModel> models, Context context, PullRefreshLayout pullRefreshLayout) {
         this.models = models;
         this.context = context;
+        this.pullRefreshLayout=pullRefreshLayout;
     }
 
     public void setData(List<BroadcastModel> list) {
@@ -41,6 +43,7 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             models = list;
         }
         notifyDataSetChanged();
+        pullRefreshLayout.setRefreshing(false);
     }
     public void restoreData(List<BroadcastModel> list){
         this.models=list;

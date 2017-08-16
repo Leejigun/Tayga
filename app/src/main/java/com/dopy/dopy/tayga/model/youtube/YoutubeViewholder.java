@@ -1,13 +1,12 @@
 package com.dopy.dopy.tayga.model.youtube;
 
-import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.YoutubeCardviewBinding;
-import com.dopy.dopy.tayga.model.BaseRcvViewHolder;
+import com.dopy.dopy.tayga.model.broadcast.BaseRcvViewHolder;
 
 
 /**

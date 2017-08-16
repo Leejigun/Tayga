@@ -1,13 +1,9 @@
 package com.dopy.dopy.tayga.model;
 
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FavoritesCardviewBinding;
+import com.dopy.dopy.tayga.model.broadcast.BaseRcvViewHolder;
 
 /**
  * Created by Dopy on 2017-08-09.

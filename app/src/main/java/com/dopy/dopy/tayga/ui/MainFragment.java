@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
@@ -64,8 +65,14 @@ public class MainFragment extends Fragment {
     }
 
     public void setUpRecyclerView(){
+        binding.containerMainFragment.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshBroadcastList(0);
+            }
+        });
         broadcastList=new ArrayList<>();
-        adapter= new BroadcastRcvAdapter(broadcastList,getContext());
+        adapter= new BroadcastRcvAdapter(broadcastList,getContext(),binding.containerMainFragment);
         binding.rcvMainFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rcvMainFragment.setAdapter(adapter);
     }

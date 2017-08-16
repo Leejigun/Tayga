@@ -2,14 +2,18 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.dopy.dopy.tayga.ui.ListOfGameActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcvBroadListOfGame"
+    <com.baoyz.widget.PullRefreshLayout
+        android:id="@+id/listOfGmaeRefreshLayout"
+        app:refreshColor="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</FrameLayout>
+        android:layout_height="match_parent"
+        app:refreshType="material"
+        tools:context="com.dopy.dopy.tayga.ui.ListOfGameActivity">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcvBroadListOfGame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.baoyz.widget.PullRefreshLayout>
 </layout>

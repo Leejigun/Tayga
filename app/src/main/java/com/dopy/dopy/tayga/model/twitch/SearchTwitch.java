@@ -72,7 +72,7 @@ public class SearchTwitch {
                 .build();
         TwitchService service = retrofit.create(TwitchService.class);
         try {
-            Call<TwitchStreamList> videoList = (Call<TwitchStreamList>) service.searchStreamListOfGame(gameName, 50, offset);
+            Call<TwitchStreamList> videoList = (Call<TwitchStreamList>) service.searchStreamListOfGame(gameName, 20, offset);
             videoList.enqueue(new Callback<TwitchStreamList>() {
                 @Override
                 public void onResponse(Call<TwitchStreamList> call, Response<TwitchStreamList> response) {
@@ -81,7 +81,6 @@ public class SearchTwitch {
                     TwitchStreamList datas = response.body();
                     Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
                     Log.d("SearchTwitch", datas.getList().get(0).channel.status);
-                    Log.d("SearchTwitch", datas.getList().get(0).preview.medium.toString());
                     List<BroadcastModel> list = new ArrayList<>();
                     list.addAll(datas.getList());
                     adapter.setData(list);

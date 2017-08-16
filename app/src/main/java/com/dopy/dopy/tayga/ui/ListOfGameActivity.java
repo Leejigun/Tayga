@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityGameDetailPageBinding;
 import com.dopy.dopy.tayga.databinding.ActivityListOfGameBinding;
@@ -43,7 +44,13 @@ public class ListOfGameActivity extends AppCompatActivity {
     private void setUpRecyclerView() {
         List<BroadcastModel> list = new ArrayList<>();
         list.add(gameItem);
-        adapter = new BroadcastRcvAdapter(list, this);
+        binding.listOfGmaeRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshBroadcastListOfGame(0);
+            }
+        });
+        adapter = new BroadcastRcvAdapter(list, this,binding.listOfGmaeRefreshLayout);
         binding.rcvBroadListOfGame.setLayoutManager(new LinearLayoutManager(this));
         binding.rcvBroadListOfGame.setAdapter(adapter);
     }

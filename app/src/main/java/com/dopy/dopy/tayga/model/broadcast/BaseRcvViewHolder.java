@@ -1,4 +1,4 @@
-package com.dopy.dopy.tayga.model;
+package com.dopy.dopy.tayga.model.broadcast;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

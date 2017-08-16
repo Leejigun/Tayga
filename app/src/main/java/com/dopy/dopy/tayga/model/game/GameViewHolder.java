@@ -7,8 +7,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.GameitemCardviewBinding;
-import com.dopy.dopy.tayga.model.BaseRcvViewHolder;
-import com.dopy.dopy.tayga.ui.GameDetailPageActivity;
+import com.dopy.dopy.tayga.model.broadcast.BaseRcvViewHolder;
 import com.dopy.dopy.tayga.ui.ListOfGameActivity;
 
 import org.parceler.Parcels;

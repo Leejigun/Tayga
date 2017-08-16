@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
-import com.dopy.dopy.tayga.model.BaseRcvViewHolder;
+import com.dopy.dopy.tayga.model.broadcast.BaseRcvViewHolder;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.GameDetailHeaderViewHolder;

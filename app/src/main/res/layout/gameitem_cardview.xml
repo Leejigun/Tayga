@@ -21,9 +21,9 @@
 
             <ImageView
                 android:id="@+id/imvGameItem"
+                android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop" />
+                android:layout_height="@dimen/gameImage_height"/>
 
             <TextView
                 android:gravity="center"

@@ -8,12 +8,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.GameDetailHeaderBinding;
-import com.dopy.dopy.tayga.model.BaseRcvViewHolder;
-import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
-import com.dopy.dopy.tayga.model.twitch.TwitchStream;
-
-import java.net.URL;
+import com.dopy.dopy.tayga.model.broadcast.BaseRcvViewHolder;
 
 /**
  * Created by Dopy on 2017-08-15.
@@ -34,8 +32,20 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
         if (TwitchStream.class.toString().equals(type)) {
             final TwitchStream twitchStream = (TwitchStream) data;
             binding.setModel(twitchStream);
-            Glide.with(itemView.getContext()).load(twitchStream.channel.logo).into(binding.imvGameDetailLogo);
-            Glide.with(itemView.getContext()).load(twitchStream.preview.medium).into(binding.imvStreamIamge);
+            Glide.with(itemView.getContext())
+                    .load(twitchStream.channel.logo)
+                    .placeholder(R.drawable.placeholder_broadcast)
+                    .error(R.drawable.ic_error_outline_black_24dp)
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .crossFade()
+                    .into(binding.imvGameDetailLogo);
+            Glide.with(itemView.getContext())
+                    .load(twitchStream.preview.medium)
+                    .placeholder(R.drawable.placeholder_broadcast)
+                    .error(R.drawable.ic_error_outline_black_24dp)
+                    .diskCacheStrategy(DiskCacheStrategy.RESULT)
+                    .crossFade()
+                    .into(binding.imvStreamIamge);
             binding.btnPrayButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
