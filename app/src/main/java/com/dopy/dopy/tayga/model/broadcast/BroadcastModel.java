@@ -15,7 +15,6 @@ import java.net.URL;
 public abstract class BroadcastModel{
     public BroadcastModel() {
     }
-
     public abstract String showTitle();
 
     public abstract String showHostName();
