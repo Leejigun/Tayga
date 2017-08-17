@@ -2,6 +2,7 @@ package com.dopy.dopy.tayga.model.broadcast;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,6 +12,7 @@ import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.TwitchViewHolder;
+import com.dopy.dopy.tayga.ui.ContainerRefresh;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,27 +28,36 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     Context context;
     List<BroadcastModel> models;
-    PullRefreshLayout pullRefreshLayout;
-    public BroadcastRcvAdapter(List<BroadcastModel> models, Context context, PullRefreshLayout pullRefreshLayout) {
+    ContainerRefresh containerRefresh;
+    public BroadcastRcvAdapter(List<BroadcastModel> models, Context context, ContainerRefresh containerRefresh) {
         this.models = models;
         this.context = context;
-        this.pullRefreshLayout=pullRefreshLayout;
+        this.containerRefresh=containerRefresh;
     }
 
     public void setData(List<BroadcastModel> list) {
-        if(this.models.size()>0){
-            List<BroadcastModel> newlist=new ArrayList<>();
-            newlist.add(models.get(0));
-            newlist.addAll(list);
-            this.models=newlist;
-        }else {
-            models = list;
-        }
+        containerRefresh.stopLoading();
+       if(list.size()==0){
+           Log.d("BroadcastRcvAdapter","list.size()==0");
+           return;
+       }else if(models.size()==0){
+           this.models=list;
+
+       }else if(getItemViewType(0)==GAME_HEADER){
+           Log.d("BroadcastRcvAdapter","getItemViewType(0)==GAME_HEADER");
+           List<BroadcastModel> list1 = new ArrayList<>();
+           list1.add(models.get(0));
+           list1.addAll(list);
+           this.models=list1;
+       }else{
+           Log.d("BroadcastRcvAdapter","else");
+           this.models=list;
+       }
         notifyDataSetChanged();
-        pullRefreshLayout.setRefreshing(false);
     }
     public void restoreData(List<BroadcastModel> list){
         this.models=list;
+        containerRefresh.stopLoading();
         notifyDataSetChanged();
     }
 

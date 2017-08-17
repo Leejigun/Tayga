@@ -3,17 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.baoyz.widget.PullRefreshLayout
-        android:id="@+id/listOfGmaeRefreshLayout"
-        app:refreshColor="@color/colorPrimary"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:refreshType="material"
-        tools:context="com.dopy.dopy.tayga.ui.ListOfGameActivity">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rcvBroadListOfGame"
+        <com.baoyz.widget.PullRefreshLayout
+            android:id="@+id/listOfGmaeRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </com.baoyz.widget.PullRefreshLayout>
+            android:layout_height="match_parent"
+            app:refreshColor="@color/colorPrimary"
+            app:refreshType="material"
+            tools:context="com.dopy.dopy.tayga.ui.ListOfGameActivity">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcvBroadListOfGame"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.baoyz.widget.PullRefreshLayout>
+
+        <com.victor.loading.rotate.RotateLoading
+            android:id="@+id/loadingGameOList"
+            android:layout_gravity="center"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:loading_color="@color/colorPrimary"
+            app:loading_speed="11"
+            app:loading_width="5dp" />
+    </FrameLayout>
 </layout>

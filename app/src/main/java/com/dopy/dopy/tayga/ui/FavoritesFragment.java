@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentFavoritesBinding;
 import com.dopy.dopy.tayga.model.FavoritesRcvAdapter;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 public class FavoritesFragment extends Fragment{
     FragmentFavoritesBinding binding;
+    ContainerRefresh containerRefresh;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -43,12 +45,19 @@ public class FavoritesFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentFavoritesBinding.bind(view);
+        containerRefresh=new ContainerRefresh(binding.rotateFavoritesloading,binding.refreshLayoutFavorites);
         setUpParallaxRecyclerView();
     }
 
     private void setUpParallaxRecyclerView() {
         List<FavorityItem> models = inputTestData();
-        FavoritesRcvAdapter adapter = new FavoritesRcvAdapter(models, getContext());
+        containerRefresh.pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+        });
+        FavoritesRcvAdapter adapter = new FavoritesRcvAdapter(models, getContext(),containerRefresh);
         binding.rcvFavoritesFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         View header = LayoutInflater.from(getContext()).inflate(R.layout.favorites_header, binding.rcvFavoritesFragment, false);
         binding.rcvFavoritesFragment.setAdapter(adapter);

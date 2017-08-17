@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentGameBinding;
 import com.dopy.dopy.tayga.model.game.GameItem;
@@ -26,7 +27,7 @@ import java.util.List;
 public class GameFragment extends Fragment{
     FragmentGameBinding binding;
     GameRcvAdapter adapter;
-
+    ContainerRefresh containerRefresh;
     public GameFragment() {
         // Required empty public constructor
     }
@@ -46,6 +47,7 @@ public class GameFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentGameBinding.bind(view);
+        containerRefresh=new ContainerRefresh(binding.rotateGameloading,binding.containerGameFragment);
         setUpRecyclerView();
 
         if(savedInstanceState!=null){
@@ -56,7 +58,13 @@ public class GameFragment extends Fragment{
     }
     public void setUpRecyclerView(){
         List<GameItem> gameItemList =new ArrayList<>();
-        adapter = new GameRcvAdapter(getContext(),gameItemList);
+        containerRefresh.pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshGameItemList();
+            }
+        });
+        adapter = new GameRcvAdapter(getContext(),gameItemList,containerRefresh);
         binding.rcvGameFragment.setLayoutManager(new GridLayoutManager(getContext(),2));
         binding.rcvGameFragment.setAdapter(adapter);
     }

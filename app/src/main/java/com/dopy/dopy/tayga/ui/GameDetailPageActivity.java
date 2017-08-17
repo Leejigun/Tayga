@@ -41,11 +41,14 @@ public class GameDetailPageActivity extends AppCompatActivity{
     YoutubeRcvAdapter adapter;
     SearchData currentUtube;
     List<BroadcastModel> youtubeList;
+    ContainerRefresh containerRefresh;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding =DataBindingUtil.setContentView(this, R.layout.activity_game_detail_page);
+        containerRefresh =new ContainerRefresh(binding.rotateGamelading,binding.containerGameDetailFragment);
         BroadcastModel model = Parcels.unwrap(getIntent().getParcelableExtra("GameDetailPageActivity"));
         getSupportActionBar().setTitle(model.showTitle());
         setUpRecyclerView(model);
@@ -84,7 +87,7 @@ public class GameDetailPageActivity extends AppCompatActivity{
     private void setUpRecyclerView(BroadcastModel model) {
         youtubeList = new ArrayList<>();
         youtubeList.add(model);
-        adapter = new YoutubeRcvAdapter(youtubeList);
+        adapter = new YoutubeRcvAdapter(youtubeList , containerRefresh);
         adapter.addSetOnClickListener(new SetOnclickYoutubePlay() {
             @Override
             public void onClickYoutube(View v, SearchData data) {

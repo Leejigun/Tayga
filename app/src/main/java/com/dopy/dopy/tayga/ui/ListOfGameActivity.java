@@ -25,11 +25,13 @@ public class ListOfGameActivity extends AppCompatActivity {
     ActivityListOfGameBinding binding;
     BroadcastRcvAdapter adapter;
     GameItem gameItem;
+    ContainerRefresh containerRefresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_list_of_game);
+        containerRefresh=new ContainerRefresh(binding.loadingGameOList,binding.listOfGmaeRefreshLayout);
         gameItem = Parcels.unwrap(getIntent().getParcelableExtra("ListOfGameActivity"));
         getSupportActionBar().setTitle(gameItem.showTitle());
         setUpRecyclerView();
@@ -50,7 +52,7 @@ public class ListOfGameActivity extends AppCompatActivity {
                 refreshBroadcastListOfGame(0);
             }
         });
-        adapter = new BroadcastRcvAdapter(list, this,binding.listOfGmaeRefreshLayout);
+        adapter = new BroadcastRcvAdapter(list, this,containerRefresh);
         binding.rcvBroadListOfGame.setLayoutManager(new LinearLayoutManager(this));
         binding.rcvBroadListOfGame.setAdapter(adapter);
     }

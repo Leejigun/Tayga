@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.model.broadcast.BaseRcvViewHolder;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.GameDetailHeaderViewHolder;
+import com.dopy.dopy.tayga.ui.ContainerRefresh;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +26,11 @@ public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder>{
     final int YOUTUBE =102;
     SetOnclickYoutubePlay onclickYoutubePlay;
     List<BroadcastModel> list;
+    ContainerRefresh containerRefresh;
 
-    public YoutubeRcvAdapter(List<BroadcastModel> list) {
+    public YoutubeRcvAdapter(List<BroadcastModel> list,ContainerRefresh containerRefresh) {
         this.list = list;
+        this.containerRefresh=containerRefresh;
     }
 
     public void addSetOnClickListener(SetOnclickYoutubePlay listener){
@@ -84,7 +88,10 @@ public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder>{
         }
     }
     public void setData(List<BroadcastModel> model){
-        Log.d("YoutubeRcvAdapter","position 0 =>"+model.get(0).showTitle());
+        containerRefresh.stopLoading();
+        if(model==null){
+            return;
+        }
         BroadcastModel header = list.get(0);
         list = new ArrayList<>();
         list.add(header);

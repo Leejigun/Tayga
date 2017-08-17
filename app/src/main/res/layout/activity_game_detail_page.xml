@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:draggable_panel="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -8,12 +8,30 @@
         android:layout_height="match_parent"
         android:background="@color/cardview_background">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rcvGameDetail"
+        <com.baoyz.widget.PullRefreshLayout
+            android:id="@+id/containerGameDetailFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-        <!-- Draggable Panel -->
+            android:layout_height="match_parent"
+            app:refreshColor="@color/colorPrimary"
+            app:refreshType="material">
 
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcvGameDetail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.baoyz.widget.PullRefreshLayout>
+
+        <com.victor.loading.rotate.RotateLoading
+            android:id="@+id/rotateGamelading"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            app:loading_color="@color/colorPrimary"
+            app:loading_speed="11"
+            app:loading_width="5dp" />
+
+        <!-- Draggable Panel -->
         <com.github.pedrovgs.DraggablePanel
             android:id="@+id/draggable_panel"
             android:layout_width="fill_parent"

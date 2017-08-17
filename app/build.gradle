@@ -50,4 +50,5 @@ dependencies {
     compile 'com.baoyz.pullrefreshlayout:library:1.2.0'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    compile 'com.victor:lib:1.0.4'
 }

@@ -16,12 +16,15 @@ import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
 import com.dopy.dopy.tayga.model.twitch.SearchTwitch;
+import com.victor.loading.rotate.RotateLoading;
 
 import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.parceler.guava.collect.ComparisonChain.start;
 
 
 /**
@@ -33,6 +36,7 @@ public class MainFragment extends Fragment {
     FragmentMainBinding binding;
     List<BroadcastModel> broadcastList;
     BroadcastRcvAdapter adapter;
+    ContainerRefresh containerRefresh;
 
     public MainFragment() {
         // Required empty public constructor
@@ -54,6 +58,7 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d(this.getClass().toString(),"ononViewCreated");
         binding = FragmentMainBinding.bind(view);
+        containerRefresh=new ContainerRefresh(binding.rotateloading,binding.containerMainFragment);
         setUpRecyclerView();
 
         if(savedInstanceState!=null){
@@ -65,14 +70,14 @@ public class MainFragment extends Fragment {
     }
 
     public void setUpRecyclerView(){
-        binding.containerMainFragment.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+        containerRefresh.pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refreshBroadcastList(0);
             }
         });
         broadcastList=new ArrayList<>();
-        adapter= new BroadcastRcvAdapter(broadcastList,getContext(),binding.containerMainFragment);
+        adapter= new BroadcastRcvAdapter(broadcastList,getContext(),containerRefresh);
         binding.rcvMainFragment.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rcvMainFragment.setAdapter(adapter);
     }

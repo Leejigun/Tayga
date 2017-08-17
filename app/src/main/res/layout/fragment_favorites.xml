@@ -1,12 +1,15 @@
-<layout>
-    <FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/discord_2Black">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aandroid="http://schemas.android.com/tools">
 
-        <FrameLayout
-            android:id="@+id/containerFavoritesFragment"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.baoyz.widget.PullRefreshLayout
+            android:id="@+id/refreshLayoutFavorites"
+            app:refreshColor="@color/colorPrimary"
+            app:refreshType="material"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -14,8 +17,17 @@
                 android:id="@+id/rcvFavoritesFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="left|top"/>
+                android:layout_gravity="left|top" />
+        </com.baoyz.widget.PullRefreshLayout>
 
-        </FrameLayout>
+        <com.victor.loading.rotate.RotateLoading
+            android:id="@+id/rotateFavoritesloading"
+            app:loading_speed="11"
+            app:loading_color="@color/colorPrimary"
+            app:loading_width="5dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center" />
+
     </FrameLayout>
 </layout>

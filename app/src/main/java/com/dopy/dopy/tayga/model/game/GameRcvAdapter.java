@@ -2,10 +2,12 @@ package com.dopy.dopy.tayga.model.game;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
+import com.dopy.dopy.tayga.ui.ContainerRefresh;
 
 import java.util.List;
 
@@ -16,10 +18,11 @@ import java.util.List;
 public class GameRcvAdapter extends RecyclerView.Adapter<GameViewHolder> {
     Context context;
     List<GameItem> list;
-
-    public GameRcvAdapter(Context context, List<GameItem> list) {
+    ContainerRefresh containerRefresh;
+    public GameRcvAdapter(Context context, List<GameItem> list,ContainerRefresh containerRefresh) {
         this.context = context;
         this.list = list;
+        this.containerRefresh=containerRefresh;
     }
 
     @Override
@@ -38,11 +41,16 @@ public class GameRcvAdapter extends RecyclerView.Adapter<GameViewHolder> {
     }
 
     public void setData(List<GameItem> list){
+        containerRefresh.stopLoading();
+        if(list.size()==0){
+            return;
+        }
         this.list=list;
         notifyDataSetChanged();
     }
     public void restroeData(List<GameItem> list){
         this.list=list;
+        containerRefresh.stopLoading();
         notifyDataSetChanged();
     }
     public List<GameItem> getData(){

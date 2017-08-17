@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
+import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
+import com.dopy.dopy.tayga.ui.ContainerRefresh;
 
 import java.util.List;
 
@@ -17,10 +19,12 @@ public class FavoritesRcvAdapter extends RecyclerView.Adapter<FavoritesViewHolde
 
     Context context;
     List<FavorityItem> favorityItems;
+    ContainerRefresh containerRefresh;
 
-    public FavoritesRcvAdapter(List<FavorityItem> favorityItems,Context context) {
+    public FavoritesRcvAdapter(List<FavorityItem> favorityItems,Context context,ContainerRefresh containerRefresh) {
         this.context = context;
         this.favorityItems = favorityItems;
+        this.containerRefresh = containerRefresh;
     }
 
     @Override
@@ -36,5 +40,13 @@ public class FavoritesRcvAdapter extends RecyclerView.Adapter<FavoritesViewHolde
     @Override
     public int getItemCount() {
         return favorityItems.size();
+    }
+
+    public void setData(List<BroadcastModel> list){
+        containerRefresh.stopLoading();
+        if (list.size()==0){
+            return;
+        }
+
     }
 }
