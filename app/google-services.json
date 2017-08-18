@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "171879041079",
+    "firebase_url": "https://tayga-e0e86.firebaseio.com",
+    "project_id": "tayga-e0e86",
+    "storage_bucket": "tayga-e0e86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171879041079:android:a09edc6ca69c8463",
+        "android_client_info": {
+          "package_name": "com.dopy.dopy.tayga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171879041079-ppvvrrqsds6q4mq84dpt4to5kbon7kii.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dopy.dopy.tayga",
+            "certificate_hash": "63546be69c5a18a1f13a699ba79df3308880303c"
+          }
+        },
+        {
+          "client_id": "171879041079-7lv45jigi0qpkafo0raqqick8tv7gvr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtmMqfg2yMaA_wh7yayTaZu_-9UIhOShA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171879041079-7lv45jigi0qpkafo0raqqick8tv7gvr7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

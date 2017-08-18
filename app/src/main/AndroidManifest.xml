@@ -15,8 +15,7 @@
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".ui.GameDetailPageActivity" />
         <activity android:name=".ui.ListOfGameActivity" />
         <activity android:name=".ui.SplashActivity">
@@ -26,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.LoginActivity"></activity>
     </application>
 
 </manifest>
