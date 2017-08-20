@@ -68,6 +68,33 @@
                 android:id="@+id/imvGameDetailLogo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"/>
+
+            <RelativeLayout
+                android:id="@+id/containerStarIcon"
+                android:layout_marginRight="10dp"
+                android:layout_below="@id/txtGameDetailViewrCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true">
+                <ImageView
+                    android:id="@+id/iconStar"
+                    android:src="@drawable/ic_star_border_black_24dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_marginRight="10dp"
+                android:layout_alignBottom="@id/containerStarIcon"
+                android:layout_toLeftOf="@id/containerStarIcon"
+                android:id="@+id/containerFavortiesIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iconFavorites"
+                    android:src="@drawable/ic_favorite_border_black_24dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp" />
+            </RelativeLayout>
             <TextView
                 android:id="@+id/txtGameDetailViewrCount"
                 android:layout_width="wrap_content"

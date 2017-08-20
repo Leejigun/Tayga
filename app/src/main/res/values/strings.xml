@@ -15,4 +15,8 @@
     <!--Firebase-->
     <string name="auth_failed">회원 가입에 실패했습니다.</string>
 
+
+    <string name="facebook_app_id">1839161863080429</string>
+    <string name="fb_login_protocol_scheme">fb1839161863080429</string>
+
 </resources>

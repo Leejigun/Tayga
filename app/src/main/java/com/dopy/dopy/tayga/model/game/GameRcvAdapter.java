@@ -2,12 +2,11 @@ package com.dopy.dopy.tayga.model.game;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
-import com.dopy.dopy.tayga.ui.ContainerRefresh;
+import com.dopy.dopy.tayga.model.ContainerRefresh;
 
 import java.util.List;
 

@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "171879041079-u003bsmki9r0n7r2stm7n9a67jfuq1jf.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.dopy.dopy.tayga",
-            "certificate_hash": "8f34a455c9fc0eec59afca0950e1f81cbbfb7d8a"
-          }
-        },
-        {
           "client_id": "171879041079-ppvvrrqsds6q4mq84dpt4to5kbon7kii.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -37,7 +29,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDlenGOP4u_K0tDQmUKjSzIVR45r9dovoU"
+          "current_key": "AIzaSyCtmMqfg2yMaA_wh7yayTaZu_-9UIhOShA"
         }
       ],
       "services": {

@@ -4,16 +4,9 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 
 import com.dopy.dopy.tayga.R;
-import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
-import com.dopy.dopy.tayga.model.twitch.SearchTwitch;
-
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.dopy.dopy.tayga.ui.auth.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

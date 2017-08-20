@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
-import com.dopy.dopy.tayga.ui.ContainerRefresh;
 
 import java.util.List;
 

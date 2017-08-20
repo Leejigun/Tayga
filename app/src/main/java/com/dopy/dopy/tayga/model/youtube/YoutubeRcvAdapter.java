@@ -5,14 +5,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.model.broadcast.BaseRcvViewHolder;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.GameDetailHeaderViewHolder;
-import com.dopy.dopy.tayga.ui.ContainerRefresh;
+import com.dopy.dopy.tayga.model.ContainerRefresh;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentFavoritesBinding;
+import com.dopy.dopy.tayga.model.ContainerRefresh;
 import com.dopy.dopy.tayga.model.FavoritesRcvAdapter;
 import com.dopy.dopy.tayga.model.FavorityItem;
 

@@ -6,13 +6,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.TwitchViewHolder;
-import com.dopy.dopy.tayga.ui.ContainerRefresh;
+import com.dopy.dopy.tayga.model.ContainerRefresh;
 
 import java.util.ArrayList;
 import java.util.List;

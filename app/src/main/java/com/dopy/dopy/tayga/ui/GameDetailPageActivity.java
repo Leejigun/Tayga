@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityGameDetailPageBinding;
+import com.dopy.dopy.tayga.model.ContainerRefresh;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.youtube.SearchData;
@@ -52,9 +53,9 @@ public class GameDetailPageActivity extends AppCompatActivity{
         BroadcastModel model = Parcels.unwrap(getIntent().getParcelableExtra("GameDetailPageActivity"));
         getSupportActionBar().setTitle(model.showTitle());
         setUpRecyclerView(model);
+        hookDraggablePanelListeners();
         initializeYoutubeFragment();
         initializeDraggablePanel();
-        hookDraggablePanelListeners();
 
         /*if(savedInstanceState!=null){
             adapter.restoreData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastBodelList")));

@@ -21,7 +21,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SearchYoutube{
     final String BASE_URL = "https://www.googleapis.com/youtube/v3/";
-    final String SERVICE_KEY = "AIzaSyAzd4t2_efKUvoyzM0X49ckFYGLe9s-IjI"; //콘솔에서 받아온 서버키를 넣어줍니다
+    final String SERVICE_KEY = "AIzaSyAq5tNlmeyHl9iklgX_OOwmFYPlN6acfUw"; //콘솔에서 받아온 서버키를 넣어줍니다
 
     public SearchYoutube() {
     }

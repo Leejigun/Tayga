@@ -1,4 +1,4 @@
-package com.dopy.dopy.tayga.ui;
+package com.dopy.dopy.tayga.model;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.victor.loading.rotate.RotateLoading;

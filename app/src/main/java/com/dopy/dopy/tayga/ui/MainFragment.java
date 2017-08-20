@@ -13,18 +13,15 @@ import android.view.ViewGroup;
 import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
+import com.dopy.dopy.tayga.model.ContainerRefresh;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
 import com.dopy.dopy.tayga.model.twitch.SearchTwitch;
-import com.victor.loading.rotate.RotateLoading;
 
-import org.parceler.Parcel;
 import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.parceler.guava.collect.ComparisonChain.start;
 
 
 /**

@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentGameBinding;
+import com.dopy.dopy.tayga.model.ContainerRefresh;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.game.GameRcvAdapter;
 import com.dopy.dopy.tayga.model.twitch.SearchTwitch;

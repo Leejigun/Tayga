@@ -7,13 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
-import com.dopy.dopy.tayga.databinding.ActivityGameDetailPageBinding;
 import com.dopy.dopy.tayga.databinding.ActivityListOfGameBinding;
+import com.dopy.dopy.tayga.model.ContainerRefresh;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.twitch.SearchTwitch;
-import com.dopy.dopy.tayga.model.twitch.TwitchService;
 
 import org.parceler.Parcels;
 

@@ -2,20 +2,58 @@ package com.dopy.dopy.tayga.model;
 
 import android.net.Uri;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
- * Created by Dopy on 2017-08-18.
+ * Created by Dopy on 2017-08-20.
  */
-
+@IgnoreExtraProperties
 public class User {
-    String name;
+    String userID;
+    String displayname;
     String email;
-    Uri photoUri;
-    String uid;
+    String potoUri;
+    /*Uri로 하니까 에러가 발생 검색결과 Uri를 firebase가 getter setter지원하지 않는다고 함*/
 
-    public User(String name, String email, Uri photoUri, String uid) {
-        this.name = name;
+    public User() {
+    }
+
+    public User(String userID, String displayname, String email, String potoUri) {
+        this.userID = userID;
+        this.displayname = displayname;
         this.email = email;
-        this.photoUri = photoUri;
-        this.uid = uid;
+        this.potoUri = potoUri;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getDisplayname() {
+        return displayname;
+    }
+
+    public void setDisplayname(String displayname) {
+        this.displayname = displayname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPotoUri() {
+        return potoUri;
+    }
+
+    public void setPotoUri(String potoUri) {
+        this.potoUri = potoUri;
     }
 }
