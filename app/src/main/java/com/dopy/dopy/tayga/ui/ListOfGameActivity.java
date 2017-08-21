@@ -35,7 +35,11 @@ public class ListOfGameActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(gameItem.showTitle());
         setUpRecyclerView();
 
-        if(savedInstanceState!=null){s
+        if(savedInstanceState!=null){
+            adapter.restoreData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastModelList")));
+        }else{
+            refreshBroadcastListOfGame(0);
+        }
     }
 
     private void setUpRecyclerView() {
