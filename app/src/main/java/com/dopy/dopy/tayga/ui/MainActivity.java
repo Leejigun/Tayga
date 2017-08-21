@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .commit();
         } else if (id == R.id.menu_favorites) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(contentBinding.mainFrame.getId(), MainFragment.newInstance())
+                    .replace(contentBinding.mainFrame.getId(), FavoritesFragment.newInstance())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.menu_profile_detail) {

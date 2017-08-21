@@ -35,7 +35,7 @@ public class GameDetailPageActivity extends AppCompatActivity{
 
 
     ActivityGameDetailPageBinding binding;
-
+    BroadcastModel model;
     YouTubePlayer youtubePlayer;
     YouTubePlayerSupportFragment youtubeFragment;
     YoutubeDetailFragment youtubeDetailFragment;
@@ -50,7 +50,10 @@ public class GameDetailPageActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         binding =DataBindingUtil.setContentView(this, R.layout.activity_game_detail_page);
         containerRefresh =new ContainerRefresh(binding.rotateGamelading,binding.containerGameDetailFragment);
-        BroadcastModel model = Parcels.unwrap(getIntent().getParcelableExtra("GameDetailPageActivity"));
+        if(model==null){
+
+        }
+        model = Parcels.unwrap(getIntent().getParcelableExtra("GameDetailPageActivity"));
         getSupportActionBar().setTitle(model.showTitle());
         setUpRecyclerView(model);
         hookDraggablePanelListeners();

@@ -15,6 +15,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static android.R.id.list;
+
 /**
  * Created by Dopy on 2017-08-12.
  */
@@ -42,6 +44,10 @@ public class SearchYoutube{
                     Log.d("SearchYoutube", "statusCode :" + Integer.toString(statusCode));
                     Log.d("SearchYoutube", "response.body() :" + response.body());
                     List<BroadcastModel> datas = new ArrayList<BroadcastModel>();
+
+                    if(response.body().getList()== null){
+                        return;
+                    }
                     datas.addAll(response.body().getList());
                     Log.d("SearchYoutube", datas.size() + " 개의 데이터가 들어왔습니다.");
                     Log.d("SearchYoutube", datas.get(0).showTitle());

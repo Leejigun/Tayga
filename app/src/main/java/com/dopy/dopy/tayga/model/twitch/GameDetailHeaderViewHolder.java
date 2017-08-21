@@ -36,12 +36,13 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
     DatabaseReference databaseReference;
     Boolean isLiked = false;
     Boolean isFavofirtes = false;
+    MyApplication myApplication;
 
     public GameDetailHeaderViewHolder(View itemView, Context context) {
         super(itemView);
         binding = GameDetailHeaderBinding.bind(itemView);
         this.context = context;
-        MyApplication myApplication = (MyApplication) context;
+        myApplication = (MyApplication) context;
         currentUser = myApplication.getUser();
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
@@ -132,6 +133,7 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
     }
 
     private void setUpLikeandStar(final TwitchStream twitchStream) {
+        currentUser= myApplication.getUser();
         databaseReference.child("Like").child(currentUser.getUserID()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
