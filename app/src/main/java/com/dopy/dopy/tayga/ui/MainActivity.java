@@ -19,9 +19,13 @@ import com.dopy.dopy.tayga.databinding.ActivityMainBinding;
 import com.dopy.dopy.tayga.databinding.AppBarMainBinding;
 import com.dopy.dopy.tayga.databinding.ContentMainBinding;
 import com.dopy.dopy.tayga.databinding.NavHeaderMainBinding;
+import com.dopy.dopy.tayga.model.MyApplication;
 import com.dopy.dopy.tayga.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -38,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference dbRef;
+    MyApplication myApplication;
 
     boolean backKeyPressed = false;
 
@@ -63,17 +68,50 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 .replace(contentBinding.mainFrame.getId(),MainFragment.newInstance())
                 .commit();
 
+        myApplication =(MyApplication)getApplication();
+
         user=auth.getCurrentUser();
+
         if(user!=null){
-            updateUI();
+            getUserInfo();
         }
 
         int fragmentCountget = getSupportFragmentManager().getBackStackEntryCount();
         Log.d("MainActivity", "fragmentCountget -> " + fragmentCountget);
     }
+    private void getUserInfo(){
+        dbRef.child("Users").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if(dataSnapshot.getKey()==user.getUid()){
+                   myApplication.setUser(dataSnapshot.getValue(User.class));
+                    updateUI();
+                }
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                myApplication.setUser((User)dataSnapshot.getValue(User.class));
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     private void updateUI() {
-        User currentUser=new User(user.getUid(),user.getDisplayName(),user.getEmail(),user.getPhotoUrl().toString());
+        User currentUser = myApplication.getUser();
         dbRef.child("Users").child(currentUser.getUserID()).setValue(currentUser);
         if (currentUser.getDisplayname() != null) {
             navHeaderMainBinding.profileDisplayName.setText(currentUser.getDisplayname());

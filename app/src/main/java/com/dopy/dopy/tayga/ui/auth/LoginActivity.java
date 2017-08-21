@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityLoginBinding;
+import com.dopy.dopy.tayga.model.User;
 import com.dopy.dopy.tayga.ui.MainActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -34,6 +35,8 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 /*
 * https://firebase.google.com/docs/auth/android/google-signin?hl=ko
 * */
@@ -63,6 +66,10 @@ public class LoginActivity extends AppCompatActivity implements
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
+                    FirebaseDatabase database=FirebaseDatabase.getInstance();
+                    DatabaseReference databaseReference = database.getReference("Users");
+                    User temp =new User(user.getUid(),user.getDisplayName(),user.getEmail(),user.getPhotoUrl().toString());
+                    databaseReference.child(temp.getUserID()).setValue(temp);
                     startActivity(new Intent(LoginActivity.this,MainActivity.class));
                     Log.d(TAG,"로그인 성공함");
                     finish();

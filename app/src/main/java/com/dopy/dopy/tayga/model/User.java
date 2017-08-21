@@ -2,7 +2,10 @@ package com.dopy.dopy.tayga.model;
 
 import android.net.Uri;
 
+import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.google.firebase.database.IgnoreExtraProperties;
+
+import java.util.HashMap;
 
 /**
  * Created by Dopy on 2017-08-20.
@@ -13,6 +16,7 @@ public class User {
     String displayname;
     String email;
     String potoUri;
+    HashMap<String,TwitchStream> favoritesMap;
     /*Uri로 하니까 에러가 발생 검색결과 Uri를 firebase가 getter setter지원하지 않는다고 함*/
 
     public User() {
@@ -55,5 +59,13 @@ public class User {
 
     public void setPotoUri(String potoUri) {
         this.potoUri = potoUri;
+    }
+
+    public HashMap<String, TwitchStream> getFavoritesMap() {
+        return favoritesMap;
+    }
+
+    public void setFavoritesMap(HashMap<String, TwitchStream> favoritesMap) {
+        this.favoritesMap = favoritesMap;
     }
 }

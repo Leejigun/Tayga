@@ -1,5 +1,6 @@
 package com.dopy.dopy.tayga.model.youtube;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,9 +27,10 @@ public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder>{
     SetOnclickYoutubePlay onclickYoutubePlay;
     List<BroadcastModel> list;
     ContainerRefresh containerRefresh;
-
-    public YoutubeRcvAdapter(List<BroadcastModel> list,ContainerRefresh containerRefresh) {
+    Context context;
+    public YoutubeRcvAdapter(List<BroadcastModel> list, ContainerRefresh containerRefresh, Context context) {
         this.list = list;
+        this.context=context;
         this.containerRefresh=containerRefresh;
     }
 
@@ -40,7 +42,7 @@ public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder>{
     public BaseRcvViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType){
             case STREAMINFO:
-                return new GameDetailHeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.game_detail_header,parent,false));
+                return new GameDetailHeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.game_detail_header,parent,false),context);
             case YOUTUBE:
                 return new YoutubeViewholder(LayoutInflater.from(parent.getContext()).inflate(R.layout.youtube_cardview,parent,false));
             default:

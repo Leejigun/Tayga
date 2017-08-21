@@ -68,6 +68,13 @@
                 android:id="@+id/imvGameDetailLogo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"/>
+            <TextView
+                android:id="@+id/txtGameDetailViewrCount"
+                android:layout_width="wrap_content"
+                android:text="@{model.showViewrToString()}"
+                android:hint="5000시청중"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
 
             <RelativeLayout
                 android:id="@+id/containerStarIcon"
@@ -95,13 +102,6 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp" />
             </RelativeLayout>
-            <TextView
-                android:id="@+id/txtGameDetailViewrCount"
-                android:layout_width="wrap_content"
-                android:text="@{model.showViewrToString()}"
-                android:hint="5000시청중"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" />
 
         </RelativeLayout>
         <View

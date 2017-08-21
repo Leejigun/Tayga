@@ -44,6 +44,7 @@ public class SearchData extends BroadcastModel {
 
 
     }
+
     @org.parceler.Parcel
     public static class Id {
 
@@ -51,6 +52,7 @@ public class SearchData extends BroadcastModel {
         @Expose
         public String videoId;
     }
+
     @org.parceler.Parcel
     public static class Snippet {
         @SerializedName("publishedAt")
@@ -71,6 +73,7 @@ public class SearchData extends BroadcastModel {
         @SerializedName("channelTitle")
         @Expose
         public String channelTitle;
+
         @org.parceler.Parcel
         public static class Thumbnails {
             @SerializedName("default")
@@ -82,6 +85,7 @@ public class SearchData extends BroadcastModel {
             @SerializedName("high")
             @Expose
             public High high;
+
             @org.parceler.Parcel
             public static class Default {
 
@@ -96,6 +100,7 @@ public class SearchData extends BroadcastModel {
                 public Integer height;
 
             }
+
             @org.parceler.Parcel
             public static class Medium {
 
@@ -110,6 +115,7 @@ public class SearchData extends BroadcastModel {
                 public Integer height;
 
             }
+
             @org.parceler.Parcel
             public static class High {
 
@@ -125,10 +131,10 @@ public class SearchData extends BroadcastModel {
             }
         }
 
-        public String getPublishedAt(){
+        public String getPublishedAt() {
             try {
                 Date date = new java.text.SimpleDateFormat("yyyy-mm-dd").parse(publishedAt);
-                return ("게시일: " +new SimpleDateFormat("yyyy년 mm월 dd일").format(date));
+                return ("게시일: " + new SimpleDateFormat("yyyy년 mm월 dd일").format(date));
             } catch (ParseException e) {
                 e.printStackTrace();
             }

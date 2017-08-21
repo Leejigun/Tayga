@@ -88,7 +88,7 @@ public class GameDetailPageActivity extends AppCompatActivity{
     private void setUpRecyclerView(BroadcastModel model) {
         youtubeList = new ArrayList<>();
         youtubeList.add(model);
-        adapter = new YoutubeRcvAdapter(youtubeList , containerRefresh);
+        adapter = new YoutubeRcvAdapter(youtubeList , containerRefresh,getApplication());
         adapter.addSetOnClickListener(new SetOnclickYoutubePlay() {
             @Override
             public void onClickYoutube(View v, SearchData data) {
