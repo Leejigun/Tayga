@@ -19,6 +19,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 
 import static android.os.Build.VERSION_CODES.M;
 
@@ -98,13 +100,16 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
             @Override
             public void onClick(View v) {
                 if (isLiked) {
-                    databaseReference.child("Like").child(currentUser.getUserID()).child(twitchStream.channel.name).removeValue();
+                    databaseReference.child("Like").child("Streamer").child(currentUser.getUserID()).child(twitchStream.channel.name).removeValue();
                     binding.iconStar.setImageResource(R.drawable.ic_star_border_black_24dp);
+                    databaseReference.child("LikeCount").child("Streamer").child(twitchStream.channel.name).child(currentUser.getUserID()).removeValue();
                     isLiked=!isLiked;
                 } else {
-                    databaseReference.child("Like").child(currentUser.getUserID()).child(twitchStream.channel.name).setValue(twitchStream);
+                    databaseReference.child("Like").child("Streamer").child(currentUser.getUserID()).child(twitchStream.channel.name).setValue(twitchStream);
                     binding.iconStar.setImageResource(R.drawable.ic_star_black_24dp);
+                    databaseReference.child("LikeCount").child("Streamer").child(twitchStream.channel.name).child(currentUser.getUserID()).setValue(twitchStream);
                     isLiked=!isLiked;
+
                 }
             }
         });
@@ -112,12 +117,14 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
             @Override
             public void onClick(View v) {
                 if(isFavofirtes){
-                    databaseReference.child("Favorites").child(currentUser.getUserID()).child(twitchStream.channel.name).removeValue();
+                    databaseReference.child("Favorites").child("Streamer").child(currentUser.getUserID()).child(twitchStream.channel.name).removeValue();
                     binding.iconFavorites.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                    databaseReference.child("FavoritesCount").child("Streamer").child(twitchStream.channel.name).child(currentUser.getUserID()).removeValue();
                     isFavofirtes=!isFavofirtes;
                 }else{
-                    databaseReference.child("Favorites").child(currentUser.getUserID()).child(twitchStream.channel.name).setValue(twitchStream);
+                    databaseReference.child("Favorites").child("Streamer").child(currentUser.getUserID()).child(twitchStream.channel.name).setValue(twitchStream);
                     binding.iconFavorites.setImageResource(R.drawable.ic_favorite_black_24dp);
+                    databaseReference.child("FavoritesCount").child("Streamer").child(twitchStream.channel.name).child(currentUser.getUserID()).setValue(twitchStream);
                     isFavofirtes=!isFavofirtes;
                 }
             }

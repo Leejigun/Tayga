@@ -65,7 +65,7 @@ public class GameFragment extends Fragment{
                 refreshGameItemList();
             }
         });
-        adapter = new GameRcvAdapter(getContext(),gameItemList,containerRefresh);
+        adapter = new GameRcvAdapter(getActivity().getApplication(),gameItemList,containerRefresh);
         binding.rcvGameFragment.setLayoutManager(new GridLayoutManager(getContext(),2));
         binding.rcvGameFragment.setAdapter(adapter);
     }

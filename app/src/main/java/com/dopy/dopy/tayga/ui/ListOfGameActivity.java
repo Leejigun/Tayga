@@ -35,11 +35,7 @@ public class ListOfGameActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(gameItem.showTitle());
         setUpRecyclerView();
 
-        if(savedInstanceState!=null){
-            adapter.restoreData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastModelList")));
-        }else{
-            refreshBroadcastListOfGame(0);
-        }
+        if(savedInstanceState!=null){s
     }
 
     private void setUpRecyclerView() {
@@ -51,7 +47,7 @@ public class ListOfGameActivity extends AppCompatActivity {
                 refreshBroadcastListOfGame(0);
             }
         });
-        adapter = new BroadcastRcvAdapter(list, this,containerRefresh);
+        adapter = new BroadcastRcvAdapter(list,getApplication(),containerRefresh);
         binding.rcvBroadListOfGame.setLayoutManager(new LinearLayoutManager(this));
         binding.rcvBroadListOfGame.setAdapter(adapter);
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,33 +9,59 @@
             type="com.dopy.dopy.tayga.model.game.GameItem" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:background="@color/gameLogo_background">
             <ImageView
                 android:id="@+id/imvGameLogo"
+                android:layout_width="150dp"
+                android:layout_height="200dp" />
+
+        <RelativeLayout
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/gameName"
+                android:layout_marginRight="10dp"
+                android:textSize="20sp"
+                android:gravity="end"
+                android:hint="LOL"
+                android:text="@{GameItem.showGameName()}"
                 android:layout_width="match_parent"
-                android:layout_height="150dp" />
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="20dp"
+                android:gravity="end"
+                android:layout_below="@id/gameName"
+                android:text="@{GameItem.showTotalViewr()}"
+                android:hint="2000 명 시청중"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RelativeLayout
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/containerFavortiesGame"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:src="@drawable/ic_favorite_border_black_24dp"
+                    android:id="@+id/favortiesGame"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+            </RelativeLayout>
+        </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1sp"
             android:background="@color/cardview_outline"/>
 
-        <TextView
-            android:gravity="center"
-            android:hint="aaaaaaa"
-            android:textSize="20sp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{GameItem.showTitle()}"/>
-        <TextView
-            android:gravity="end"
-            android:hint="2015812"
-            android:text="@{GameItem.showChannels()}"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1sp"

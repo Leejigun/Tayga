@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
+import com.dopy.dopy.tayga.model.Recommanded.ViewPagerHader;
 import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
@@ -73,7 +74,7 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case TWITCH:
                 return new TwitchViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.twitch_stream_cardview, parent, false));
             case GAME_HEADER:
-                return new GameHeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.game_logo_header,parent,false));
+                return new GameHeaderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.game_logo_header,parent,false),context);
         }
         return null;
     }
@@ -101,9 +102,9 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return TWITCH;
         } else if(GameItem.class.toString().equals(type)){
             return GAME_HEADER;
-        }else{
-            return 0;
-        }
+        }else if(ViewPagerHader.class.toString().equals(type)){
+            return RECOMMANDED_HEADER;
+        }else return 0;
     }
 
     @Override

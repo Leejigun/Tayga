@@ -55,4 +55,7 @@ public class GameRcvAdapter extends RecyclerView.Adapter<GameViewHolder> {
     public List<GameItem> getData(){
         return list;
     }
+
+
 }
+

@@ -13,7 +13,7 @@ import org.parceler.Parcel;
 @Parcel
 public class TwitchStream extends BroadcastModel{
 
-
+    public int startCount;
     @SerializedName("viewers")
     @Expose
     public double viewers;
