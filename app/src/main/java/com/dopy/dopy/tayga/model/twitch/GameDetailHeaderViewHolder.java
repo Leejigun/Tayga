@@ -84,7 +84,7 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
             public void onClick(View view) {
                 if (isPackageInstalled("tv.twitch.android.app", itemView.getContext())) {
                     //installed twitch app
-                    String url = ("twitch://stream/<" + (twitchStream.channel.name) + ">/");
+                    String url = ("twitch://stream/" + (twitchStream.channel.name));
                     Log.d("GameDetailHeader", "url -> " + url);
                     Intent intent = view.getContext().getPackageManager().getLaunchIntentForPackage("tv.twitch.android.app");
                     intent.setData(Uri.parse(url));

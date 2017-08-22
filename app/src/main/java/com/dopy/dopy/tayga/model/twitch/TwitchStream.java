@@ -16,6 +16,15 @@ import java.util.Date;
 
 @Parcel
 public class TwitchStream extends BroadcastModel{
+    private String tag;
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public int startCount;
     @SerializedName("viewers")
@@ -44,17 +53,15 @@ public class TwitchStream extends BroadcastModel{
         return createdAt;
     }
 
-    @Override
     public String showTitle() {
         return channel.status;
     }
 
-    @Override
+
     public String showHostName() {
         return channel.displayName;
     }
 
-    @Override
     public String showViewrToString() {
         int viewer=(int) viewers;
         return (viewer +"명 시청중");
@@ -71,13 +78,6 @@ public class TwitchStream extends BroadcastModel{
         return (name+" 플레이 중..");
     }
 
-    @Override
-    public void onClick(View v) {
-        Toast.makeText(v.getContext(),"onItemClicked",Toast.LENGTH_LONG).show();
-        /*Intent intent= new Intent(v.getContext(),GameDetailPageActivity.class);
-        intent.putExtra("GameDetailPageActivity",this);
-        v.getContext().startActivity(intent);*/
-    }
 
     @Parcel
     public static class Channel {

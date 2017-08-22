@@ -24,24 +24,4 @@ public class ViewPagerItemList extends BroadcastModel{
     public void setModels(List<BroadcastModel> models) {
         this.models = models;
     }
-
-    @Override
-    public String showTitle() {
-        return null;
-    }
-
-    @Override
-    public String showHostName() {
-        return null;
-    }
-
-    @Override
-    public String showViewrToString() {
-        return null;
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
 }

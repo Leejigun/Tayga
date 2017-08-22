@@ -8,9 +8,10 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityGameDetailPageBinding;
-import com.dopy.dopy.tayga.model.ContainerRefresh;
+import com.dopy.dopy.tayga.model.RefreshContainer;
 import com.dopy.dopy.tayga.model.RefreshDoneInterface;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
@@ -41,60 +42,50 @@ public class GameDetailPageActivity extends AppCompatActivity {
     YouTubePlayer youtubePlayer;
     YouTubePlayerSupportFragment youtubeFragment;
     YoutubeDetailFragment youtubeDetailFragment;
-    YoutubeRcvAdapter adapter;
     SearchData currentUtube;
     List<BroadcastModel> youtubeList;
-    ContainerRefresh containerRefresh;
+    RefreshContainer refreshContainer;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_game_detail_page);
-        containerRefresh = new ContainerRefresh(binding.rotateGamelading, binding.containerGameDetailFragment, binding.containerrotateGamelading);
-        if (model == null) {
-
-        }
         model = Parcels.unwrap(getIntent().getParcelableExtra("GameDetailPageActivity"));
+        refreshContainer = new RefreshContainer(binding.rotateGamelading, binding.containerGameDetailFragment, binding.containerrotateGamelading);
+        refreshContainer.pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshYouTubeModelList(model);
+            }
+        });
         getSupportActionBar().setTitle("Tayga");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hookDraggablePanelListeners();
         initializeYoutubeFragment();
         initializeDraggablePanel();
 
-        /*if(savedInstanceState!=null){
-            adapter.restoreData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastBodelList")));
 
-            String state = savedInstanceState.getString("State");
-            binding.draggablePanel.setVisibility(View.VISIBLE);
-            if(!state.equals("GONE")) {
-                if (state.equals("MAX")) {
-                    binding.draggablePanel.maximize();
-                } else {
-                    binding.draggablePanel.minimize();
-                }
-                Boolean isPlaying = savedInstanceState.getBoolean("isPlaying");
-                if(isPlaying){
-                    LoadYoutube(currentUtube);
-                }else{
-                    LoadYoutube(currentUtube);
-                    youtubePlayer.pause();
-                }
-            }
-
-        }else{
-            //not exist saveData
-            youtubeList = new ArrayList<>();
-            refreshYouTubeModelList(model);
-        }*/
         refreshYouTubeModelList(model);
     }
+    private void refreshYouTubeModelList(BroadcastModel model) {
+       final List<BroadcastModel>broadcastModelList=new ArrayList<>();
+        broadcastModelList.add(model);
+        String type = model.getClass().toString();
+        if (TwitchStream.class.toString().equals(type)) {
+            TwitchStream twitchStream = (TwitchStream) model;
+            SearchYoutube searchYoutube =new SearchYoutube();
+            searchYoutube.getUtube(twitchStream.channel.displayName, 5,broadcastModelList, new RefreshDoneInterface() {
+                @Override
+                public void refreshDone() {
+                    setUpRecyclerView(broadcastModelList);
+                }
+            });
+        }
+    }
 
-    private void setUpRecyclerView(List<SearchData> list) {
-        youtubeList = new ArrayList<>();
-        youtubeList.addAll(list);
-        youtubeList.add(0,model);
-        adapter = new YoutubeRcvAdapter(youtubeList, containerRefresh, getApplication());
+    private void setUpRecyclerView(List<BroadcastModel> list) {
+        YoutubeRcvAdapter adapter = new YoutubeRcvAdapter(list,getApplication());
         adapter.addSetOnClickListener(new SetOnclickYoutubePlay() {
             @Override
             public void onClickYoutube(View v, SearchData data) {
@@ -105,7 +96,7 @@ public class GameDetailPageActivity extends AppCompatActivity {
         });
         binding.rcvGameDetail.setLayoutManager(new LinearLayoutManager(this));
         binding.rcvGameDetail.setAdapter(adapter);
-        containerRefresh.stopLoading();
+        refreshContainer.stopLoading();
     }
 
     private void initializeYoutubeFragment() {
@@ -173,48 +164,6 @@ public class GameDetailPageActivity extends AppCompatActivity {
     private void playVideo() {
         if (!youtubePlayer.isPlaying()) {
             youtubePlayer.play();
-        }
-    }
-
-
-    private void refreshYouTubeModelList(BroadcastModel model) {
-        SearchYoutube searchYoutube = new SearchYoutube();
-        String type = model.getClass().toString();
-        if (TwitchStream.class.toString().equals(type)) {
-            Log.d("GameDetailPageActivity", "call refreshYouTubeModelList");
-            TwitchStream twitchStream = (TwitchStream) model;
-            searchYoutube.getUtube(twitchStream.channel.displayName, 10, adapter, new RefreshDoneInterface() {
-                @Override
-                public void refreshDone(List<SearchData> list) {
-                    setUpRecyclerView(list);
-                }
-
-                @Override
-                public void isNull() {
-
-                }
-            });
-        }
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable("BroadcastBodelList", Parcels.wrap(adapter.getData()));
-        outState.putParcelable("CurrentVideo", Parcels.wrap(currentUtube));
-        if (binding.draggablePanel.getVisibility() == View.GONE) {
-            outState.putString("State", "GONE");
-        } else {
-            if (binding.draggablePanel.isMaximized()) {
-                outState.putString("State", "MAX");
-            } else {
-                outState.putString("State", "MIN");
-            }
-            if (youtubePlayer.isPlaying()) {
-                outState.putBoolean("isPlaying", true);
-            } else {
-                outState.putBoolean("isPlaying", false);
-            }
         }
     }
 

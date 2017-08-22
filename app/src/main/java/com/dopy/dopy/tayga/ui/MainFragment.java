@@ -13,12 +13,21 @@ import android.view.ViewGroup;
 import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
-import com.dopy.dopy.tayga.model.ContainerRefresh;
+import com.dopy.dopy.tayga.model.MyApplication;
+import com.dopy.dopy.tayga.model.RefreshContainer;
+import com.dopy.dopy.tayga.model.RefreshDoneInterface;
+import com.dopy.dopy.tayga.model.TwitchListContainer;
+import com.dopy.dopy.tayga.model.User;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
+import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.twitch.SearchTwitch;
-
-import org.parceler.Parcels;
+import com.dopy.dopy.tayga.model.twitch.TwitchStream;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,12 +37,12 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class MainFragment extends Fragment {
-
+    final String TAG ="MainFragment";
 
     FragmentMainBinding binding;
-    List<BroadcastModel> broadcastList;
-    BroadcastRcvAdapter adapter;
-    ContainerRefresh containerRefresh;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+    RefreshContainer refreshContainer;
 
     public MainFragment() {
         // Required empty public constructor
@@ -55,39 +64,106 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d(this.getClass().toString(),"ononViewCreated");
         binding = FragmentMainBinding.bind(view);
-        containerRefresh=new ContainerRefresh(binding.rotateloading,binding.containerMainFragment,binding.containerrotateloading);
-        setUpRecyclerView();
-
-        if(savedInstanceState!=null){
-            Log.d("MainFragment","savedInstanceState!=null");
-            adapter.restoreData((List<BroadcastModel>) Parcels.unwrap(savedInstanceState.getParcelable("BroadcastModelList")));
-        }else {
-            refreshBroadcastList(0);
-        }
-    }
-
-    public void setUpRecyclerView(){
-        containerRefresh.pullRefreshLayout.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
+        refreshContainer = new RefreshContainer(binding.rotateloading,binding.pullRefreshMainFragment,binding.rotateloadingFrameLayout);
+        binding.pullRefreshMainFragment.setOnRefreshListener(new PullRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                refreshBroadcastList(0);
+                refreshDataSet();
             }
         });
-        broadcastList=new ArrayList<>();
-        adapter= new BroadcastRcvAdapter(broadcastList,getContext(),containerRefresh);
-        binding.rcvMainFragment.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rcvMainFragment.setAdapter(adapter);
+        setUpFIrebase();
+        refreshDataSet();
+    }
+    private void setUpFIrebase(){
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
-    //    새로고침
-    private void refreshBroadcastList(int pageOffSet) {
-        SearchTwitch searchTwitch =new SearchTwitch();
-        searchTwitch.getTwitch(pageOffSet,adapter);
+    private void refreshDataSet(){
+        refreshContainer.startLoading();
+        final List<BroadcastModel> broadcastModels= new ArrayList<>();
+        getFavoritesStreamerList(broadcastModels, new RefreshDoneInterface() {
+            @Override
+            public void refreshDone() {
+                getFavoritesGameList(broadcastModels, new RefreshDoneInterface() {
+                    @Override
+                    public void refreshDone() {
+                        setUpTwitchList(broadcastModels);
+                    }
+                });
+            }
+
+        });
+    }
+    private void setUpTwitchList(final List<BroadcastModel> broadcastModels){
+        SearchTwitch searchTwitch = new SearchTwitch();
+        searchTwitch.getTwitch(0, 5, broadcastModels, new RefreshDoneInterface() {
+            @Override
+            public void refreshDone() {
+                setUpRecyclerView(broadcastModels);
+            }
+        });
+    }
+
+    private void setUpRecyclerView(List<BroadcastModel> broadcastModels){
+        Log.d(TAG,"setUpRecyclerView broadcastModels.size()=>"+broadcastModels.size());
+        BroadcastRcvAdapter adapter = new BroadcastRcvAdapter(broadcastModels,getActivity().getApplication());
+        binding.rcvMainFragment.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rcvMainFragment.setAdapter(adapter);
+        refreshContainer.stopLoading();
+    }
+    private void getFavoritesStreamerList(final List<BroadcastModel> broadcastModels, final RefreshDoneInterface refreshDoneInterface){
+        User user = ((MyApplication)getActivity().getApplication()).getUser();
+        final TwitchListContainer streamerList = new TwitchListContainer();
+        databaseReference.child("Favorites").child("Streamer").child(user.getUserID()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<TwitchStream>twitchStreams =new ArrayList<TwitchStream>();
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    Log.d(TAG,ds.getValue(TwitchStream.class).showTitle());
+                    twitchStreams.add(ds.getValue(TwitchStream.class));
+                }
+                streamerList.setListType(TwitchListContainer.STREAMER);
+                streamerList.setTwitchStreamList(twitchStreams);
+                broadcastModels.add(streamerList);
+                refreshDoneInterface.refreshDone();
+                //끝나면 즐겨찾기 게임 목록 받는 함수 호출
+                Log.d(TAG,"twitchStreams 즐겨찾기에 "+twitchStreams.size()+"개의 데이터가 들어옴");
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    private void getFavoritesGameList(final List<BroadcastModel> broadcastModels, final RefreshDoneInterface refreshDoneInterface){
+        User user=((MyApplication)getActivity().getApplication()).getUser();
+        final TwitchListContainer gameList= new TwitchListContainer();
+        databaseReference.child("Favorites").child("Game").child(user.getUserID()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<GameItem>gameItems = new ArrayList<GameItem>();
+                for(DataSnapshot ds : dataSnapshot.getChildren()){
+                    Log.d(TAG,ds.getValue(GameItem.class).showTitle());
+                    gameItems.add(ds.getValue(GameItem.class));
+                }
+                gameList.setGameItemList(gameItems);
+                gameList.setListType(TwitchListContainer.GAME);
+                gameList.setTag("당신이 즐겨찾기한 게임");
+                broadcastModels.add(gameList);
+                refreshDoneInterface.refreshDone();
+                Log.d(TAG,"gameItems 즐겨찾기에 "+gameItems.size()+"개의 데이터가 들어옴");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("BroadcastModelList",Parcels.wrap(adapter.getData()));
     }
 }

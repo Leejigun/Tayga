@@ -24,22 +24,18 @@ public class SearchData extends BroadcastModel {
     public Snippet snippet;
 
 
-    @Override
     public String showTitle() {
         return snippet.title;
     }
 
-    @Override
     public String showHostName() {
         return snippet.channelTitle;
     }
 
-    @Override
     public String showViewrToString() {
         return null;
     }
 
-    @Override
     public void onClick(View v) {
 
 

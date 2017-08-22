@@ -1,0 +1,46 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.dopy.dopy.tayga.ui.StreamListFragment">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.dopy.dopy.tayga.ui.GameFragment">
+
+            <com.baoyz.widget.PullRefreshLayout
+                android:id="@+id/PullStreamFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:refreshColor="@color/colorPrimary"
+                app:refreshType="material">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcvStreamFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </com.baoyz.widget.PullRefreshLayout>
+
+            <FrameLayout
+                android:id="@+id/frameLayoutStreamloading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/rotation_background"
+                android:visibility="gone">
+
+                <com.victor.loading.rotate.RotateLoading
+                    android:id="@+id/rotateStreamloading"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    app:loading_color="@color/colorPrimary"
+                    app:loading_speed="11"
+                    app:loading_width="5dp" />
+            </FrameLayout>
+        </FrameLayout>
+    </FrameLayout>
+</layout>

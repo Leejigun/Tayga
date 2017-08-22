@@ -33,11 +33,10 @@ import java.util.List;
 
 public class FavortiesStreamerViewPagerAdapter extends PagerAdapter {
     ViewpagerCardviewBinding binding;
-    List<BroadcastModel> streamerList;
+    List<TwitchStream> streamerList;
     Context context;
-    boolean backKeyPressed=false;
 
-    public FavortiesStreamerViewPagerAdapter(List<BroadcastModel> streamerList, Context context) {
+    public FavortiesStreamerViewPagerAdapter(List<TwitchStream> streamerList, Context context) {
         this.streamerList = streamerList;
         this.context = context;
     }
@@ -58,7 +57,7 @@ public class FavortiesStreamerViewPagerAdapter extends PagerAdapter {
     }
     @Override
     public Object instantiateItem(final ViewGroup container, final int position) {
-            final TwitchStream stream = (TwitchStream) streamerList.get(position);
+            final TwitchStream stream = streamerList.get(position);
             final View view = LayoutInflater.from(context).inflate(R.layout.viewpager_cardview, container, false);
             binding = ViewpagerCardviewBinding.bind(view);
             binding.setStreamerModel(stream);
@@ -70,16 +69,11 @@ public class FavortiesStreamerViewPagerAdapter extends PagerAdapter {
             binding.containerViewPager.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    container.getContext().startActivity(new Intent(container.getContext(),GameDetailPageActivity.class).putExtra("GameDetailPageActivity", Parcels.wrap(stream)));
+                    container.getContext().startActivity(new Intent(container.getContext(),GameDetailPageActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("GameDetailPageActivity", Parcels.wrap(stream)));
                 }
             });
 
             container.addView(view);
             return view;
-    }
-
-    @Override
-    public int getItemPosition(Object object) {
-        return POSITION_NONE;
     }
 }

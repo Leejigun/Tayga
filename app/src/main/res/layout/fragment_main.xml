@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.baoyz.widget.PullRefreshLayout
-        android:id="@+id/containerMainFragment"
+        android:id="@+id/pullRefreshMainFragment"
         app:refreshType="material"
         app:refreshColor="@color/colorPrimary"
         android:layout_height="match_parent"
@@ -18,7 +18,7 @@
 
     </com.baoyz.widget.PullRefreshLayout>
     <FrameLayout
-        android:id="@+id/containerrotateloading"
+        android:id="@+id/rotateloadingFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/rotation_background"

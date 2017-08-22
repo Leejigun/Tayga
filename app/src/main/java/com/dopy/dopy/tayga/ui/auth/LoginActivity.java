@@ -66,12 +66,6 @@ public class LoginActivity extends AppCompatActivity implements
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     // User is signed in
-                    FirebaseDatabase database=FirebaseDatabase.getInstance();
-                    DatabaseReference databaseReference = database.getReference("Users");
-                    User temp =new User(user.getUid(),user.getDisplayName(),user.getEmail(),user.getPhotoUrl().toString());
-                    databaseReference.child(temp.getUserID()).setValue(temp);
-                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
-                    Log.d(TAG,"로그인 성공함");
                     finish();
                 } else {
                     // User is signed out

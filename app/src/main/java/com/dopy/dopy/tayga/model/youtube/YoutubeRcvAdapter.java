@@ -12,7 +12,7 @@ import com.dopy.dopy.tayga.model.broadcast.BaseRcvViewHolder;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.GameDetailHeaderViewHolder;
-import com.dopy.dopy.tayga.model.ContainerRefresh;
+import com.dopy.dopy.tayga.model.RefreshContainer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,12 +26,10 @@ public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder>{
     final int YOUTUBE =102;
     SetOnclickYoutubePlay onclickYoutubePlay;
     List<BroadcastModel> list;
-    ContainerRefresh containerRefresh;
     Context context;
-    public YoutubeRcvAdapter(List<BroadcastModel> list, ContainerRefresh containerRefresh, Context context) {
+    public YoutubeRcvAdapter(List<BroadcastModel> list, Context context) {
         this.list = list;
         this.context=context;
-        this.containerRefresh=containerRefresh;
     }
 
     public void addSetOnClickListener(SetOnclickYoutubePlay listener){
@@ -88,20 +86,13 @@ public class YoutubeRcvAdapter extends RecyclerView.Adapter<BaseRcvViewHolder>{
             throw new NullPointerException();
         }
     }
-    public void setData(List<BroadcastModel> model){
-        containerRefresh.stopLoading();
-        if(model==null){
-            return;
-        }
-        BroadcastModel header = list.get(0);
-        list = new ArrayList<>();
-        list.add(header);
-        list.addAll(model);
+    public void setData(List<BroadcastModel> models){
+        this.list=models;
         notifyDataSetChanged();
     }
 
-    public void restoreData(List<BroadcastModel> model){
-        this.list=model;
+    public void restoreData(List<BroadcastModel> models){
+        this.list=models;
         notifyDataSetChanged();
     }
 

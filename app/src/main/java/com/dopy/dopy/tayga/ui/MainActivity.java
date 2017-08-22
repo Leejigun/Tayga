@@ -1,5 +1,6 @@
 package com.dopy.dopy.tayga.ui;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.dopy.dopy.tayga.databinding.ContentMainBinding;
 import com.dopy.dopy.tayga.databinding.NavHeaderMainBinding;
 import com.dopy.dopy.tayga.model.MyApplication;
 import com.dopy.dopy.tayga.model.User;
+import com.dopy.dopy.tayga.ui.auth.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -34,6 +36,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
 
+    private static final String TAG = "MainActivity";
     ActivityMainBinding activityBinding;
     AppBarMainBinding appbarBinding;
     ContentMainBinding contentBinding;
@@ -55,8 +58,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         contentBinding = appbarBinding.contentMain;
         setSupportActionBar(appbarBinding.toolbar);
         auth = FirebaseAuth.getInstance();
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        dbRef=firebaseDatabase.getReference();
+        user = auth.getCurrentUser();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        dbRef = firebaseDatabase.getReference();
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, activityBinding.drawerLayout, appbarBinding.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -64,55 +68,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         activityBinding.navView.setNavigationItemSelectedListener(this);
         navHeaderMainBinding = NavHeaderMainBinding.bind(activityBinding.navView.getHeaderView(0));
-        getSupportFragmentManager().beginTransaction()
-                .replace(contentBinding.mainFrame.getId(),MainFragment.newInstance())
-                .commit();
-
-        myApplication =(MyApplication)getApplication();
-
-        user=auth.getCurrentUser();
-
-        if(user!=null){
+        if (user == null) {
+            startActivity(new Intent(this, LoginActivity.class));
+        } else {
             getUserInfo();
         }
-
-        int fragmentCountget = getSupportFragmentManager().getBackStackEntryCount();
-        Log.d("MainActivity", "fragmentCountget -> " + fragmentCountget);
-    }
-    private void getUserInfo(){
-        dbRef.child("Users").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if(dataSnapshot.getKey()==user.getUid()){
-                   myApplication.setUser(dataSnapshot.getValue(User.class));
-                    updateUI();
-                }
-            }
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                myApplication.setUser((User)dataSnapshot.getValue(User.class));
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        getSupportFragmentManager().beginTransaction()
+                .replace(contentBinding.mainFrame.getId(), MainFragment.newInstance())
+                .commit();
     }
 
-    private void updateUI() {
-        User currentUser = myApplication.getUser();
-        dbRef.child("Users").child(currentUser.getUserID()).setValue(currentUser);
+    private void getUserInfo() {
+        myApplication = (MyApplication) getApplication();
+        User userInfo = new User(user.getUid(), user.getDisplayName(), user.getEmail(), user.getPhotoUrl().toString());
+        myApplication.setUser(userInfo);
+        updateUI(userInfo);
+    }
+
+    private void updateUI(User currentUser) {
         if (currentUser.getDisplayname() != null) {
             navHeaderMainBinding.profileDisplayName.setText(currentUser.getDisplayname());
         }
@@ -138,6 +111,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.menu_main) {
             getSupportFragmentManager().beginTransaction()
                     .replace(contentBinding.mainFrame.getId(), MainFragment.newInstance())
+                    .addToBackStack(null)
+                    .commit();
+        } else if (id == R.id.menu_popular) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(contentBinding.mainFrame.getId(), StreamListFragment.newInstance())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.menu_game) {

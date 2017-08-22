@@ -26,11 +26,17 @@ public interface TwitchService {
 
 
     @Headers("Client-ID:2ern1d9404oilcymc4z8xioyaxf14w")
-    @GET("games/top?limit=50")
-    Call<GameItemList> searchGameList();
+    @GET("games/top?")
+    Call<GameItemList> searchGameList(@Query("limit")int count,
+                                      @Query("offset")int offset);
     @Headers("Client-ID:2ern1d9404oilcymc4z8xioyaxf14w")
     @GET("streams/?")
     Call<TwitchStream> searchStreamer(@Query("channel") String name);
+
+    @Headers("Client-ID:2ern1d9404oilcymc4z8xioyaxf14w")
+    @GET("streams/featured?")
+    Call<TwitchStream> serchFeaturedStream(@Query("limit")int count,
+                                           @Query("offset")int offset);
 
 
 }

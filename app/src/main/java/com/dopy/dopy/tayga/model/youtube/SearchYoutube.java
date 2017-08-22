@@ -29,7 +29,7 @@ public class SearchYoutube{
     public SearchYoutube() {
     }
 
-    public void getUtube(String tag, int count, final YoutubeRcvAdapter adapter, final RefreshDoneInterface refreshDoneInterface) {
+    public void getUtube(String tag, int count, final List<BroadcastModel>models , final RefreshDoneInterface refreshDoneInterface) {
         Log.d("SearchYoutube","call getUtube");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -44,14 +44,10 @@ public class SearchYoutube{
                     int statusCode = response.code();
                     Log.d("SearchYoutube", "statusCode :" + Integer.toString(statusCode));
                     Log.d("SearchYoutube", "response.body() :" + response.body());
-                    if(response.body()==null){
-                        refreshDoneInterface.isNull();
-                        return;
-                    }
-                    List<SearchData> datas=response.body().getList();
-                    Log.d("SearchYoutube", datas.size() + " 개의 데이터가 들어왔습니다.");
-                    Log.d("SearchYoutube", datas.get(0).showTitle());
-                    refreshDoneInterface.refreshDone(datas);
+                    YoutubeList youtubeList = response.body();
+                    Log.d("SearchYoutube", "youtubeList size:" + response.body().getList().size());
+                    models.addAll(youtubeList.getList());
+                    refreshDoneInterface.refreshDone();
                 }
 
                 @Override

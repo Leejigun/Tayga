@@ -37,22 +37,18 @@ public class GameItem extends BroadcastModel {
         return (game.popularity + "명 시청중");
     }
 
-    @Override
     public String showTitle() {
         return game.name;
     }
 
-    @Override
     public String showHostName() {
         return game.name;
     }
 
-    @Override
     public String showViewrToString() {
         return showTotalViewr();
     }
 
-    @Override
     public void onClick(View v) {
 
     }

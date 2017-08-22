@@ -1,14 +1,14 @@
 package com.dopy.dopy.tayga.ui;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityListOfGameBinding;
-import com.dopy.dopy.tayga.model.ContainerRefresh;
+import com.dopy.dopy.tayga.model.RefreshContainer;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
 import com.dopy.dopy.tayga.model.game.GameItem;
@@ -24,13 +24,13 @@ public class ListOfGameActivity extends AppCompatActivity {
     ActivityListOfGameBinding binding;
     BroadcastRcvAdapter adapter;
     GameItem gameItem;
-    ContainerRefresh containerRefresh;
+    RefreshContainer refreshContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_list_of_game);
-        containerRefresh=new ContainerRefresh(binding.loadingGameOList,binding.listOfGmaeRefreshLayout,binding.containerloadingGameOList);
+        refreshContainer =new RefreshContainer(binding.loadingGameOList,binding.listOfGmaeRefreshLayout,binding.containerloadingGameOList);
         gameItem = Parcels.unwrap(getIntent().getParcelableExtra("ListOfGameActivity"));
         getSupportActionBar().setTitle(gameItem.showTitle());
         setUpRecyclerView();
@@ -51,7 +51,7 @@ public class ListOfGameActivity extends AppCompatActivity {
                 refreshBroadcastListOfGame(0);
             }
         });
-        adapter = new BroadcastRcvAdapter(list,getApplication(),containerRefresh);
+        adapter = new BroadcastRcvAdapter(list,getApplication());
         binding.rcvBroadListOfGame.setLayoutManager(new LinearLayoutManager(this));
         binding.rcvBroadListOfGame.setAdapter(adapter);
     }

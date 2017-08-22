@@ -10,6 +10,5 @@ import java.util.List;
  */
 
 public interface RefreshDoneInterface {
-    public void refreshDone(List<SearchData> list);
-    public void isNull();
+    public void refreshDone();
 }

@@ -10,15 +10,17 @@ import com.victor.loading.rotate.RotateLoading;
  * Created by Dopy on 2017-08-17.
  */
 
-public class ContainerRefresh {
+public class RefreshContainer {
     public RotateLoading rotateLoading;
     public PullRefreshLayout pullRefreshLayout;
     public FrameLayout containerRotated;
 
-    public ContainerRefresh(RotateLoading rotateLoading, PullRefreshLayout pullRefreshLayout,FrameLayout containerRotated) {
+    public RefreshContainer(RotateLoading rotateLoading, PullRefreshLayout pullRefreshLayout, FrameLayout containerRotated) {
         this.rotateLoading = rotateLoading;
         this.pullRefreshLayout = pullRefreshLayout;
         this.containerRotated=containerRotated;
+    }
+    public void startLoading(){
         containerRotated.setVisibility(View.VISIBLE);
         rotateLoading.start();
     }

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#BDBDBD</color>
     <color name="colorAccent">#FAFAFA</color>
 
-    <color name="cardview_background">#FFFFFF</color>
+    <color name="cardview_background">#FFFDE7</color>
     <color name="playbutton_background">#FAFAFA</color>
     <color name="cardview_outline">#BDBDBD</color>
     <color name="grey">#9E9E9E</color>
