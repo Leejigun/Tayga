@@ -10,6 +10,10 @@ import com.google.gson.annotations.SerializedName;
 
 import org.parceler.Parcel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Parcel
 public class TwitchStream extends BroadcastModel{
 
@@ -23,9 +27,22 @@ public class TwitchStream extends BroadcastModel{
     @SerializedName("channel")
     @Expose
     public Channel channel;
+    @SerializedName("created_at")
+    @Expose
+    public String createdAt;
     @SerializedName("_links")
     @Expose
     public Links_ links;
+
+    public String showCreatedAt(){
+        try {
+            Date date = new java.text.SimpleDateFormat("mm-dd-hh-mm").parse(createdAt);
+            return (new SimpleDateFormat("mm월 dd일- hh시 mm분").format(date)+"방송 시작");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return createdAt;
+    }
 
     @Override
     public String showTitle() {
@@ -41,6 +58,17 @@ public class TwitchStream extends BroadcastModel{
     public String showViewrToString() {
         int viewer=(int) viewers;
         return (viewer +"명 시청중");
+    }
+    public String showFollwersToString() {
+        int viewer=(int) channel.followers;
+        return (viewer +"명이 팔로윙중");
+    }
+    public String showGameToString() {
+        String name = channel.game;
+        return ("주로 [ "+name+" ]을 플레이하는 방송입니다.");
+    }public String showCurrentPlayGameToString() {
+        String name = channel.game;
+        return (name+" 플레이 중..");
     }
 
     @Override
@@ -80,7 +108,9 @@ public class TwitchStream extends BroadcastModel{
         @SerializedName("_links")
         @Expose
         public Links links;
-
+        @SerializedName("followers")
+        @Expose
+        public double followers;
     }
     @Parcel
     public static class Preview {

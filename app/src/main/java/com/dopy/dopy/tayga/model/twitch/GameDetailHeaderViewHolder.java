@@ -84,7 +84,7 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
             public void onClick(View view) {
                 if (isPackageInstalled("tv.twitch.android.app", itemView.getContext())) {
                     //installed twitch app
-                    String url = ("twitch://stream/" + (twitchStream.channel.name) + "/");
+                    String url = ("twitch://stream/<" + (twitchStream.channel.name) + ">/");
                     Log.d("GameDetailHeader", "url -> " + url);
                     Intent intent = view.getContext().getPackageManager().getLaunchIntentForPackage("tv.twitch.android.app");
                     intent.setData(Uri.parse(url));
@@ -134,7 +134,7 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
 
     private void setUpLikeandStar(final TwitchStream twitchStream) {
         currentUser= myApplication.getUser();
-        databaseReference.child("Like").child(currentUser.getUserID()).addChildEventListener(new ChildEventListener() {
+        databaseReference.child("Like").child("Streamer").child(currentUser.getUserID()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.getKey().equals(twitchStream.channel.name)) {
@@ -164,7 +164,7 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
             }
         });
 
-        databaseReference.child("Favorites").child(currentUser.getUserID()).addChildEventListener(new ChildEventListener() {
+        databaseReference.child("Favorites").child("Streamer").child(currentUser.getUserID()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (dataSnapshot.getKey().equals(twitchStream.channel.name)) {

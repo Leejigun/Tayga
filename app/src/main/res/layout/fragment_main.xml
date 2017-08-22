@@ -17,14 +17,21 @@
             android:layout_gravity="left|top" />
 
     </com.baoyz.widget.PullRefreshLayout>
+    <FrameLayout
+        android:id="@+id/containerrotateloading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/rotation_background"
+        android:visibility="gone">
 
-    <com.victor.loading.rotate.RotateLoading
-        android:id="@+id/rotateloading"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center"
-        app:loading_color="@color/colorPrimary"
-        app:loading_speed="11"
-        app:loading_width="5dp" />
+        <com.victor.loading.rotate.RotateLoading
+            android:id="@+id/rotateloading"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            app:loading_color="@color/colorPrimary"
+            app:loading_speed="11"
+            app:loading_width="5dp" />
+    </FrameLayout>
 </FrameLayout>
 </layout>

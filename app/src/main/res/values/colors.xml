@@ -8,7 +8,7 @@
     <color name="playbutton_background">#FAFAFA</color>
     <color name="cardview_outline">#BDBDBD</color>
     <color name="grey">#9E9E9E</color>
-    <color name="gameLogo_background">#F3E5F5</color>
+    <color name="gameLogo_background">#FFF3E0</color>
 
     <color name="discord_4Black">#002</color>
     <color name="discord_3Black">#1e2124</color>
@@ -22,6 +22,10 @@
     <color name="dark_gray">#3d454c</color>
     <color name="dark_gray_pressed">#373e44</color>
     <color name="darker_gray">#1f2226</color>
+
+    <color name="rotation_background">#AA000000</color>
+    <color name="star_tint_color">#FFC107</color>
+    <color name="favorites_tint_color">#F06292</color>
 
 
 </resources>

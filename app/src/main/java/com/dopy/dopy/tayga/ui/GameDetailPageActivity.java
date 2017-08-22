@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.ActivityGameDetailPageBinding;
 import com.dopy.dopy.tayga.model.ContainerRefresh;
+import com.dopy.dopy.tayga.model.RefreshDoneInterface;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.youtube.SearchData;
@@ -29,7 +31,7 @@ import java.util.List;
 import static android.view.View.GONE;
 
 
-public class GameDetailPageActivity extends AppCompatActivity{
+public class GameDetailPageActivity extends AppCompatActivity {
 
     final String SERVICE_KEY = "AIzaSyAzd4t2_efKUvoyzM0X49ckFYGLe9s-IjI";
 
@@ -48,14 +50,14 @@ public class GameDetailPageActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding =DataBindingUtil.setContentView(this, R.layout.activity_game_detail_page);
-        containerRefresh =new ContainerRefresh(binding.rotateGamelading,binding.containerGameDetailFragment);
-        if(model==null){
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_game_detail_page);
+        containerRefresh = new ContainerRefresh(binding.rotateGamelading, binding.containerGameDetailFragment, binding.containerrotateGamelading);
+        if (model == null) {
 
         }
         model = Parcels.unwrap(getIntent().getParcelableExtra("GameDetailPageActivity"));
-        getSupportActionBar().setTitle(model.showTitle());
-        setUpRecyclerView(model);
+        getSupportActionBar().setTitle("Tayga");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hookDraggablePanelListeners();
         initializeYoutubeFragment();
         initializeDraggablePanel();
@@ -88,20 +90,22 @@ public class GameDetailPageActivity extends AppCompatActivity{
         refreshYouTubeModelList(model);
     }
 
-    private void setUpRecyclerView(BroadcastModel model) {
+    private void setUpRecyclerView(List<SearchData> list) {
         youtubeList = new ArrayList<>();
-        youtubeList.add(model);
-        adapter = new YoutubeRcvAdapter(youtubeList , containerRefresh,getApplication());
+        youtubeList.addAll(list);
+        youtubeList.add(0,model);
+        adapter = new YoutubeRcvAdapter(youtubeList, containerRefresh, getApplication());
         adapter.addSetOnClickListener(new SetOnclickYoutubePlay() {
             @Override
             public void onClickYoutube(View v, SearchData data) {
-                Log.d("GameDetailPageActivity","call onClickYoutube");
-                currentUtube=data;
+                Log.d("GameDetailPageActivity", "call onClickYoutube");
+                currentUtube = data;
                 LoadYoutube(currentUtube);
             }
         });
         binding.rcvGameDetail.setLayoutManager(new LinearLayoutManager(this));
         binding.rcvGameDetail.setAdapter(adapter);
+        containerRefresh.stopLoading();
     }
 
     private void initializeYoutubeFragment() {
@@ -176,30 +180,40 @@ public class GameDetailPageActivity extends AppCompatActivity{
     private void refreshYouTubeModelList(BroadcastModel model) {
         SearchYoutube searchYoutube = new SearchYoutube();
         String type = model.getClass().toString();
-        if(TwitchStream.class.toString().equals(type)){
-            Log.d("GameDetailPageActivity","call refreshYouTubeModelList");
-            TwitchStream twitchStream = (TwitchStream)model;
-            searchYoutube.getUtube(twitchStream.channel.displayName, 10, adapter);
+        if (TwitchStream.class.toString().equals(type)) {
+            Log.d("GameDetailPageActivity", "call refreshYouTubeModelList");
+            TwitchStream twitchStream = (TwitchStream) model;
+            searchYoutube.getUtube(twitchStream.channel.displayName, 10, adapter, new RefreshDoneInterface() {
+                @Override
+                public void refreshDone(List<SearchData> list) {
+                    setUpRecyclerView(list);
+                }
+
+                @Override
+                public void isNull() {
+
+                }
+            });
         }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("BroadcastBodelList",Parcels.wrap(adapter.getData()));
-        outState.putParcelable("CurrentVideo",Parcels.wrap(currentUtube));
-        if(binding.draggablePanel.getVisibility()==View.GONE){
-            outState.putString("State","GONE");
-        }else{
-            if(binding.draggablePanel.isMaximized()){
-                outState.putString("State","MAX");
-            }else{
-                outState.putString("State","MIN");
+        outState.putParcelable("BroadcastBodelList", Parcels.wrap(adapter.getData()));
+        outState.putParcelable("CurrentVideo", Parcels.wrap(currentUtube));
+        if (binding.draggablePanel.getVisibility() == View.GONE) {
+            outState.putString("State", "GONE");
+        } else {
+            if (binding.draggablePanel.isMaximized()) {
+                outState.putString("State", "MAX");
+            } else {
+                outState.putString("State", "MIN");
             }
-            if(youtubePlayer.isPlaying()){
-                outState.putBoolean("isPlaying",true);
-            }else{
-                outState.putBoolean("isPlaying",false);
+            if (youtubePlayer.isPlaying()) {
+                outState.putBoolean("isPlaying", true);
+            } else {
+                outState.putBoolean("isPlaying", false);
             }
         }
     }
@@ -221,6 +235,16 @@ public class GameDetailPageActivity extends AppCompatActivity{
             binding.draggablePanel.closeToRight();
         } else {
             finish();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

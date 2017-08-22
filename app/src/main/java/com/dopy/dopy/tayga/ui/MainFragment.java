@@ -55,7 +55,7 @@ public class MainFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d(this.getClass().toString(),"ononViewCreated");
         binding = FragmentMainBinding.bind(view);
-        containerRefresh=new ContainerRefresh(binding.rotateloading,binding.containerMainFragment);
+        containerRefresh=new ContainerRefresh(binding.rotateloading,binding.containerMainFragment,binding.containerrotateloading);
         setUpRecyclerView();
 
         if(savedInstanceState!=null){

@@ -12,8 +12,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:background="@color/gameLogo_background">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/imvGameLogo"
                 android:layout_width="150dp"
@@ -26,9 +29,11 @@
             <TextView
                 android:id="@+id/gameName"
                 android:layout_marginRight="10dp"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:gravity="end"
                 android:hint="LOL"
+                android:ellipsize="end"
+                android:maxLines="3"
                 android:text="@{GameItem.showGameName()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -48,6 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <ImageView
+                    android:tint="@color/favorites_tint_color"
                     android:src="@drawable/ic_favorite_border_black_24dp"
                     android:id="@+id/favortiesGame"
                     android:layout_width="60dp"
@@ -55,16 +61,10 @@
             </RelativeLayout>
         </RelativeLayout>
 
+        </LinearLayout>
         <View
             android:layout_width="match_parent"
             android:layout_height="1sp"
-            android:background="@color/cardview_outline"/>
-
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1sp"
-            android:background="@color/cardview_outline"/>
+            android:background="@color/discord_3Black"/>
     </LinearLayout>
 </layout>

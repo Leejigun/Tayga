@@ -28,6 +28,9 @@ public interface TwitchService {
     @Headers("Client-ID:2ern1d9404oilcymc4z8xioyaxf14w")
     @GET("games/top?limit=50")
     Call<GameItemList> searchGameList();
+    @Headers("Client-ID:2ern1d9404oilcymc4z8xioyaxf14w")
+    @GET("streams/?")
+    Call<TwitchStream> searchStreamer(@Query("channel") String name);
 
 
 }

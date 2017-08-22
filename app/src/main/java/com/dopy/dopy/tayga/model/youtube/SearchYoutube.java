@@ -3,6 +3,7 @@ package com.dopy.dopy.tayga.model.youtube;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.dopy.dopy.tayga.model.RefreshDoneInterface;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 
 import java.io.IOException;
@@ -28,7 +29,7 @@ public class SearchYoutube{
     public SearchYoutube() {
     }
 
-    public void getUtube(String tag, int count, final YoutubeRcvAdapter adapter) {
+    public void getUtube(String tag, int count, final YoutubeRcvAdapter adapter, final RefreshDoneInterface refreshDoneInterface) {
         Log.d("SearchYoutube","call getUtube");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -43,15 +44,14 @@ public class SearchYoutube{
                     int statusCode = response.code();
                     Log.d("SearchYoutube", "statusCode :" + Integer.toString(statusCode));
                     Log.d("SearchYoutube", "response.body() :" + response.body());
-                    List<BroadcastModel> datas = new ArrayList<BroadcastModel>();
-
-                    if(response.body().getList()== null){
+                    if(response.body()==null){
+                        refreshDoneInterface.isNull();
                         return;
                     }
-                    datas.addAll(response.body().getList());
+                    List<SearchData> datas=response.body().getList();
                     Log.d("SearchYoutube", datas.size() + " 개의 데이터가 들어왔습니다.");
                     Log.d("SearchYoutube", datas.get(0).showTitle());
-                    adapter.setData(datas);
+                    refreshDoneInterface.refreshDone(datas);
                 }
 
                 @Override

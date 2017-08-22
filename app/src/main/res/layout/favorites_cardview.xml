@@ -42,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <ImageView
+                        android:tint="@color/favorites_tint_color"
                         android:id="@+id/FavoritesCardViewIcon"
                         android:src="@drawable/ic_favorite_black_24dp"
                         android:layout_width="70dp"

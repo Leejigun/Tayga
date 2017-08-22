@@ -30,7 +30,7 @@ public class ListOfGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_list_of_game);
-        containerRefresh=new ContainerRefresh(binding.loadingGameOList,binding.listOfGmaeRefreshLayout);
+        containerRefresh=new ContainerRefresh(binding.loadingGameOList,binding.listOfGmaeRefreshLayout,binding.containerloadingGameOList);
         gameItem = Parcels.unwrap(getIntent().getParcelableExtra("ListOfGameActivity"));
         getSupportActionBar().setTitle(gameItem.showTitle());
         setUpRecyclerView();

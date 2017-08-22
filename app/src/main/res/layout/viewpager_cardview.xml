@@ -1,10 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="streamerModel"
+            type="com.dopy.dopy.tayga.model.twitch.TwitchStream"/>
+    </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:textSize="20dp"
+            android:text="당신이 즐겨 찾기한 Streamer"
+            android:textColor="@color/discord_3Black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:background="@color/discord_3Black"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"/>
 
+        <LinearLayout
+            android:id="@+id/containerViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/imvViewPager"
+                android:padding="5dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp" />
+
+            <RelativeLayout
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <TextView
+                    android:text="@{streamerModel.showHostName()}"
+                    android:gravity="center"
+                    android:textColor="@color/discord_3Black"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"
+                    android:hint="LookSam"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/txtViewPagerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:text="@{streamerModel.showFollwersToString()}"
+                    android:id="@+id/txtViewPagerFollowers"
+                    android:textColor="@color/discord_3Black"
+                    android:gravity="center"
+                    android:hint="200521명의 사람들이 Forwing 했습니다."
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/txtViewPagerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/txtViewPagerFollowers"
+                    android:text="@{streamerModel.showGameToString()}"
+                    android:gravity="center"
+                    android:textColor="@color/discord_3Black"
+                    android:hint="주로 오버워치를 플레이 하는 방송입니다."
+                    android:id="@+id/txtViewPagerGameName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+        </LinearLayout>
+        <View
+            android:background="@color/discord_3Black"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"/>
 
     </LinearLayout>
 </layout>

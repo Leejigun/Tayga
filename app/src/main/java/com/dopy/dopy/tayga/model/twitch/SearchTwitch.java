@@ -2,7 +2,6 @@ package com.dopy.dopy.tayga.model.twitch;
 
 import android.util.Log;
 
-import com.dopy.dopy.tayga.model.Recommanded.ViewPagerHader;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
 import com.dopy.dopy.tayga.model.game.GameItem;

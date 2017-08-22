@@ -7,12 +7,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
-import com.dopy.dopy.tayga.model.Recommanded.ViewPagerHader;
+import com.dopy.dopy.tayga.model.ContainerRefresh;
 import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.TwitchViewHolder;
-import com.dopy.dopy.tayga.model.ContainerRefresh;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,9 +101,8 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return TWITCH;
         } else if(GameItem.class.toString().equals(type)){
             return GAME_HEADER;
-        }else if(ViewPagerHader.class.toString().equals(type)){
-            return RECOMMANDED_HEADER;
-        }else return 0;
+        }
+        else return 0;
     }
 
     @Override

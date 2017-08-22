@@ -59,6 +59,7 @@ dependencies {
     compile 'com.google.firebase:firebase-crash:10.0.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    compile 'me.relex:circleindicator:1.2.2@aar'
 }
 
 apply plugin: 'com.google.gms.google-services'

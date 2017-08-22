@@ -18,7 +18,13 @@ public class GameRcvAdapter extends RecyclerView.Adapter<GameViewHolder> {
     Context context;
     List<GameItem> list;
     ContainerRefresh containerRefresh;
-    public GameRcvAdapter(Context context, List<GameItem> list,ContainerRefresh containerRefresh) {
+
+    public GameRcvAdapter(Context context, List<GameItem> list) {
+        this.context = context;
+        this.list = list;
+    }
+
+    public GameRcvAdapter(Context context, List<GameItem> list, ContainerRefresh containerRefresh) {
         this.context = context;
         this.list = list;
         this.containerRefresh=containerRefresh;

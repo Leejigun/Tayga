@@ -48,7 +48,7 @@ public class GameFragment extends Fragment{
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding = FragmentGameBinding.bind(view);
-        containerRefresh=new ContainerRefresh(binding.rotateGameloading,binding.containerGameFragment);
+        containerRefresh=new ContainerRefresh(binding.rotateGameloading,binding.containerGameFragment,binding.containerrotateGameloading);
         setUpRecyclerView();
 
         if(savedInstanceState!=null){
