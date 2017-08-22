@@ -83,7 +83,14 @@ public class FavoritesFragment extends Fragment {
         databaseReference = firebaseDatabase.getReference();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        refreshFavoritesList();
+    }
+
     private void refreshFavoritesList() {
+        Log.d(TAG,"call refreshFavoritesList");
         refreshContainer.startLoading();
         final List<BroadcastModel> models=new ArrayList<>();
         getFavoritesStreamerList(models, new RefreshDoneInterface() {
@@ -138,11 +145,10 @@ public class FavoritesFragment extends Fragment {
                 gameList.setGameItemList(gameItems);
                 gameList.setListType(TwitchListContainer.GAME);
                 gameList.setTag("당신이 즐겨찾기한 게임");
-                broadcastModels.add(gameList);
+                broadcastModels.add(1,gameList);
                 refreshDoneInterface.refreshDone();
                 Log.d(TAG,"gameItems 즐겨찾기에 "+gameItems.size()+"개의 데이터가 들어옴");
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

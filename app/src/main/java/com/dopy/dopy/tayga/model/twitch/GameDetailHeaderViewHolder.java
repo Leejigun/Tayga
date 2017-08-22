@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -37,6 +38,7 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
     Boolean isLiked = false;
     Boolean isFavofirtes = false;
     MyApplication myApplication;
+    TwitchStream twitchStream;
 
     public GameDetailHeaderViewHolder(View itemView, Context context) {
         super(itemView);
@@ -52,7 +54,7 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
     public void bind(final Object data) {
         String type = data.getClass().toString();
         if (TwitchStream.class.toString().equals(type)) {
-            final TwitchStream twitchStream = (TwitchStream) data;
+            twitchStream = (TwitchStream) data;
             binding.setModel(twitchStream);
             Glide.with(itemView.getContext())
                     .load(twitchStream.channel.logo)
@@ -101,16 +103,18 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
             @Override
             public void onClick(View v) {
                 if (isLiked) {
+//                    좋아요 삭제
                     databaseReference.child("Like").child("Streamer").child(currentUser.getUserID()).child(twitchStream.channel.name).removeValue();
                     binding.iconStar.setImageResource(R.drawable.ic_star_border_black_24dp);
                     databaseReference.child("LikeCount").child("Streamer").child(twitchStream.channel.name).child(currentUser.getUserID()).removeValue();
                     isLiked=!isLiked;
+                    Toast.makeText(context, twitchStream.channel.displayName+"채널의 추천을 취소했습니다.", Toast.LENGTH_SHORT).show();
                 } else {
+//                    좋아요 추가
                     databaseReference.child("Like").child("Streamer").child(currentUser.getUserID()).child(twitchStream.channel.name).setValue(twitchStream);
                     binding.iconStar.setImageResource(R.drawable.ic_star_black_24dp);
                     databaseReference.child("LikeCount").child("Streamer").child(twitchStream.channel.name).child(currentUser.getUserID()).setValue(twitchStream);
                     isLiked=!isLiked;
-
                 }
             }
         });
@@ -118,11 +122,14 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
             @Override
             public void onClick(View v) {
                 if(isFavofirtes){
+//                    즐찾 삭제
                     databaseReference.child("Favorites").child("Streamer").child(currentUser.getUserID()).child(twitchStream.channel.name).removeValue();
                     binding.iconFavorites.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                     databaseReference.child("FavoritesCount").child("Streamer").child(twitchStream.channel.name).child(currentUser.getUserID()).removeValue();
                     isFavofirtes=!isFavofirtes;
+                    Toast.makeText(context, twitchStream.channel.displayName+"채널을 즐겨찾기 취소했습니다.", Toast.LENGTH_SHORT).show();
                 }else{
+//                    즐찾 추가
                     databaseReference.child("Favorites").child("Streamer").child(currentUser.getUserID()).child(twitchStream.channel.name).setValue(twitchStream);
                     binding.iconFavorites.setImageResource(R.drawable.ic_favorite_black_24dp);
                     databaseReference.child("FavoritesCount").child("Streamer").child(twitchStream.channel.name).child(currentUser.getUserID()).setValue(twitchStream);

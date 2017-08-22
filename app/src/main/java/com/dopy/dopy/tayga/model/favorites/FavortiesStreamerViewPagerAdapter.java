@@ -69,7 +69,11 @@ public class FavortiesStreamerViewPagerAdapter extends PagerAdapter {
             binding.containerViewPager.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    container.getContext().startActivity(new Intent(container.getContext(),GameDetailPageActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("GameDetailPageActivity", Parcels.wrap(stream)));
+                    TwitchStream twitchStream = streamerList.get(position);
+                    Intent intent = new Intent(v.getRootView().getContext(),GameDetailPageActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("GameDetailPageActivity",Parcels.wrap(stream));
+                    v.getContext().startActivity(intent);
                 }
             });
 

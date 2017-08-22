@@ -75,7 +75,7 @@ public class GameDetailPageActivity extends AppCompatActivity {
         if (TwitchStream.class.toString().equals(type)) {
             TwitchStream twitchStream = (TwitchStream) model;
             SearchYoutube searchYoutube =new SearchYoutube();
-            searchYoutube.getUtube(twitchStream.channel.displayName, 5,broadcastModelList, new RefreshDoneInterface() {
+            searchYoutube.getUtube(twitchStream.channel.displayName, 3,broadcastModelList, new RefreshDoneInterface() {
                 @Override
                 public void refreshDone() {
                     setUpRecyclerView(broadcastModelList);
