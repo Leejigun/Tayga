@@ -23,15 +23,11 @@
 
     <item android:title="@string/menu_profile">
         <menu>
-            <item
-                android:id="@+id/menu_profile_detail"
-                android:icon="@drawable/ic_assignment_ind_black_24dp"
-                android:title="@string/menu_profile_detail" />
 <!--TODO: 로그아웃은 로그인에 통합해서 쓰자-->
             <item
                 android:id="@+id/menu_profile_logout"
                 android:icon="@drawable/ic_assignment_ind_black_24dp"
-                android:title="로그아웃(임시)" />
+                android:title="로그아웃" />
         </menu>
     </item>
 

@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ContentMainBinding contentBinding;
     NavHeaderMainBinding navHeaderMainBinding;
     FirebaseAuth auth;
+    FirebaseAuth.AuthStateListener authStateListener;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference dbRef;
@@ -58,7 +60,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         contentBinding = appbarBinding.contentMain;
         setSupportActionBar(appbarBinding.toolbar);
         auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
+        authStateListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user==null){
+                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+                }
+            }
+        };
+        if(auth.getCurrentUser()==null){
+            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
+        }
+        auth.addAuthStateListener(authStateListener);
         firebaseDatabase = FirebaseDatabase.getInstance();
         dbRef = firebaseDatabase.getReference();
 
@@ -68,11 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
         activityBinding.navView.setNavigationItemSelectedListener(this);
         navHeaderMainBinding = NavHeaderMainBinding.bind(activityBinding.navView.getHeaderView(0));
-        if (user == null) {
-            startActivity(new Intent(this, LoginActivity.class));
-        } else {
-            getUserInfo();
-        }
+        getUserInfo();
         getSupportFragmentManager().beginTransaction()
                 .replace(contentBinding.mainFrame.getId(), MainFragment.newInstance())
                 .commit();
@@ -128,10 +138,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .replace(contentBinding.mainFrame.getId(), FavoritesFragment.newInstance())
                     .addToBackStack(null)
                     .commit();
-        } else if (id == R.id.menu_profile_detail) {
-
         } else if (id == R.id.menu_profile_logout) {
             auth.signOut();
+            startActivity(new Intent(this,LoginActivity.class));
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -154,5 +163,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }, 3 * 1000);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        auth.addAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        auth.removeAuthStateListener(authStateListener);
     }
 }
