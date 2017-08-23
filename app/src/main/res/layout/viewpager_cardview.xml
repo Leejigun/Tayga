@@ -9,27 +9,29 @@
     </data>
 
     <LinearLayout
+        android:elevation="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/cardview_background"
         android:orientation="vertical">
+        <View
+            android:elevation="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@color/cardview_outline" />
 
         <TextView
+            android:elevation="2dp"
+            android:background="@color/cardview_tag_background"
             android:gravity="center_horizontal"
             android:textStyle="bold"
             android:id="@+id/txtViewPagerTag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
             android:text="즐겨 찾기한 Streamer"
-            android:textColor="@color/textview_Color"
+            android:textColor="@color/textview_tag"
             android:textSize="20dp" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1sp"
-            android:background="@color/cardview_outline" />
 
         <LinearLayout
             android:id="@+id/containerViewPager"
@@ -48,6 +50,7 @@
                 android:layout_marginLeft="5dp">
 
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/txtViewPagerTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

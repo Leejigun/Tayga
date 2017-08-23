@@ -34,6 +34,7 @@
                     android:background="@color/cardview_outline"/>
 
                 <TextView
+                    android:gravity="center"
                     android:layout_marginRight="5dp"
                     android:ellipsize="end"
                     android:maxLines="2"

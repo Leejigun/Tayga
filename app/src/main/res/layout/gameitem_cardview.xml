@@ -38,6 +38,7 @@
             <TextView
                 android:id="@+id/textViewer"
                 android:gravity="center"
+                android:textSize="12sp"
                 android:text="@{GameItem.showTotalViewr()}"
                 android:hint="리그오브 레전드"
                 android:textColor="@color/textview_Color"

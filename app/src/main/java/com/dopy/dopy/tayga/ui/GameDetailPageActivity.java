@@ -4,6 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -59,7 +60,9 @@ public class GameDetailPageActivity extends AppCompatActivity {
                 refreshYouTubeModelList(model);
             }
         });
-        getSupportActionBar().setTitle("Tayga");
+        binding.toolbarGameDetail.setTitle("Tayga");
+        binding.toolbarGameDetail.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        setSupportActionBar(binding.toolbarGameDetail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         hookDraggablePanelListeners();
         initializeYoutubeFragment();

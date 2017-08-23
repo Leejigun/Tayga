@@ -46,7 +46,9 @@ public class ListOfGameActivity extends AppCompatActivity {
             }
         });
         gameItem = Parcels.unwrap(getIntent().getParcelableExtra("ListOfGameActivity"));
-        getSupportActionBar().setTitle("Tayga");
+        binding.toolbarListOfGame.setTitle("Tayga");
+        binding.toolbarListOfGame.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        setSupportActionBar(binding.toolbarListOfGame);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         refreshBroadcastListOfGame();
     }

@@ -58,6 +58,8 @@ public class LoginActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         Log.d(TAG,"onCreate");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        binding.toolbarLogin.setTitle("Tayga");
+        binding.toolbarLogin.setTitleTextColor(getResources().getColor(R.color.colorPrimaryDark));
         mAuth = FirebaseAuth.getInstance();
         setUpLoginAuths();
         firebaseAuthStateListener= new FirebaseAuth.AuthStateListener() {

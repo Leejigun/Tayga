@@ -13,6 +13,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -31,6 +32,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /*
 * */
@@ -108,6 +110,45 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .crossFade()
                     .into(navHeaderMainBinding.profileImage);
         }
+        navHeaderMainBinding.containerFavritesStarCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(contentBinding.mainFrame.getId(), FavoritesFragment.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        setUpFavoritesAndStartCount(currentUser);
+    }
+
+    private void setUpFavoritesAndStartCount(final User currentUser){
+        dbRef.child("Favorites").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int streamercount = (int)dataSnapshot.child("Streamer").child(currentUser.getUserID()).getChildrenCount();
+                int gamecount = (int)dataSnapshot.child("Game").child(currentUser.getUserID()).getChildrenCount();
+                int totalcount = (streamercount+gamecount);
+                navHeaderMainBinding.txtFavoritesCount.setText(Integer.toString(totalcount));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        dbRef.child("Like").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                int streamerCount = (int)dataSnapshot.child("Streamer").child(currentUser.getUserID()).getChildrenCount();
+                navHeaderMainBinding.txtStarCount.setText(Integer.toString(streamerCount));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

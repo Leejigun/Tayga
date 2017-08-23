@@ -37,7 +37,7 @@ public class GameViewHolder extends BaseRcvViewHolder {
             }
         });
         Glide.with(itemView.getContext())
-                .load(gameItem.game.box.medium)
+                .load(gameItem.game.box.large)
                 .placeholder(R.drawable.placeholder_broadcast)
                 .error(R.drawable.ic_error_outline_black_24dp)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)

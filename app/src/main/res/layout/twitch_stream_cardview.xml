@@ -11,6 +11,7 @@
     </data>
 
     <LinearLayout
+        android:elevation="2dp"
         android:id="@+id/containerTwitchCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,12 +22,14 @@
             android:layout_height="1sp"
             android:background="@color/cardview_outline" />
         <TextView
+            android:elevation="2dp"
+            android:background="@color/cardview_tag_background"
             android:gravity="center"
             android:textStyle="bold"
             android:visibility="gone"
             android:id="@+id/txtTwitchStreamTag"
             android:textSize="20sp"
-            android:textColor="#AB47BC"
+            android:textColor="@color/textview_tag"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

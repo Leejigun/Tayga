@@ -51,6 +51,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/containerFavritesStarCount"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -64,6 +65,7 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:padding="15dp"
                     android:src="@drawable/ic_favorite_black_24dp"
                     android:tint="@color/favorites_tint_color" />
 
@@ -86,8 +88,10 @@
                 <ImageView
                     android:layout_width="70dp"
                     android:layout_height="70dp"
+                    android:padding="15dp"
                     android:src="@drawable/ic_star_black_24dp"
                     android:tint="@color/star_tint_color" />
+
                 <TextView
                     android:id="@+id/txtStarCount"
                     android:layout_width="match_parent"
