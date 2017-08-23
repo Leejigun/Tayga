@@ -1,6 +1,7 @@
 package com.dopy.dopy.tayga.model.game;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 
 import com.bumptech.glide.Glide;
@@ -17,6 +18,7 @@ import org.parceler.Parcels;
  */
 
 public class GameViewHolder extends BaseRcvViewHolder {
+    private static final String TAG = "GameViewHolder";
     GameitemCardviewBinding binding;
     public GameViewHolder(View itemView) {
         super(itemView);
@@ -30,6 +32,7 @@ public class GameViewHolder extends BaseRcvViewHolder {
         binding.containerGameItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG,"call game item on click listener");
                 view.getRootView().getContext().startActivity(new Intent(itemView.getContext(),ListOfGameActivity.class).putExtra("ListOfGameActivity", Parcels.wrap(gameItem)));
             }
         });

@@ -45,8 +45,6 @@ public class FavoritesFragment extends Fragment {
     RefreshContainer refreshContainer;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    int streamerCount= 0;
-    int GameCount = 0;
 
     public FavoritesFragment() {
         // Required empty public constructor

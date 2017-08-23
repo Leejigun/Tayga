@@ -13,6 +13,7 @@ import com.dopy.dopy.tayga.model.favorites.FavoritesCountViewHolder;
 import com.dopy.dopy.tayga.model.favorites.FavoritesGameViewHolder;
 import com.dopy.dopy.tayga.model.favorites.FavoritesViewPagerViewHolder;
 import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
+import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.game.GameViewHolder;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.TwitchViewHolder;
@@ -25,10 +26,11 @@ import java.util.List;
 
 public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final String TAG = "BroadcastRcvAdapter";
-    final int FAVORITES_COUNT_BOX=100;
+    final int FAVORITES_COUNT_BOX = 100;
     final int FAVORITES_TWITCH_STREAMER = 102;
     final int FAVORITES_TWITCH_GAME = 103;
     final int TWITCH_STREAM = 201;
+    final int GAME_ITEM =202;
 
 
     Context context;
@@ -58,32 +60,42 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case FAVORITES_COUNT_BOX:
-                return new FavoritesCountViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.favorites_count_box,parent,false),(Application)context);
+                return new FavoritesCountViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.favorites_count_box, parent, false), (Application) context);
             case FAVORITES_TWITCH_STREAMER:
                 return new FavoritesViewPagerViewHolder(LayoutInflater.from(context).inflate(R.layout.viewpager_streamer_layout, parent, false));
             case FAVORITES_TWITCH_GAME:
                 return new FavoritesGameViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_wap_layout, parent, false));
-            default:
+            case TWITCH_STREAM:
                 return new TwitchViewHolder(LayoutInflater.from(context).inflate(R.layout.twitch_stream_cardview, parent, false));
+            case GAME_ITEM:
+                return new GameHeaderViewHolder(LayoutInflater.from(context).inflate(R.layout.game_logo_header,parent,false),(Application)context);
+            default:
+                return null;
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         int viewType = getItemViewType(position);
-        Log.d(TAG,"position => "+position+" viewType=> "+viewType);
+        Log.d(TAG, "position => " + position + " viewType=> " + viewType);
         switch (viewType) {
             case FAVORITES_COUNT_BOX:
-                ((FavoritesCountViewHolder)holder).bind(models.get(position));
+                ((FavoritesCountViewHolder) holder).bind(models.get(position));
                 break;
             case FAVORITES_TWITCH_STREAMER:
-                ((FavoritesViewPagerViewHolder)holder).bind(models.get(position));
+                ((FavoritesViewPagerViewHolder) holder).bind(models.get(position));
                 break;
             case FAVORITES_TWITCH_GAME:
-                ((FavoritesGameViewHolder)holder).bind(models.get(position));
+                ((FavoritesGameViewHolder) holder).bind(models.get(position));
                 break;
-            default:
+            case TWITCH_STREAM:
                 ((TwitchViewHolder) holder).bind(models.get(position));
+                break;
+            case GAME_ITEM:
+                ((GameHeaderViewHolder)holder).bind(models.get(position));
+            default:
+                Log.d(TAG, "not matched item type position =>" + position);
+                new NullPointerException();
         }
     }
 
@@ -100,7 +112,9 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             }
         } else if (viewType.equals(TwitchStream.class.toString())) {
             return TWITCH_STREAM; // 방송을 큰 형태로 보여준다.
-        }else if(viewType.equals(BroadcastModel.class.toString())){
+        } else if (viewType.equals(GameItem.class.toString())) {
+            return GAME_ITEM;
+        } else if (viewType.equals(BroadcastModel.class.toString())) {
             return FAVORITES_COUNT_BOX;
         }
         return TWITCH_STREAM;

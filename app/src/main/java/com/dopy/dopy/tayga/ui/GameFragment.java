@@ -149,8 +149,8 @@ public class GameFragment extends Fragment{
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable("GameItemList",Parcels.wrap(adapter.getData()));
+    public void onResume() {
+        super.onResume();
+        refreshGameItemList();
     }
 }

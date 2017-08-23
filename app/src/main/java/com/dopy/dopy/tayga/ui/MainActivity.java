@@ -69,9 +69,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         };
-        if(auth.getCurrentUser()==null){
-            startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-        }
+        user = auth.getCurrentUser();
         auth.addAuthStateListener(authStateListener);
         firebaseDatabase = FirebaseDatabase.getInstance();
         dbRef = firebaseDatabase.getReference();

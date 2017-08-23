@@ -34,6 +34,7 @@
                 android:hint="LOL"
                 android:ellipsize="end"
                 android:maxLines="3"
+                android:textColor="@color/discord_3Black"
                 android:text="@{GameItem.showGameName()}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -43,6 +44,7 @@
                 android:layout_below="@id/gameName"
                 android:text="@{GameItem.showTotalViewr()}"
                 android:hint="2000 명 시청중"
+                android:textColor="@color/discord_3Black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 

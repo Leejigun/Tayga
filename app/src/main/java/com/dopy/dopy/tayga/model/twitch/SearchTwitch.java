@@ -5,10 +5,8 @@ import android.util.Log;
 import com.dopy.dopy.tayga.model.RefreshDoneInterface;
 import com.dopy.dopy.tayga.model.TwitchListContainer;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
-import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.game.GameItemList;
-import com.dopy.dopy.tayga.model.game.GameRcvAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +16,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.facebook.login.widget.ProfilePictureView.TAG;
 
 /**
  * Created by Dopy on 2017-08-14.
@@ -30,7 +30,7 @@ public class SearchTwitch {
     public SearchTwitch() {
     }
 
-    public void getTwitch(int offset, int count, final List<BroadcastModel>broadcastModels, final RefreshDoneInterface refreshInterface) {
+    public void getTwitch(int offset, int count, final List<BroadcastModel> broadcastModels, final RefreshDoneInterface refreshInterface) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -66,25 +66,25 @@ public class SearchTwitch {
         }
     }
 
-    public void getListOfGame(final int offset, final String gameName, final BroadcastRcvAdapter adapter){
+    public void getListOfGame(final int offset, final String gameName, final List<BroadcastModel> list, final RefreshDoneInterface refreshDoneInterface) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         TwitchService service = retrofit.create(TwitchService.class);
         try {
-            Call<TwitchStreamList> videoList = (Call<TwitchStreamList>) service.searchStreamListOfGame(gameName, 20, offset);
+            final Call<TwitchStreamList> videoList = (Call<TwitchStreamList>) service.searchStreamListOfGame(gameName, 20, offset);
             videoList.enqueue(new Callback<TwitchStreamList>() {
                 @Override
                 public void onResponse(Call<TwitchStreamList> call, Response<TwitchStreamList> response) {
                     int statusCode = response.code();
                     Log.d("SearchTwitch", "statusCode :" + Integer.toString(statusCode));
                     TwitchStreamList datas = response.body();
+                    Log.d("SearchTwitch","이런 이름의 게임 :"+gameName);
+                    Log.d("SearchTwitch",videoList.request().toString());
                     Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
-                    Log.d("SearchTwitch", datas.getList().get(0).channel.status);
-                    List<BroadcastModel> list = new ArrayList<>();
                     list.addAll(datas.getList());
-                    adapter.setData(list);
+                    refreshDoneInterface.refreshDone();
                 }
 
                 @Override
@@ -101,14 +101,14 @@ public class SearchTwitch {
         }
     }
 
-    public void getGameList(int offset, int count, final List<BroadcastModel>broadcastModels, final RefreshDoneInterface refreshInterface) {
+    public void getGameList(int offset, int count, final List<BroadcastModel> broadcastModels, final RefreshDoneInterface refreshInterface) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         TwitchService service = retrofit.create(TwitchService.class);
         try {
-            Call<GameItemList> videoList = (Call<GameItemList>) service.searchGameList(count,offset);
+            Call<GameItemList> videoList = (Call<GameItemList>) service.searchGameList(count, offset);
             videoList.enqueue(new Callback<GameItemList>() {
                 @Override
                 public void onResponse(Call<GameItemList> call, Response<GameItemList> response) {
@@ -120,7 +120,7 @@ public class SearchTwitch {
                     Log.d("SearchTwitch", datas.getList().get(0).game.name);
                     List<GameItem> list = new ArrayList<>();
                     list.addAll(datas.getList());
-                    TwitchListContainer twitchListContainer =new TwitchListContainer();
+                    TwitchListContainer twitchListContainer = new TwitchListContainer();
                     twitchListContainer.setGameItemList(list);
                     twitchListContainer.setListType(TwitchListContainer.GAME);
                     broadcastModels.add(twitchListContainer);
@@ -141,34 +141,34 @@ public class SearchTwitch {
         }
     }
 
-    public void getFeaturedStream(int offset, int count,final List<BroadcastModel>broadcastModels, final RefreshDoneInterface refreshInterface){
+    public void getFeaturedStream(int offset, int count, final List<BroadcastModel> broadcastModels, final RefreshDoneInterface refreshInterface) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         TwitchService service = retrofit.create(TwitchService.class);
-        Call<TwitchStream> videoList = (Call<TwitchStream>) service.serchFeaturedStream(count,offset);
-       try {
-           videoList.enqueue(new Callback<TwitchStream>() {
-               @Override
-               public void onResponse(Call<TwitchStream> call, Response<TwitchStream> response) {
-                   int statusCode = response.code();
-                   Log.d("SearchTwitch", "statusCode :" + Integer.toString(statusCode));
-                   Log.d("SearchTwitch", "response.body().showTitle :" + response.body().showTitle());
-                   TwitchStream twitchStream =response.body();
-                   broadcastModels.add(twitchStream);
-                   refreshInterface.refreshDone();
-               }
+        Call<TwitchStream> videoList = (Call<TwitchStream>) service.serchFeaturedStream(count, offset);
+        try {
+            videoList.enqueue(new Callback<TwitchStream>() {
+                @Override
+                public void onResponse(Call<TwitchStream> call, Response<TwitchStream> response) {
+                    int statusCode = response.code();
+                    Log.d("SearchTwitch", "statusCode :" + Integer.toString(statusCode));
+                    Log.d("SearchTwitch", "response.body().showTitle :" + response.body().showTitle());
+                    TwitchStream twitchStream = response.body();
+                    broadcastModels.add(twitchStream);
+                    refreshInterface.refreshDone();
+                }
 
-               @Override
-               public void onFailure(Call<TwitchStream> call, Throwable t) {
+                @Override
+                public void onFailure(Call<TwitchStream> call, Throwable t) {
 
-               }
-           });
-       }catch (NullPointerException e) {
-           Log.d("SearchTwitch", e.getMessage());
-       } catch (Exception e) {
-           Log.d("SearchTwitch", e.getMessage());
-       }
+                }
+            });
+        } catch (NullPointerException e) {
+            Log.d("SearchTwitch", e.getMessage());
+        } catch (Exception e) {
+            Log.d("SearchTwitch", e.getMessage());
+        }
     }
 }
