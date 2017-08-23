@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.MenuItem;
 
 import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
@@ -45,7 +46,8 @@ public class ListOfGameActivity extends AppCompatActivity {
             }
         });
         gameItem = Parcels.unwrap(getIntent().getParcelableExtra("ListOfGameActivity"));
-        getSupportActionBar().setTitle(gameItem.showTitle());
+        getSupportActionBar().setTitle("Tayga");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         refreshBroadcastListOfGame();
     }
 
@@ -73,5 +75,15 @@ public class ListOfGameActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         refreshBroadcastListOfGame();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

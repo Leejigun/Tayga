@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -12,61 +11,67 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/gameLogo_background">
+        android:background="@color/gameLogo_background"
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/imvGameLogo"
                 android:layout_width="150dp"
                 android:layout_height="200dp" />
 
-        <RelativeLayout
-            android:padding="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/gameName"
-                android:layout_marginRight="10dp"
-                android:textSize="18sp"
-                android:gravity="end"
-                android:hint="LOL"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:textColor="@color/discord_3Black"
-                android:text="@{GameItem.showGameName()}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_marginTop="20dp"
-                android:gravity="end"
-                android:layout_below="@id/gameName"
-                android:text="@{GameItem.showTotalViewr()}"
-                android:hint="2000 명 시청중"
-                android:textColor="@color/discord_3Black"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
             <RelativeLayout
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:id="@+id/containerFavortiesGame"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:tint="@color/favorites_tint_color"
-                    android:src="@drawable/ic_favorite_border_black_24dp"
-                    android:id="@+id/favortiesGame"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="20dp">
+
+                <TextView
+                    android:id="@+id/gameName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="end"
+                    android:gravity="end"
+                    android:hint="LOL"
+                    android:maxLines="3"
+                    android:text="@{GameItem.showGameName()}"
+                    android:textColor="@color/textview_Color"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/gameName"
+                    android:layout_marginTop="20dp"
+                    android:gravity="end"
+                    android:hint="2000 명 시청중"
+                    android:text="@{GameItem.showTotalViewr()}"
+                    android:textColor="@color/textview_Color" />
+
+                <RelativeLayout
+                    android:id="@+id/containerFavortiesGame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:id="@+id/favortiesGame"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_favorite_border_black_24dp"
+                        android:tint="@color/favorites_tint_color" />
+                </RelativeLayout>
             </RelativeLayout>
-        </RelativeLayout>
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1sp"
-            android:background="@color/discord_3Black"/>
+            android:background="@color/cardview_outline" />
     </LinearLayout>
 </layout>

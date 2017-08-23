@@ -73,6 +73,7 @@
                 android:background="@color/discord_3Black" />
 
             <TextView
+                android:textColor="@color/textview_Color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"

@@ -21,10 +21,4 @@
         <item name="android:background">@color/cardview_background</item>
     </style>
 
-    <style name="BroadCardTextView">
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginTop">5dp</item>
-        <item name="android:textColor">@color/discord_3Black</item>
-    </style>
-
 </resources>

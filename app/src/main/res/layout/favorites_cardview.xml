@@ -31,7 +31,7 @@
                     android:gravity="end"
                     android:textSize="20sp"
                     android:hint="LoL"
-                    android:textColor="@color/discord_3Black"
+                    android:textColor="@color/textview_Color"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <RelativeLayout

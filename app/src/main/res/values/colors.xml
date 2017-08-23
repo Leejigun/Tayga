@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#212121</color>
-    <color name="colorPrimaryDark">#BDBDBD</color>
-    <color name="colorAccent">#FAFAFA</color>
+    <color name="colorPrimary">#9C27B0</color>
+    <color name="colorPrimaryDark">#E1BEE7</color>
+    <color name="colorAccent">#4A148C</color>
 
-    <color name="cardview_background">#FFFDE7</color>
+    <color name="cardview_background">#FAFAFA</color>
     <color name="playbutton_background">#FAFAFA</color>
     <color name="cardview_outline">#BDBDBD</color>
-    <color name="grey">#9E9E9E</color>
+    <color name="textview_Color">#8E24AA</color>
     <color name="gameLogo_background">#FFF3E0</color>
 
     <color name="discord_4Black">#002</color>

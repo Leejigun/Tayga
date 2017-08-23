@@ -17,6 +17,7 @@
             android:padding="10dp"
             android:orientation="vertical">
             <TextView
+                android:textColor="@color/textview_Color"
                 android:text="당신은.."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,6 +33,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"/>
                 <TextView
+                    android:textColor="@color/textview_Color"
                     android:id="@+id/txtStreamerCount"
                     android:layout_marginTop="5dp"
                     android:hint="10개의 방송과..."
@@ -48,6 +50,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp" />
                 <TextView
+                    android:textColor="@color/textview_Color"
                     android:id="@+id/txtGameCount"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="7dp"
@@ -56,6 +59,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <TextView
+                android:textColor="@color/textview_Color"
                 android:text="즐겨찾기 했습니다."
                 android:layout_gravity="end"
                 android:layout_width="wrap_content"

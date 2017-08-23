@@ -131,7 +131,8 @@ public class GameFragment extends Fragment{
     }
     private void setUpPopularSteam(final List<BroadcastModel> broadcastModels){
         SearchTwitch searchTwitch =new SearchTwitch();
-        searchTwitch.getTwitch(0, 1, broadcastModels, new RefreshDoneInterface() {
+        String tag = "실시간 최고 시청자 방송";
+        searchTwitch.getTwitch(0, 1, broadcastModels,tag, new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
                 setGameList(broadcastModels);

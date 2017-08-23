@@ -97,7 +97,8 @@ public class MainFragment extends Fragment {
     }
     private void setUpTwitchList(final List<BroadcastModel> broadcastModels){
         SearchTwitch searchTwitch = new SearchTwitch();
-        searchTwitch.getTwitch(0, 5, broadcastModels, new RefreshDoneInterface() {
+        String tag ="실시간 시청자수 Top 5 인기방송";
+        searchTwitch.getTwitch(0, 5, broadcastModels, tag,new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
                 setUpRecyclerView(broadcastModels);
@@ -149,7 +150,7 @@ public class MainFragment extends Fragment {
                 }
                 gameList.setGameItemList(gameItems);
                 gameList.setListType(TwitchListContainer.GAME);
-                gameList.setTag("당신이 즐겨찾기한 게임");
+                gameList.setTag("즐겨찾기한 게임");
                 broadcastModels.add(gameList);
                 refreshDoneInterface.refreshDone();
                 Log.d(TAG,"gameItems 즐겨찾기에 "+gameItems.size()+"개의 데이터가 들어옴");

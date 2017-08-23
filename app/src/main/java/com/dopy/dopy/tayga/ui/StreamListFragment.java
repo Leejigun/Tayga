@@ -121,7 +121,8 @@ public class StreamListFragment extends Fragment {
     }
     private void setUpTwitchList(final List<BroadcastModel> broadcastModels){
         SearchTwitch searchTwitch = new SearchTwitch();
-        searchTwitch.getTwitch(0, 20, broadcastModels, new RefreshDoneInterface() {
+        String tag = "인기방송 Top 20";
+        searchTwitch.getTwitch(0, 20, broadcastModels,tag, new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
                 setUpRecyclerView(broadcastModels);

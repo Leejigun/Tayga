@@ -30,7 +30,7 @@ public class SearchTwitch {
     public SearchTwitch() {
     }
 
-    public void getTwitch(int offset, int count, final List<BroadcastModel> broadcastModels, final RefreshDoneInterface refreshInterface) {
+    public void getTwitch(int offset, int count, final List<BroadcastModel> broadcastModels, final String tag, final RefreshDoneInterface refreshInterface) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -48,6 +48,7 @@ public class SearchTwitch {
                     Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
                     List<TwitchStream> list = new ArrayList<>();
                     list.addAll(datas.getList());
+                    list.get(0).setTag(tag);
                     broadcastModels.addAll(list);
                     refreshInterface.refreshDone();
                 }

@@ -21,6 +21,8 @@
             android:layout_height="1sp"
             android:background="@color/cardview_outline" />
         <TextView
+            android:gravity="center"
+            android:textStyle="bold"
             android:visibility="gone"
             android:id="@+id/txtTwitchStreamTag"
             android:textSize="20sp"
@@ -94,7 +96,7 @@
                             android:maxLines="1"
                             android:text="@{twitchModel.showTitle()}"
                             android:textSize="18sp"
-                            android:theme="@style/BroadCardTextView" />
+                            android:textColor="@color/textview_Color" />
                         <TextView
                             android:id="@+id/tscvDispalyName"
                             android:layout_width="wrap_content"
@@ -103,7 +105,7 @@
                             android:hint="Lokksam"
                             android:text="@{twitchModel.showHostName()}"
                             android:textSize="15sp"
-                            android:theme="@style/BroadCardTextView" />
+                            android:textColor="@color/textview_Color" />
 
                         <TextView
                             android:id="@+id/tscvCountOfViewer"
@@ -112,7 +114,7 @@
                             android:gravity="left"
                             android:hint="2222 viewing"
                             android:text="@{twitchModel.showViewrToString()}"
-                            android:textColor="@color/grey" />
+                            android:textColor="@color/textview_Color" />
                     </LinearLayout>
 
                 </RelativeLayout>
