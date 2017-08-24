@@ -72,7 +72,7 @@ public class TwitchStream extends BroadcastModel{
     }
     public String showGameToString() {
         String name = channel.game;
-        return ("주로 [ "+name+" ]을 플레이하는 방송입니다.");
+        return ("저번 즐겨찾기 때 [ "+name+" ] 방송을 하던 스트리머입니다.");
     }public String showCurrentPlayGameToString() {
         String name = channel.game;
         return (name+" 플레이 중..");

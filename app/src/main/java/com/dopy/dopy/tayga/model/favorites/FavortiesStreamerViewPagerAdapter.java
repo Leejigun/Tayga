@@ -64,7 +64,7 @@ public class FavortiesStreamerViewPagerAdapter extends PagerAdapter {
 
             Glide.with(context).load(stream.channel.logo)
                     .placeholder(R.drawable.ic_tayga)
-                    .crossFade()
+                    .dontAnimate()
                     .into(binding.imvViewPager);
             binding.containerViewPager.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     .load(Uri.parse(currentUser.getPotoUri()))
                     .placeholder(R.drawable.ic_assignment_ind_black_24dp)
                     .error(R.drawable.ic_assignment_ind_black_24dp)
-                    .crossFade()
+                    .dontAnimate()
                     .into(navHeaderMainBinding.profileImage);
         }
         navHeaderMainBinding.containerFavritesStarCount.setOnClickListener(new View.OnClickListener() {
@@ -148,21 +148,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.menu_main) {
+            appbarBinding.toolbar.setTitle("Tayga");
             getSupportFragmentManager().beginTransaction()
                     .replace(contentBinding.mainFrame.getId(), MainFragment.newInstance())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.menu_popular) {
+            appbarBinding.toolbar.setTitle(R.string.menu_popular);
             getSupportFragmentManager().beginTransaction()
                     .replace(contentBinding.mainFrame.getId(), StreamListFragment.newInstance())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.menu_game) {
+            appbarBinding.toolbar.setTitle(R.string.menu_game);
             getSupportFragmentManager().beginTransaction()
                     .replace(contentBinding.mainFrame.getId(), GameFragment.newInstance())
                     .addToBackStack(null)
                     .commit();
         } else if (id == R.id.menu_favorites) {
+            appbarBinding.toolbar.setTitle(R.string.menu_favorites);
             getSupportFragmentManager().beginTransaction()
                     .replace(contentBinding.mainFrame.getId(), FavoritesFragment.newInstance())
                     .addToBackStack(null)

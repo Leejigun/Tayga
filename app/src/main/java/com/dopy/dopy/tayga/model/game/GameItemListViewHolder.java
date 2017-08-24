@@ -20,7 +20,7 @@ public class GameItemListViewHolder extends BaseRcvViewHolder{
     @Override
     public void bind(Object data) {
         GameItemList gameItemList = (GameItemList)data;
-        binding.recyclerview.setLayoutManager(new GridLayoutManager(itemView.getContext(),2));
+        binding.recyclerview.setLayoutManager(new GridLayoutManager(itemView.getContext(),3));
         GameRcvAdapter adapter = new GameRcvAdapter(itemView.getContext(),gameItemList.getList());
         binding.recyclerview.setAdapter(adapter);
         if(gameItemList.getTag()!=null){

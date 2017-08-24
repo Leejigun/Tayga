@@ -2,11 +2,11 @@
 <resources>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#F50057</color>
-    <color name="colorAccent">#DCE775</color>
+    <color name="colorAccent">#C51162</color>
 
     <color name="cardview_background">#FAFAFA</color>
     <color name="cardview_tag_background">#FAFAFA</color>
-    <color name="cardview_game_outline">#1e2124</color>
+    <color name="cardview_game_outline">#C51162</color>
     <color name="playbutton_background">#FAFAFA</color>
     <color name="cardview_outline">#BDBDBD</color>
     <color name="textview_tag">#F50057</color>

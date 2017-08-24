@@ -107,10 +107,10 @@ public class StreamListFragment extends Fragment {
     }
     private void setUpGameList(final List<BroadcastModel> broadcastModels){
         SearchTwitch searchTwitch = new SearchTwitch();
-        searchTwitch.getGameList(0,4,broadcastModels, new RefreshDoneInterface() {
+        searchTwitch.getGameList(0,3,broadcastModels, new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
-                ((GameItemList)broadcastModels.get(0)).setTag("이 게임은 어떠신가요? (Top 4)");
+                ((GameItemList)broadcastModels.get(0)).setTag("이 게임은 어떠신가요? (Top 3)");
                 getFavoritesStreamerList(broadcastModels, new RefreshDoneInterface() {
                     @Override
                     public void refreshDone() {

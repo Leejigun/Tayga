@@ -17,9 +17,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:paddingLeft="5dp"
             android:text="즐겨찾기한 스트리머 채널"
             android:textColor="@color/textview_tag"
             android:textSize="20sp"
@@ -33,7 +34,7 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/favoritViewPager"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="140dp"
             android:layout_marginBottom="1dp" />
 
             <me.relex.circleindicator.CircleIndicator

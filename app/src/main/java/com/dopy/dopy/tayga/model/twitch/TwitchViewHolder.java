@@ -40,7 +40,7 @@ public class TwitchViewHolder extends BaseRcvViewHolder {
                 .placeholder(R.drawable.placeholder_broadcast)
                 .error(R.drawable.ic_error_outline_black_24dp)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .crossFade()
+                .dontAnimate()
                 .into(binding.tscvLogo);
         Glide.with(itemView.getContext())
                 .load(twitchStream.preview.medium)

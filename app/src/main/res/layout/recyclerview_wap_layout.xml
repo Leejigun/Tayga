@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+    <android.support.v7.widget.CardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:elevation="2dp"
-        android:orientation="vertical">
-        <TextView
-            android:visibility="gone"
-            android:layout_marginBottom="5dp"
-            android:layout_marginTop="5dp"
-            android:elevation="2dp"
-            android:textStyle="bold"
-            android:id="@+id/txtRecyclerviewTag"
-            android:textColor="@color/textview_tag"
-            android:textSize="20sp"
-            android:gravity="center"
+        android:layout_margin="5dp">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/cardview_tag_background"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp">
+            android:background="@color/cardview_background"
+            android:orientation="vertical">
 
-        </android.support.v7.widget.RecyclerView>
+            <TextView
+                android:id="@+id/txtRecyclerviewTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/cardview_tag_background"
+                android:gravity="left"
+                android:paddingLeft="5dp"
+                android:textColor="@color/textview_tag"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
 
-    </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1sp"
+                android:background="@color/cardview_outline" />
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_centerHorizontal="true"
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 </layout>
