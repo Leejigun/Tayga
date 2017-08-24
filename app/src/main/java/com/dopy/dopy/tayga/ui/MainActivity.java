@@ -45,7 +45,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     ContentMainBinding contentBinding;
     NavHeaderMainBinding navHeaderMainBinding;
     FirebaseAuth auth;
-    FirebaseAuth.AuthStateListener authStateListener;
     FirebaseUser user;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference dbRef;
@@ -62,17 +61,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         contentBinding = appbarBinding.contentMain;
         setSupportActionBar(appbarBinding.toolbar);
         auth = FirebaseAuth.getInstance();
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user==null){
-                    startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-                }
-            }
-        };
         user = auth.getCurrentUser();
-        auth.addAuthStateListener(authStateListener);
         firebaseDatabase = FirebaseDatabase.getInstance();
         dbRef = firebaseDatabase.getReference();
 
@@ -181,6 +170,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.menu_profile_logout) {
             auth.signOut();
             startActivity(new Intent(this,LoginActivity.class));
+            finish();
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -203,17 +193,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }, 3 * 1000);
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        auth.addAuthStateListener(authStateListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        auth.removeAuthStateListener(authStateListener);
     }
 }

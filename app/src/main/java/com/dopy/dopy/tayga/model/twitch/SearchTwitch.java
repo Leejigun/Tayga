@@ -59,6 +59,7 @@ public class SearchTwitch {
                     Log.d("SearchTwitch", "call:" + call.request());
                     Log.d("SearchTwitch", "Throwable:" + t.getMessage());
                 }
+
             });
         } catch (NullPointerException e) {
             Log.d("SearchTwitch", e.getMessage());

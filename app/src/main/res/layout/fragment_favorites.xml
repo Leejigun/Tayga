@@ -29,8 +29,8 @@
 
             <com.victor.loading.rotate.RotateLoading
                 android:id="@+id/rotateFavoritesloading"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
                 app:loading_color="@android:color/white"
                 app:loading_speed="11"

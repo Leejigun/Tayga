@@ -126,6 +126,7 @@ public class MainFragment extends Fragment {
                 }
                 streamerList.setListType(TwitchListContainer.STREAMER);
                 streamerList.setTwitchStreamList(twitchStreams);
+                broadcastModels.clear();
                 broadcastModels.add(streamerList);
                 refreshDoneInterface.refreshDone();
                 //끝나면 즐겨찾기 게임 목록 받는 함수 호출
@@ -151,7 +152,7 @@ public class MainFragment extends Fragment {
                 gameList.setGameItemList(gameItems);
                 gameList.setListType(TwitchListContainer.GAME);
                 gameList.setTag("즐겨찾기한 게임");
-                broadcastModels.add(gameList);
+                broadcastModels.add(1,gameList);
                 refreshDoneInterface.refreshDone();
                 Log.d(TAG,"gameItems 즐겨찾기에 "+gameItems.size()+"개의 데이터가 들어옴");
             }
@@ -161,11 +162,5 @@ public class MainFragment extends Fragment {
 
             }
         });
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        refreshDataSet();
     }
 }

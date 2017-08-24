@@ -32,6 +32,8 @@ public class TwitchViewHolder extends BaseRcvViewHolder {
         if(twitchStream.getTag()!=null){
             binding.txtTwitchStreamTag.setVisibility(View.VISIBLE);
             binding.txtTwitchStreamTag.setText(twitchStream.getTag());
+        }else{
+            binding.txtTwitchStreamTag.setVisibility(View.GONE);
         }
         Glide.with(itemView.getContext())
                 .load(twitchStream.channel.logo)
