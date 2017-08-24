@@ -14,7 +14,8 @@ import com.dopy.dopy.tayga.model.favorites.FavoritesGameViewHolder;
 import com.dopy.dopy.tayga.model.favorites.FavoritesViewPagerViewHolder;
 import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
 import com.dopy.dopy.tayga.model.game.GameItem;
-import com.dopy.dopy.tayga.model.game.GameViewHolder;
+import com.dopy.dopy.tayga.model.game.GameItemList;
+import com.dopy.dopy.tayga.model.game.GameItemListViewHolder;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.dopy.dopy.tayga.model.twitch.TwitchViewHolder;
 
@@ -30,7 +31,8 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     final int FAVORITES_TWITCH_STREAMER = 102;
     final int FAVORITES_TWITCH_GAME = 103;
     final int TWITCH_STREAM = 201;
-    final int GAME_ITEM =202;
+    final int GAME_ITEM_LIST=202;
+    final int GAME_HEADER =203;
 
 
     Context context;
@@ -67,8 +69,10 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 return new FavoritesGameViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_wap_layout, parent, false));
             case TWITCH_STREAM:
                 return new TwitchViewHolder(LayoutInflater.from(context).inflate(R.layout.twitch_stream_cardview, parent, false));
-            case GAME_ITEM:
+            case GAME_HEADER:
                 return new GameHeaderViewHolder(LayoutInflater.from(context).inflate(R.layout.game_logo_header,parent,false),(Application)context);
+            case GAME_ITEM_LIST:
+                return new GameItemListViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_wap_layout,parent,false));
             default:
                 return null;
         }
@@ -91,8 +95,12 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case TWITCH_STREAM:
                 ((TwitchViewHolder) holder).bind(models.get(position));
                 break;
-            case GAME_ITEM:
+            case GAME_ITEM_LIST:
+                ((GameItemListViewHolder)holder).bind(models.get(position));
+                break;
+            case GAME_HEADER:
                 ((GameHeaderViewHolder)holder).bind(models.get(position));
+                break;
             default:
                 Log.d(TAG, "not matched item type position =>" + position);
                 new NullPointerException();
@@ -113,9 +121,11 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         } else if (viewType.equals(TwitchStream.class.toString())) {
             return TWITCH_STREAM; // 방송을 큰 형태로 보여준다.
         } else if (viewType.equals(GameItem.class.toString())) {
-            return GAME_ITEM;
+            return GAME_HEADER;
         } else if (viewType.equals(BroadcastModel.class.toString())) {
             return FAVORITES_COUNT_BOX;
+        }else if(viewType.equals(GameItemList.class.toString())){
+            return GAME_ITEM_LIST;
         }
         return TWITCH_STREAM;
     }

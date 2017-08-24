@@ -119,12 +119,7 @@ public class SearchTwitch {
                     GameItemList datas = response.body();
                     Log.d("SearchTwitch", datas.getList().size() + " 개의 데이터가 들어왔습니다.");
                     Log.d("SearchTwitch", datas.getList().get(0).game.name);
-                    List<GameItem> list = new ArrayList<>();
-                    list.addAll(datas.getList());
-                    TwitchListContainer twitchListContainer = new TwitchListContainer();
-                    twitchListContainer.setGameItemList(list);
-                    twitchListContainer.setListType(TwitchListContainer.GAME);
-                    broadcastModels.add(twitchListContainer);
+                    broadcastModels.add(datas);
                     refreshInterface.refreshDone();
                 }
 

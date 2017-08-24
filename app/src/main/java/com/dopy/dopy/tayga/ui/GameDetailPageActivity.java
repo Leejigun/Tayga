@@ -71,14 +71,16 @@ public class GameDetailPageActivity extends AppCompatActivity {
 
         refreshYouTubeModelList(model);
     }
+
     private void refreshYouTubeModelList(BroadcastModel model) {
-       final List<BroadcastModel>broadcastModelList=new ArrayList<>();
+        refreshContainer.startLoading();
+        final List<BroadcastModel> broadcastModelList = new ArrayList<>();
         broadcastModelList.add(model);
         String type = model.getClass().toString();
         if (TwitchStream.class.toString().equals(type)) {
             TwitchStream twitchStream = (TwitchStream) model;
-            SearchYoutube searchYoutube =new SearchYoutube();
-            searchYoutube.getUtube(twitchStream.channel.displayName, 3,broadcastModelList, new RefreshDoneInterface() {
+            SearchYoutube searchYoutube = new SearchYoutube();
+            searchYoutube.getUtube(twitchStream.channel.displayName, 3, broadcastModelList, new RefreshDoneInterface() {
                 @Override
                 public void refreshDone() {
                     setUpRecyclerView(broadcastModelList);
@@ -88,7 +90,7 @@ public class GameDetailPageActivity extends AppCompatActivity {
     }
 
     private void setUpRecyclerView(List<BroadcastModel> list) {
-        YoutubeRcvAdapter adapter = new YoutubeRcvAdapter(list,getApplication());
+        YoutubeRcvAdapter adapter = new YoutubeRcvAdapter(list, getApplication());
         adapter.addSetOnClickListener(new SetOnclickYoutubePlay() {
             @Override
             public void onClickYoutube(View v, SearchData data) {

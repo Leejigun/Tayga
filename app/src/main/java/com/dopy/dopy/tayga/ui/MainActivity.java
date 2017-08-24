@@ -117,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         .replace(contentBinding.mainFrame.getId(), FavoritesFragment.newInstance())
                         .addToBackStack(null)
                         .commit();
+                activityBinding.drawerLayout.closeDrawers();
             }
         });
         setUpFavoritesAndStartCount(currentUser);

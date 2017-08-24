@@ -6,8 +6,15 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cardview_background">
+        android:background="@color/cardview_background"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
         <android.support.design.widget.AppBarLayout
+            android:id="@+id/appbarlayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
@@ -25,15 +32,31 @@
             android:id="@+id/containerGameDetailFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:refreshColor="@color/colorPrimary"
+            app:refreshColor="@color/colorPrimaryDark"
             app:refreshType="material">
 
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcvGameDetail"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
         </com.baoyz.widget.PullRefreshLayout>
+        </LinearLayout>
+
+
+
+        <!-- Draggable Panel -->
+        <com.github.pedrovgs.DraggablePanel
+            android:id="@+id/draggable_panel"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            draggable_panel:enable_horizontal_alpha_effect="false"
+            draggable_panel:top_fragment_height="200dp"
+            draggable_panel:top_fragment_margin_bottom="@dimen/top_fragment_margin"
+            draggable_panel:top_fragment_margin_right="@dimen/top_fragment_margin"
+            draggable_panel:x_scale_factor="@dimen/x_scale_factor"
+            draggable_panel:y_scale_factor="@dimen/y_scale_factor" />
+
         <FrameLayout
             android:id="@+id/containerrotateGamelading"
             android:layout_width="match_parent"
@@ -50,18 +73,6 @@
                 app:loading_speed="11"
                 app:loading_width="5dp" />
         </FrameLayout>
-
-
-        <!-- Draggable Panel -->
-        <com.github.pedrovgs.DraggablePanel
-            android:id="@+id/draggable_panel"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            draggable_panel:enable_horizontal_alpha_effect="false"
-            draggable_panel:top_fragment_height="200dp"
-            draggable_panel:top_fragment_margin_bottom="@dimen/top_fragment_margin"
-            draggable_panel:top_fragment_margin_right="@dimen/top_fragment_margin"
-            draggable_panel:x_scale_factor="@dimen/x_scale_factor"
-            draggable_panel:y_scale_factor="@dimen/y_scale_factor" />
     </FrameLayout>
+
 </layout>

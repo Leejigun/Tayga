@@ -9,7 +9,7 @@
 
         <com.baoyz.widget.PullRefreshLayout
             android:id="@+id/containerGameFragment"
-            app:refreshColor="@color/colorPrimary"
+            app:refreshColor="@color/colorPrimaryDark"
             app:refreshType="material"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

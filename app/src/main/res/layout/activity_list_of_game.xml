@@ -3,27 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbarListOfGame"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbarListOfGame"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay" />
         </android.support.design.widget.AppBarLayout>
 
         <com.baoyz.widget.PullRefreshLayout
             android:id="@+id/listOfGmaeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:refreshColor="@color/colorPrimary"
+            app:refreshColor="@color/colorPrimaryDark"
             app:refreshType="material"
             tools:context="com.dopy.dopy.tayga.ui.ListOfGameActivity">
 
@@ -33,6 +34,7 @@
                 android:layout_height="match_parent" />
 
         </com.baoyz.widget.PullRefreshLayout>
+
         <FrameLayout
             android:id="@+id/containerloadingGameOList"
             android:layout_width="match_parent"
@@ -42,12 +44,12 @@
 
             <com.victor.loading.rotate.RotateLoading
                 android:id="@+id/loadingGameOList"
-                android:layout_gravity="center"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
+                android:layout_gravity="center"
                 app:loading_color="@color/colorPrimary"
                 app:loading_speed="11"
                 app:loading_width="5dp" />
         </FrameLayout>
-    </FrameLayout>
+    </LinearLayout>
 </layout>

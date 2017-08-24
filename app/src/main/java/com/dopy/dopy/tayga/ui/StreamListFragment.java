@@ -20,6 +20,7 @@ import com.dopy.dopy.tayga.model.TwitchListContainer;
 import com.dopy.dopy.tayga.model.User;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastModel;
 import com.dopy.dopy.tayga.model.broadcast.BroadcastRcvAdapter;
+import com.dopy.dopy.tayga.model.game.GameItemList;
 import com.dopy.dopy.tayga.model.twitch.SearchTwitch;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
 import com.google.firebase.database.DataSnapshot;
@@ -109,7 +110,7 @@ public class StreamListFragment extends Fragment {
         searchTwitch.getGameList(0,4,broadcastModels, new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
-                ((TwitchListContainer)broadcastModels.get(0)).setTag("이 게임은 어떠신가요? (Top 4)");
+                ((GameItemList)broadcastModels.get(0)).setTag("이 게임은 어떠신가요? (Top 4)");
                 getFavoritesStreamerList(broadcastModels, new RefreshDoneInterface() {
                     @Override
                     public void refreshDone() {

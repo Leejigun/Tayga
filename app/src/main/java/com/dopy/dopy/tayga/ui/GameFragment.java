@@ -94,7 +94,7 @@ public class GameFragment extends Fragment{
 
     public void refreshGameItemList(){
         refreshContainer.startLoading();
-        final List<BroadcastModel> models=new ArrayList<>();
+        final List<BroadcastModel> models = new ArrayList<>();
         getFavoritesGameList(models, new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
@@ -118,6 +118,7 @@ public class GameFragment extends Fragment{
                 gameList.setGameItemList(gameItems);
                 gameList.setListType(TwitchListContainer.GAME);
                 gameList.setTag("당신이 즐겨찾기한 게임");
+                broadcastModels.clear();
                 broadcastModels.add(gameList);
                 refreshDoneInterface.refreshDone();
                 Log.d(TAG,"gameItems 즐겨찾기에 "+gameItems.size()+"개의 데이터가 들어옴");
@@ -152,6 +153,5 @@ public class GameFragment extends Fragment{
     @Override
     public void onResume() {
         super.onResume();
-        refreshGameItemList();
     }
 }

@@ -6,7 +6,7 @@
     <com.baoyz.widget.PullRefreshLayout
         android:id="@+id/pullRefreshMainFragment"
         app:refreshType="material"
-        app:refreshColor="@color/colorPrimary"
+        app:refreshColor="@color/colorPrimaryDark"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 

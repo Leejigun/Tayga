@@ -149,11 +149,12 @@
             android:background="@color/cardview_outline" />
 
         <TextView
-            android:textColor="@color/textview_Color"
+            android:textColor="@color/textview_tag"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="연관 동영상"
+            android:textStyle="bold"
             android:textSize="20dp" />
 
 

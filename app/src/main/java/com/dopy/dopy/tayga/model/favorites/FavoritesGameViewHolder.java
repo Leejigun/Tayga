@@ -1,6 +1,7 @@
 package com.dopy.dopy.tayga.model.favorites;
 
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.dopy.dopy.tayga.databinding.RecyclerviewWapLayoutBinding;
@@ -27,7 +28,9 @@ public class FavoritesGameViewHolder extends BaseRcvViewHolder {
         List<GameItem> gameItemList = ((TwitchListContainer)data).getGameItemList();
         GameRcvAdapter adapter =new GameRcvAdapter(itemView.getContext(),gameItemList);
         binding.txtRecyclerviewTag.setText(((TwitchListContainer)data).getTag());
-        binding.recyclerview.setLayoutManager(new GridLayoutManager(itemView.getContext(),2));
+        binding.txtRecyclerviewTag.setVisibility(View.VISIBLE);
+        binding.recyclerview.setLayoutManager(new LinearLayoutManager(itemView.getContext(),LinearLayoutManager.HORIZONTAL,false));
         binding.recyclerview.setAdapter(adapter);
+
     }
 }
