@@ -11,8 +11,8 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:padding="10dp"
                 android:src="@drawable/ic_favorite_black_24dp"
                 android:tint="@color/favorites_tint_color" />
@@ -23,22 +23,16 @@
                 android:orientation="vertical"
                 android:padding="10dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:text="당신은.."
-                    android:textColor="@color/textview_Color" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="10dp"
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_ondemand_video_black_24dp" />
 
                     <TextView
@@ -46,19 +40,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp"
+                        android:textSize="15sp"
                         android:hint="10개의 방송과..."
                         android:textColor="@color/textview_Color" />
                 </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="70dp">
+                    android:layout_marginLeft="10dp">
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_videogame_asset_black_24dp" />
 
                     <TextView
@@ -66,17 +61,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="7dp"
+                        android:textSize="15sp"
                         android:hint="5개의 게임을..."
                         android:textColor="@color/textview_Color" />
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="즐겨찾기 했습니다."
-                    android:textColor="@color/textview_Color" />
 
             </LinearLayout>
 

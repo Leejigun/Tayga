@@ -98,7 +98,7 @@ public class GameFragment extends Fragment{
         getFavoritesGameList(models, new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
-                setUpPopularSteam(models);
+                setGameFirst9Items(models);
             }
         });
 
@@ -130,19 +130,31 @@ public class GameFragment extends Fragment{
             }
         });
     }
-    private void setUpPopularSteam(final List<BroadcastModel> broadcastModels){
-        SearchTwitch searchTwitch =new SearchTwitch();
-        String tag = "실시간 최고 시청자 방송";
-        searchTwitch.getTwitch(0, 1, broadcastModels,tag, new RefreshDoneInterface() {
+    private void setGameFirst9Items(final List<BroadcastModel> broadcastModels){
+        SearchTwitch searchTwitch = new SearchTwitch();
+        String tag = "Top 1 ~ top 9";
+        searchTwitch.getGameList(0, 9, broadcastModels,tag,1, new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
-                setGameList(broadcastModels);
+                setUpPopularSteam(broadcastModels);
             }
         });
     }
-    private void setGameList(final List<BroadcastModel> broadcastModels){
+    private void setUpPopularSteam(final List<BroadcastModel> broadcastModels){
+        SearchTwitch searchTwitch =new SearchTwitch();
+        String tag = "실시간 최고 시청자 방송";
+        searchTwitch.getTwitch(0, 1, broadcastModels,tag,2, new RefreshDoneInterface() {
+            @Override
+            public void refreshDone() {
+                setGameListLast11Items(broadcastModels);
+            }
+        });
+    }
+
+    private void setGameListLast11Items(final List<BroadcastModel> broadcastModels){
         SearchTwitch searchTwitch = new SearchTwitch();
-        searchTwitch.getGameList(0, 20, broadcastModels, new RefreshDoneInterface() {
+        String tag = "Top 10 ~ Top 20";
+        searchTwitch.getGameList(9, 11, broadcastModels,tag,3, new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
                 setUpRecyclerView(broadcastModels);

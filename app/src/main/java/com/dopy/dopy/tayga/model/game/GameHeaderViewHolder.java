@@ -48,7 +48,7 @@ public class GameHeaderViewHolder extends BaseRcvViewHolder {
                 .placeholder(R.drawable.placeholder_broadcast)
                 .error(R.drawable.ic_error_outline_black_24dp)
                 .diskCacheStrategy(DiskCacheStrategy.RESULT)
-                .crossFade()
+                .dontAnimate()
                 .into(binding.imvGameLogo);
     }
     private void setUpFavoritesMark(final GameItem gameItem){

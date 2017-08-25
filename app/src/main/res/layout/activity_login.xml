@@ -33,7 +33,7 @@
                 android:orientation="vertical">
 
                 <com.google.android.gms.common.SignInButton
-                    android:tag="구글 로그인"
+                    android:gravity="center_vertical|center"
                     android:id="@+id/sign_in_buttonGoogle"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -41,17 +41,24 @@
                     android:layout_weight="1"
                     android:padding="0dp" />
 
-                <com.facebook.login.widget.LoginButton
-                    android:id="@+id/login_buttonFaceBook"
+                <RelativeLayout
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_weight="1"
-                    android:paddingBottom="9dp"
-                    android:paddingTop="9dp"
-                    android:textSize="17sp"
-                    app:com_facebook_login_text="로그인 "
-                    app:com_facebook_logout_text="로그아웃" />
+                    android:layout_height="wrap_content">
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_buttonFaceBook"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="3dp"
+                        android:layout_weight="1"
+                        android:paddingBottom="9dp"
+                        android:paddingTop="9dp"
+                        android:textSize="17sp"
+                        app:com_facebook_login_text="로그인 "
+                        app:com_facebook_logout_text="로그아웃" />
+                </RelativeLayout>
             </LinearLayout>
 
 

@@ -97,7 +97,7 @@ public class FavoritesFragment extends Fragment {
                 getFavoritesGameList(models, new RefreshDoneInterface() {
                     @Override
                     public void refreshDone() {
-                        models.add(0,new BroadcastModel());
+                        models.add(1,new BroadcastModel());
                         setUpRecyclerView(models);
                     }
                 });
@@ -154,9 +154,6 @@ public class FavoritesFragment extends Fragment {
         });
     }
 
-    private void getStarStreamer(List<BroadcastModel> list,RefreshDoneInterface refreshDoneInterface){
-
-    }
     private void setUpRecyclerView(List<BroadcastModel>gameNameList){
         BroadcastRcvAdapter adapter =new BroadcastRcvAdapter(gameNameList,getActivity().getApplication());
         binding.favoriteFragmentRcv.setAdapter(adapter);

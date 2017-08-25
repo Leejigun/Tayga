@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dopy.dopy.tayga.R;
+import com.dopy.dopy.tayga.model.AdvertiseCard;
+import com.dopy.dopy.tayga.model.AdvertiseCardViewHolder;
 import com.dopy.dopy.tayga.model.TwitchListContainer;
 import com.dopy.dopy.tayga.model.favorites.FavoritesCountViewHolder;
 import com.dopy.dopy.tayga.model.favorites.FavoritesGameViewHolder;
@@ -16,7 +18,9 @@ import com.dopy.dopy.tayga.model.game.GameHeaderViewHolder;
 import com.dopy.dopy.tayga.model.game.GameItem;
 import com.dopy.dopy.tayga.model.game.GameItemList;
 import com.dopy.dopy.tayga.model.game.GameItemListViewHolder;
+import com.dopy.dopy.tayga.model.twitch.TwitchGameListViewHolder;
 import com.dopy.dopy.tayga.model.twitch.TwitchStream;
+import com.dopy.dopy.tayga.model.twitch.TwitchStreamList;
 import com.dopy.dopy.tayga.model.twitch.TwitchViewHolder;
 
 import java.util.List;
@@ -30,6 +34,7 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     final int FAVORITES_COUNT_BOX = 100;
     final int FAVORITES_TWITCH_STREAMER = 102;
     final int FAVORITES_TWITCH_GAME = 103;
+    final int ADDVERTISE=200;
     final int TWITCH_STREAM = 201;
     final int GAME_ITEM_LIST=202;
     final int GAME_HEADER =203;
@@ -68,11 +73,13 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case FAVORITES_TWITCH_GAME:
                 return new FavoritesGameViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_wap_layout, parent, false));
             case TWITCH_STREAM:
-                return new TwitchViewHolder(LayoutInflater.from(context).inflate(R.layout.twitch_stream_cardview, parent, false));
+                return new TwitchGameListViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_wap_layout, parent, false));
             case GAME_HEADER:
                 return new GameHeaderViewHolder(LayoutInflater.from(context).inflate(R.layout.game_logo_header,parent,false),(Application)context);
             case GAME_ITEM_LIST:
                 return new GameItemListViewHolder(LayoutInflater.from(context).inflate(R.layout.recyclerview_wap_layout,parent,false));
+            case ADDVERTISE:
+                return new AdvertiseCardViewHolder(LayoutInflater.from(context).inflate(R.layout.ad_item_cardview,parent,false));
             default:
                 return null;
         }
@@ -93,7 +100,7 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                 ((FavoritesGameViewHolder) holder).bind(models.get(position));
                 break;
             case TWITCH_STREAM:
-                ((TwitchViewHolder) holder).bind(models.get(position));
+                ((TwitchGameListViewHolder) holder).bind(models.get(position));
                 break;
             case GAME_ITEM_LIST:
                 ((GameItemListViewHolder)holder).bind(models.get(position));
@@ -101,9 +108,12 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case GAME_HEADER:
                 ((GameHeaderViewHolder)holder).bind(models.get(position));
                 break;
+            case ADDVERTISE:
+                ((AdvertiseCardViewHolder)holder).bind(models.get(position));
+                break;
             default:
                 Log.d(TAG, "not matched item type position =>" + position);
-                new NullPointerException();
+                throw new NullPointerException();
         }
     }
 
@@ -118,7 +128,7 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             } else {
                 return FAVORITES_TWITCH_GAME; // 즐겨찾기 일수도 있고 그냥 게임일 수도 있지만 그리드 형태로 게임들을 보여준다.
             }
-        } else if (viewType.equals(TwitchStream.class.toString())) {
+        } else if (viewType.equals(TwitchStreamList.class.toString())) {
             return TWITCH_STREAM; // 방송을 큰 형태로 보여준다.
         } else if (viewType.equals(GameItem.class.toString())) {
             return GAME_HEADER;
@@ -126,6 +136,8 @@ public class BroadcastRcvAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             return FAVORITES_COUNT_BOX;
         }else if(viewType.equals(GameItemList.class.toString())){
             return GAME_ITEM_LIST;
+        }else if(viewType.equals(AdvertiseCard.class.toString())){
+            return ADDVERTISE;
         }
         return TWITCH_STREAM;
     }

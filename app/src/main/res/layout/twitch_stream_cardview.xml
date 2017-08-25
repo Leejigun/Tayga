@@ -22,19 +22,6 @@
             android:background="@color/cardview_background"
             android:orientation="vertical"
             android:padding="5dp">
-            <TextView
-                android:hint="aaaaaaaaaaaaaaaaa"
-                android:layout_marginBottom="5dp"
-                android:id="@+id/txtTwitchStreamTag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/cardview_tag_background"
-                android:gravity="left"
-                android:paddingLeft="5dp"
-                android:textColor="@color/textview_tag"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:visibility="visible" />
 
             <FrameLayout
                 android:layout_width="match_parent"

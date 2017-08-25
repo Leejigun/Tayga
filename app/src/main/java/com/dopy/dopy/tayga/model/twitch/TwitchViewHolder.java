@@ -29,12 +29,7 @@ public class TwitchViewHolder extends BaseRcvViewHolder {
     public void bind(Object data) {
         final TwitchStream twitchStream =(TwitchStream)data;
         binding.setTwitchModel(twitchStream);
-        if(twitchStream.getTag()!=null){
-            binding.txtTwitchStreamTag.setVisibility(View.VISIBLE);
-            binding.txtTwitchStreamTag.setText(twitchStream.getTag());
-        }else{
-            binding.txtTwitchStreamTag.setVisibility(View.GONE);
-        }
+
         Glide.with(itemView.getContext())
                 .load(twitchStream.channel.logo)
                 .placeholder(R.drawable.placeholder_broadcast)

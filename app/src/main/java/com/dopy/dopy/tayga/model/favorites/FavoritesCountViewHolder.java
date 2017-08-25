@@ -82,7 +82,7 @@ public class FavoritesCountViewHolder extends BaseRcvViewHolder {
     }
 
     private void setUpText(){
-        binding.txtStreamerCount.setText(Integer.toString(streamerCount)+"개의 방송과..");
-        binding.txtGameCount.setText(Integer.toString(gameCount)+"개의 게임을..");
+        binding.txtStreamerCount.setText(Integer.toString(streamerCount)+"개의 방송과");
+        binding.txtGameCount.setText(Integer.toString(gameCount)+"개의 게임을 즐겨찾기 했습니다.");
     }
 }

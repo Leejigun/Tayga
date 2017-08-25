@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.baoyz.widget.PullRefreshLayout;
 import com.dopy.dopy.tayga.R;
 import com.dopy.dopy.tayga.databinding.FragmentMainBinding;
+import com.dopy.dopy.tayga.model.AdvertiseCard;
 import com.dopy.dopy.tayga.model.MyApplication;
 import com.dopy.dopy.tayga.model.RefreshContainer;
 import com.dopy.dopy.tayga.model.RefreshDoneInterface;
@@ -88,17 +89,38 @@ public class MainFragment extends Fragment {
                 getFavoritesGameList(broadcastModels, new RefreshDoneInterface() {
                     @Override
                     public void refreshDone() {
-                        setUpTwitchList(broadcastModels);
+                        setUpTwitchListFirst3Items(broadcastModels);
                     }
                 });
             }
 
         });
     }
-    private void setUpTwitchList(final List<BroadcastModel> broadcastModels){
+    private void setUpTwitchListFirst3Items(final List<BroadcastModel> broadcastModels){
         SearchTwitch searchTwitch = new SearchTwitch();
-        String tag ="실시간 시청자수 Top 5 인기방송";
-        searchTwitch.getTwitch(0, 5, broadcastModels, tag,new RefreshDoneInterface() {
+        String tag ="실시간 시청자수 Top 7 인기방송";
+        searchTwitch.getTwitch(0, 3, broadcastModels, tag,2,new RefreshDoneInterface() {
+            @Override
+            public void refreshDone() {
+                setUpTwitchListLast2Items(broadcastModels);
+            }
+        });
+    }
+    private void setUpTwitchListLast2Items(final List<BroadcastModel> broadcastModels){
+        SearchTwitch searchTwitch = new SearchTwitch();
+        String tag ="Top 4 ~ Top 7 ";
+        searchTwitch.getTwitch(3, 4, broadcastModels, tag,3,new RefreshDoneInterface() {
+            @Override
+            public void refreshDone() {
+                setUpAdvertisePopularGameItem(broadcastModels);
+            }
+        });
+    }
+
+    private void setUpAdvertisePopularGameItem(final List<BroadcastModel> broadcastModels){
+        SearchTwitch searchTwitch = new SearchTwitch();
+        String tag = "이 게임은 어떤가요? (시청자수 Top 1)";
+        searchTwitch.getAdvertiseGame(0,broadcastModels,tag,3, new RefreshDoneInterface() {
             @Override
             public void refreshDone() {
                 setUpRecyclerView(broadcastModels);
@@ -113,6 +135,7 @@ public class MainFragment extends Fragment {
         binding.rcvMainFragment.setAdapter(adapter);
         refreshContainer.stopLoading();
     }
+
     private void getFavoritesStreamerList(final List<BroadcastModel> broadcastModels, final RefreshDoneInterface refreshDoneInterface){
         User user = ((MyApplication)getActivity().getApplication()).getUser();
         final TwitchListContainer streamerList = new TwitchListContainer();
@@ -127,7 +150,7 @@ public class MainFragment extends Fragment {
                 streamerList.setListType(TwitchListContainer.STREAMER);
                 streamerList.setTwitchStreamList(twitchStreams);
                 broadcastModels.clear();
-                broadcastModels.add(streamerList);
+                broadcastModels.add(0,streamerList);
                 refreshDoneInterface.refreshDone();
                 //끝나면 즐겨찾기 게임 목록 받는 함수 호출
                 Log.d(TAG,"twitchStreams 즐겨찾기에 "+twitchStreams.size()+"개의 데이터가 들어옴");
