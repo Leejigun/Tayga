@@ -130,7 +130,9 @@ public class FavoritesFragment extends Fragment {
         });
     }
     private void getFavoritesGameList(final List<BroadcastModel> broadcastModels, final RefreshDoneInterface refreshDoneInterface){
-        User user=((MyApplication)getActivity().getApplication()).getUser();
+
+        MyApplication myApplication =((MyApplication)getActivity().getApplication());
+        User user = myApplication.getUser();
         final TwitchListContainer gameList= new TwitchListContainer();
         databaseReference.child("Favorites").child("Game").child(user.getUserID()).addValueEventListener(new ValueEventListener() {
             @Override

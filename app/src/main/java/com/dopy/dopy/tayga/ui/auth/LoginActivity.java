@@ -23,6 +23,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -70,6 +71,8 @@ public class LoginActivity extends AppCompatActivity implements
                 }
             }
         };
+
+        binding.signInButtonGoogle.setSize(SignInButton.SIZE_WIDE);
     }
 
     private void setUpLoginAuths() {
@@ -211,7 +214,7 @@ public class LoginActivity extends AppCompatActivity implements
     @Override
     public void onBackPressed() {
         if (backKeyPressed) {
-
+            super.onBackPressed();
         } else {
             Toast.makeText(this, "뒤로가기를 한번 더 누르시면 앱을 종료합니다.", Toast.LENGTH_LONG).show();
             backKeyPressed = true;

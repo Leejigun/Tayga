@@ -55,13 +55,11 @@
                         android:layout_weight="1"
                         android:paddingBottom="9dp"
                         android:paddingTop="9dp"
-                        android:textSize="17sp"
-                        app:com_facebook_login_text="로그인 "
+                        android:textSize="15sp"
+                        app:com_facebook_login_text="Facebook 계정으로 로그인 "
                         app:com_facebook_logout_text="로그아웃" />
                 </RelativeLayout>
             </LinearLayout>
-
-
         </LinearLayout>
     </LinearLayout>
 </layout>
