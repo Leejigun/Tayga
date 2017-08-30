@@ -80,17 +80,20 @@ public class GameDetailHeaderViewHolder extends BaseRcvViewHolder {
         }
     }
 
+// 트위치 딥 링크
     private void setUpClickListener(final TwitchStream twitchStream) {
         binding.btnPrayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (isPackageInstalled("tv.twitch.android.app", itemView.getContext())) {
                     //installed twitch app
-                    String url = ("twitch://stream/" + (twitchStream.channel.name));
+                    String url = ("twitch://channel/" + (twitchStream.channel.name));
                     Log.d("GameDetailHeader", "url -> " + url);
-                    Intent intent = view.getContext().getPackageManager().getLaunchIntentForPackage("tv.twitch.android.app");
+                    /*Intent intent = view.getContext().getPackageManager().getLaunchIntentForPackage("tv.twitch.android.app");
+                    intent.setAction(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(url));
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);*/
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(twitchStream.channel.url));
                     view.getContext().startActivity(intent);
                 } else {
                     String url = "market://details?id=" + "tv.twitch.android.app";
