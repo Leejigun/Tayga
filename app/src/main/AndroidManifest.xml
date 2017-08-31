@@ -20,6 +20,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.GameDetailPageActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
