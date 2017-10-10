@@ -1,29 +1,6 @@
-# README #
+# 네이버 부스트캠프 안드로이드 실무자 과정 2기 프로젝트 #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+트위치 API와 유튜브 API를 이용 게임 트렌드와 방송 등을 제공
 
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+소개 페이지
+https://leejigun.github.io/
